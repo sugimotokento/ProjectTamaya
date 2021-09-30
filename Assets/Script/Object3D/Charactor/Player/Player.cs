@@ -22,7 +22,9 @@ public class Player : MonoBehaviour {
     }
 
     private void FixedUpdate() {
-
+        for(int i=0; i < action.Count; ++i) {
+            action[i].Action();
+        }
     }
 
     public PlayerAction GetAction<T>() {
