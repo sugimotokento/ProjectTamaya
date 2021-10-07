@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerMoveAction : PlayerAction {
-    private Vector3 moveSpeed;
+    public Vector3 moveSpeed;
     private float ACCELERATION_SPEED = 10;
 
     public override void Init(Player p) {
