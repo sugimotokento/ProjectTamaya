@@ -10,6 +10,13 @@ public class PlayerMoveAction : PlayerAction {
         base.Init(p);
     }
     public override void Action() {
+        //居合中は移動しない
+        PlayerIaiAction iaiAction = player.GetAction<PlayerIaiAction>();
+        if (iaiAction.isIai == true) {
+            iaiAction.moveSpeed = moveSpeed;
+            return;
+        }
+
         if (Input.GetMouseButton(0)) {
             //マウスカーソルの3D座標とプレイヤーの座標の距離を取って加速する向きを計算
             Vector3 mousePos = Input.mousePosition;

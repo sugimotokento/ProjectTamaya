@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class PlayerReflectionAction : PlayerAction {
 
+    Renderer renderer;
+
     public override void Init(Player p) {
         base.Init(p);
-
+        renderer = player.transform.GetChild(0).GetChild(0).gameObject.GetComponent<Renderer>();
     }
 
     public override void Action() {
@@ -39,6 +41,35 @@ public class PlayerReflectionAction : PlayerAction {
         float h = Mathf.Abs(Mathf.Cos(90/180*3.14f));
         Vector3 r = moveAction.moveSpeed + 2 * n * h;
         moveAction.moveSpeed = r*1.01f;
+
+        int rand = Random.Range(0, 5);
+        switch (rand) {
+            case 0:
+                renderer.material.color = Color.red;
+                break;
+
+            case 1:
+                renderer.material.color = Color.blue;
+                break;
+
+            case 2:
+                renderer.material.color = Color.green;
+                break;
+
+            case 3:
+                renderer.material.color = Color.magenta;
+                break;
+
+
+            case 4:
+                renderer.material.color = Color.yellow;
+                break;
+
+            default:
+                renderer.material.color = Color.white;
+                break;
+        }
+
     }
 
 }

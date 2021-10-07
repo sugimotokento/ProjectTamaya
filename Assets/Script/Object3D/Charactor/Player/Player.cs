@@ -16,12 +16,19 @@ public class Player : MonoBehaviour {
         action.Add(new PlayerTacleAction());
         action.Add(new PlayerGuruguruAction());
         action.Add(new PlayerReflectionAction());
+        action.Add(new PlayerIaiAction());
     }
 
     // Start is called before the first frame update
     private void Start() {
         for (int i = 0; i < action.Count; ++i) {
             action[i].Init(this);
+        }
+    }
+
+    private void Update() {
+        for (int i = 0; i < action.Count; ++i) {
+            action[i].UpdateAction();
         }
     }
 
