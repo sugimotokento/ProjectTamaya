@@ -6,7 +6,7 @@ public class Player : MonoBehaviour {
     [HideInInspector]
     public List<PlayerAction> action = new List<PlayerAction>();
     public PlayerHP hP;
-    
+    public PlayerFuel fuel;
 
     public Vector3 positionBuffer;
 

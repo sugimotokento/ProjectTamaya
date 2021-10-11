@@ -17,14 +17,14 @@ public class PlayerMoveAction : PlayerAction {
         }
 
 
-        if (Input.GetMouseButtonDown(0)) {
+        if (Input.GetMouseButtonDown(0) && player.fuel.canUse==true) {
             player.audioSource.PlayOneShot(player.sound1);
         }
     }
 
     public override void Action() {
         
-        if (Input.GetMouseButton(0)) {
+        if (Input.GetMouseButton(0) && player.fuel.canUse == true) {
             //マウスカーソルの3D座標とプレイヤーの座標の距離を取って加速する向きを計算
             Vector3 mousePos = Input.mousePosition;
             mousePos.z = 10.0f;
@@ -33,6 +33,8 @@ public class PlayerMoveAction : PlayerAction {
             Vector3 dist = mousePos - player.transform.position;
             dist.z = 0;
             moveSpeed += dist.normalized * ACCELERATION_SPEED_BASE * Time.fixedDeltaTime;
+
+            player.fuel.UseFuel();
         }
 
         player.transform.position += moveSpeed * Time.fixedDeltaTime;
