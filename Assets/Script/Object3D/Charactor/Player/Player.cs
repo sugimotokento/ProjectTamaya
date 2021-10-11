@@ -10,17 +10,20 @@ public class Player : MonoBehaviour {
 
     public Vector3 positionBuffer;
 
+    public AudioClip sound1;
+    public AudioSource audioSource;
+
     private void Awake() {
         //ÉvÉåÉCÉÑÅ[ÇÃìÆçÏÇÇ¢ÇÍÇÈ
         action.Add(new PlayerMoveAction());
-        action.Add(new PlayerTacleAction());
         action.Add(new PlayerGuruguruAction());
         action.Add(new PlayerReflectionAction());
-        action.Add(new PlayerIaiAction());
     }
 
     // Start is called before the first frame update
     private void Start() {
+        audioSource = GetComponent<AudioSource>();
+
         for (int i = 0; i < action.Count; ++i) {
             action[i].Init(this);
         }
