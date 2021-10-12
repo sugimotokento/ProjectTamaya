@@ -159,13 +159,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4cc36a11c3a8f6441af897c6ff5d9171, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  action: []
   hP: {fileID: 0}
   fuel: {fileID: 0}
+  guruguruParticle: {fileID: 385815538847433257, guid: 2094de789394cd543b71f97cb69da1d5, type: 3}
   audioSource: {fileID: 0}
   sound:
   - {fileID: 8300000, guid: abd74733c819e4f43a012db000ac3fe3, type: 3}
   positionBuffer: {x: 0, y: 0, z: 0}
+  moveSpeed: {x: 0, y: 0, z: 0}
 --- !u!65 &8042726863604454944
 BoxCollider:
   m_ObjectHideFlags: 0

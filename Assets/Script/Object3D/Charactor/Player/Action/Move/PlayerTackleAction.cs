@@ -14,8 +14,6 @@ public class PlayerTackleAction : PlayerMoveAction {
     }
 
     public override void Action() {
-        Debug.Log("ƒ^ƒbƒNƒ‹");
-
         Move();
 
         timer += Time.fixedDeltaTime;
@@ -35,10 +33,14 @@ public class PlayerTackleAction : PlayerMoveAction {
     protected override void Move() {
         Vector3 dist = mousePos - player.transform.position;
         dist.z = 0;
+
+        //‰Á‘¬‚µ‚ÄˆÚ“®‚·‚é
         player.moveSpeed += dist.normalized * accelerationBaseSpeed * Time.fixedDeltaTime;
+        player.transform.position += (player.moveSpeed * (1 + timer * 2)) * Time.fixedDeltaTime;
 
-        player.fuel.UseFuel();
+        //”R—¿‚ðŒ¸‚ç‚·
+        player.fuel.Use(); 
 
-        player.transform.position += (player.moveSpeed *(1+timer*2))* Time.fixedDeltaTime;
+        
     }
 }

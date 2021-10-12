@@ -22,8 +22,6 @@ public class PlayerIaiAction : PlayerMoveAction {
     }
 
     public override void Action() {
-
-
         if (isIai == false) {
             if (isMouseDown == true) {
                 isMouseDown = false;

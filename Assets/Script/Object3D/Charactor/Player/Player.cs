@@ -7,6 +7,8 @@ public class Player : MonoBehaviour {
     public PlayerHP hP;
     public PlayerFuel fuel;
 
+    public GameObject guruguruParticle;
+
     [HideInInspector]
     public AudioSource audioSource;
     public List<AudioClip> sound;

@@ -9,4 +9,12 @@ public class PlayerAction : MonoBehaviour {
     virtual public void UpdateAction() { }
     virtual public void Action() { }
     virtual public void CollisionEnter() { }
+
+    protected Vector3 GetWorldMousePos() {
+        Vector3 mousePos = Input.mousePosition;
+        mousePos.z = 10.0f;
+        mousePos = Camera.main.ScreenToWorldPoint(mousePos);
+
+        return mousePos;
+    }
 }

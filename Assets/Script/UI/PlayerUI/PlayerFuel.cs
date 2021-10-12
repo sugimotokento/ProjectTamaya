@@ -22,18 +22,19 @@ public class PlayerFuel : MonoBehaviour {
     void Update() {
         gauge.fillAmount = fuel / maxFuel;
 
+        //燃料を一度使い切ったら再チャージする
         if (fuel > maxFuel) {
             fuel = maxFuel;
             canUse = true;
-        } else {
 
-            ChargeFuel();
+        } else {
+            Charge();
             
         }
     }
 
 
-    private void ChargeFuel() {
+    private void Charge() {
         if (canUse == true) {
             fuel += Time.deltaTime * 10;
             gauge.color = Color.white;
@@ -43,7 +44,7 @@ public class PlayerFuel : MonoBehaviour {
         }
     }
 
-    public void UseFuel() {
+    public void Use() {
         fuel -= Time.deltaTime * 20;
 
         if (fuel < 0) {

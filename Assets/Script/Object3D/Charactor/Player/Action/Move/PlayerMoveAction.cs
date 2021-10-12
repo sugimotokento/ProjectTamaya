@@ -20,11 +20,7 @@ public class PlayerMoveAction : PlayerAction {
     }
 
     public override void Action() {
-        Debug.Log("移動");
-
         Move();
-
-
         ChangeAction();
     }
 
@@ -32,15 +28,11 @@ public class PlayerMoveAction : PlayerAction {
     protected virtual void Move() {
         if (Input.GetMouseButton(0) && player.fuel.canUse == true) {
             //マウスカーソルの3D座標とプレイヤーの座標の距離を取って加速する向きを計算
-            Vector3 mousePos = Input.mousePosition;
-            mousePos.z = 10.0f;
-            mousePos = Camera.main.ScreenToWorldPoint(mousePos);
-
-            Vector3 dist = mousePos - player.transform.position;
+            Vector3 dist = GetWorldMousePos() - player.transform.position;
             dist.z = 0;
             player.moveSpeed += dist.normalized * accelerationBaseSpeed * Time.fixedDeltaTime;
 
-            player.fuel.UseFuel();
+            player.fuel.Use(); //燃料を減らす
         }
 
         player.transform.position += player.moveSpeed * Time.fixedDeltaTime;
@@ -56,15 +48,10 @@ public class PlayerMoveAction : PlayerAction {
             if (rightCrickTimer > 0 && rightCrickTimer < CHANGE_ACTION_INTERVAL) {
                 Debug.Log("タックルチェンジ");
 
-                //マウス座標を取得
-                Vector3 mousePos = Input.mousePosition;
-                mousePos.z = 10.0f;
-                mousePos = Camera.main.ScreenToWorldPoint(mousePos);
-
                 //クラスの切り替え
                 player.ChangeAction<PlayerMoveAction, PlayerTackleAction>();
                 PlayerTackleAction tackleAction = player.GetAction<PlayerTackleAction>();
-                tackleAction.mousePos = mousePos;
+                tackleAction.mousePos = GetWorldMousePos();
             }
 
             //居合モード
@@ -75,4 +62,6 @@ public class PlayerMoveAction : PlayerAction {
             }
         }
     }
+
+    
 }
