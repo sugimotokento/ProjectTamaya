@@ -40,6 +40,7 @@ public class PlayerGuruguruAction : PlayerAction {
             isGuruguru = true;
         } else {
             isGuruguru = false;
+            count = 0;
         }
 
         GameObject obj = (Instantiate(player.guruguruParticle, mousePos, Quaternion.identity));
@@ -55,13 +56,14 @@ public class PlayerGuruguruAction : PlayerAction {
     }
     private void GuruguruCoutn() {
         Vector3 dist1 = GetWorldMousePos() - initialMousePos;
-        Vector3 cross = Vector3.Cross(Vector3.right, dist1);
+        Vector3 dist2 = player.transform.position - initialMousePos;
+        Vector3 cross = Vector3.Cross(dist2, dist1);
 
-        if(guruguruCrossBuffer.z<0 && cross.z > 0) {
+        if(guruguruCrossBuffer.z<0 && cross.z > 0 && isGuruguru==true) {
             count++;
         }
         Debug.Log(count);
 
-        guruguruCrossBuffer= Vector3.Cross(Vector3.right, dist1);
+        guruguruCrossBuffer= Vector3.Cross(dist2, dist1);
     }
 }
