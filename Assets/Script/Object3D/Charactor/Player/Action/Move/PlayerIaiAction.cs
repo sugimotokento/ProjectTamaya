@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerIaiAction : PlayerAction {
+public class PlayerIaiAction : PlayerMoveAction {
 
     float moveLate = 0;
     public bool isIai = false;

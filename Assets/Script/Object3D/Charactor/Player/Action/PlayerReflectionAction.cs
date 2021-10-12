@@ -39,8 +39,8 @@ public class PlayerReflectionAction : PlayerAction {
         // 反射ベクトルを計算する
         Vector3 n = normal;
         float h = Mathf.Abs(Mathf.Cos(90/180*3.14f));
-        Vector3 r = moveAction.moveSpeed + 2 * n * h;
-        moveAction.moveSpeed = r*1.01f;
+        Vector3 r = player.moveSpeed + 2 * n * h;
+        player.moveSpeed = r*1.01f;
 
         int rand = Random.Range(0, 5);
         switch (rand) {
