@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerGuruguruAction : PlayerAction {
+    GameObject target;
+
     Vector3 mousePosBuffer;
-    Vector3 initialMousePos;
+    Vector3 initTargetDist;
     Vector3 guruguruCrossBuffer;
     ParticleSystem particle;
 
@@ -13,7 +15,8 @@ public class PlayerGuruguruAction : PlayerAction {
     bool isGuruguru = true;
     public override void Init(Player p) {
         base.Init(p);
-        initialMousePos = GetWorldMousePos();
+        target = player.gameObject;
+        initTargetDist = target.transform.position - GetWorldMousePos();
     }
     public override void Action() {
         Guruguru();
@@ -24,11 +27,11 @@ public class PlayerGuruguruAction : PlayerAction {
 
     private void Guruguru() {
         Vector3 mousePos = GetWorldMousePos();
-        Vector3 target = player.transform.position;
+        
 
 
         //目標とマウス座標を距離
-        Vector3 dist1 = target - mousePos;
+        Vector3 dist1 = target.transform.position - mousePos;
 
         //1フレーム前のマウス座標と今のマウス座標の距離
         Vector3 dist2 = mousePosBuffer - mousePos;
@@ -55,8 +58,8 @@ public class PlayerGuruguruAction : PlayerAction {
        
     }
     private void GuruguruCoutn() {
-        Vector3 dist1 = GetWorldMousePos() - initialMousePos;
-        Vector3 dist2 = player.transform.position - initialMousePos;
+        Vector3 dist1 = GetWorldMousePos() - (initTargetDist+target.transform.position);
+        Vector3 dist2 = player.transform.position - (initTargetDist + target.transform.position);
         Vector3 cross = Vector3.Cross(dist2, dist1);
 
         if(guruguruCrossBuffer.z<0 && cross.z > 0 && isGuruguru==true) {
