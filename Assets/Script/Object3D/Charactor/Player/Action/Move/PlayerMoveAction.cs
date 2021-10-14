@@ -15,7 +15,7 @@ public class PlayerMoveAction : PlayerAction {
 
     public override void UpdateAction() {
         if (Input.GetMouseButtonDown(0) && player.fuel.canUse == true) {
-            player.audioSource.PlayOneShot(player.sound[0]);
+            player.sound.PlayShot(PlayerSound.SoundIndex.MOVE);
         }
     }
 

@@ -6,27 +6,26 @@ public class Player : MonoBehaviour {
     private List<PlayerAction> action = new List<PlayerAction>();
     public PlayerHP hP;
     public PlayerFuel fuel;
+    public PlayerSound sound;
 
-    public GameObject guruguruParticle;
+    public GameObject guruguruLine;
 
-    [HideInInspector]
-    public AudioSource audioSource;
-    public List<AudioClip> sound;
+    
 
     public Vector3 positionBuffer;
     public Vector3 moveSpeed;
 
     
     private void Awake() {
+        action.Add(new PlayerGuruguruAction());
         action.Add(new PlayerReflectionAction());
         action.Add(new PlayerMoveAction());
-        action.Add(new PlayerGuruguruAction());
+     
         
     }
 
     // Start is called before the first frame update
     private void Start() {
-        audioSource = GetComponent<AudioSource>();
 
         for (int i = 0; i < action.Count; ++i) {
             action[i].Init(this);
@@ -52,6 +51,7 @@ public class Player : MonoBehaviour {
         for (int i = 0; i < action.Count; ++i) {
             action[i].CollisionEnter();
         }
+        moveSpeed *= 0.9f;
     }
 
 
