@@ -9,6 +9,7 @@ public class PlayerAction : MonoBehaviour {
     virtual public void UpdateAction() { }
     virtual public void Action() { }
     virtual public void CollisionEnter(Collision collision) { }
+    virtual public void TriggerEnter(Collider collider) {  }
 
     protected Vector3 GetWorldMousePos() {
         Vector3 mousePos = Input.mousePosition;

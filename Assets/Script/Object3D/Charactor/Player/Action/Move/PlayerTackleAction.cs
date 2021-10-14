@@ -28,6 +28,13 @@ public class PlayerTackleAction : PlayerMoveAction {
         player.ChangeAction<PlayerTackleAction, PlayerMoveAction>();
         
     }
+    public override void TriggerEnter(Collider collider) {
+        if (collider.CompareTag("Enemy")) {
+            player.ChangeAction<PlayerTackleAction, PlayerGuruguruAction>();
+            PlayerGuruguruAction guruguruAction = player.GetAction<PlayerGuruguruAction>();
+            guruguruAction.SetTartegt(collider.gameObject);
+        }
+    }
 
 
     protected override void Move() {

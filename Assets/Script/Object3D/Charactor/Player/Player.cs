@@ -8,16 +8,14 @@ public class Player : MonoBehaviour {
     public PlayerFuel fuel;
     public PlayerSound sound;
 
-    public GameObject guruguruLine;
-
-    
+    public GameObject visual;
+    public GameObject[] guruguruLine=new GameObject[2];
 
     public Vector3 positionBuffer;
     public Vector3 moveSpeed;
 
     
     private void Awake() {
-        action.Add(new PlayerGuruguruAction());
         action.Add(new PlayerReflectionAction());
         action.Add(new PlayerMoveAction());
      
@@ -26,7 +24,6 @@ public class Player : MonoBehaviour {
 
     // Start is called before the first frame update
     private void Start() {
-
         for (int i = 0; i < action.Count; ++i) {
             action[i].Init(this);
         }
@@ -52,7 +49,11 @@ public class Player : MonoBehaviour {
             action[i].CollisionEnter(collision);
         }
     }
-
+    private void OnTriggerEnter(Collider other) {
+        for (int i = 0; i < action.Count; ++i) {
+            action[i].TriggerEnter(other);
+        }
+    }
 
 
     public T GetAction<T>() where T : PlayerAction {

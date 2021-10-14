@@ -29,7 +29,6 @@ public class PlayerMoveAction : PlayerAction {
 
     protected virtual void Move() {
         if (isLeftMouseDown==true && player.fuel.canUse == true) {
-            isLeftMouseDown = false;
             player.sound.PlayShot(PlayerSound.SoundIndex.MOVE);
 
             //マウスカーソルの3D座標とプレイヤーの座標の距離を取って加速する向きを計算
@@ -41,6 +40,7 @@ public class PlayerMoveAction : PlayerAction {
         }
 
         player.transform.position += player.moveSpeed * Time.fixedDeltaTime;
+        isLeftMouseDown = false;
     }
 
 
@@ -57,10 +57,8 @@ public class PlayerMoveAction : PlayerAction {
                 player.ChangeAction<PlayerMoveAction, PlayerTackleAction>();
                 PlayerTackleAction tackleAction = player.GetAction<PlayerTackleAction>();
                 tackleAction.mousePos = GetWorldMousePos();
-            }
 
-            //居合モード
-            if (rightCrickTimer >= CHANGE_ACTION_INTERVAL) {
+            }else if (rightCrickTimer >= CHANGE_ACTION_INTERVAL) {
                 Debug.Log("居合チェンジ");
                 //player.ChangeAction<PlayerMoveAction, PlayerIaiAction>();
                 //PlayerIaiAction iaiAction = player.GetAction<PlayerIaiAction>();
