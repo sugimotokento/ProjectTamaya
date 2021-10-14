@@ -59,6 +59,7 @@ public class PlayerGuruguruAction : PlayerAction {
         GuruguruCount();
         GuruguruAnimatioin();
         GuruguruEnd();
+        ChangeColor();
         Line();
         isRightMouseDown = false;
     }
@@ -84,17 +85,8 @@ public class PlayerGuruguruAction : PlayerAction {
         }
         mousePosBuffer = GetWorldMousePos();
 
-        if (isGuruguru == true) {
-            for (int i = 0; i < (int)LineIndex.MAX; ++i) {
-                line[i].materials[0].color = Color.green;
-                line[i].materials[0].SetColor("_EmissionColor", Color.green);
-            }
-        } else {
-            for (int i = 0; i < (int)LineIndex.MAX; ++i) {
-                line[i].materials[0].color = Color.red;
-                line[i].materials[0].SetColor("_EmissionColor", Color.red);
-            }
-        }
+
+       
     }
     private void GuruguruCount() {
         //初期マウス座標と今のマウスの座標の距離
@@ -151,6 +143,20 @@ public class PlayerGuruguruAction : PlayerAction {
         player.visual.transform.rotation = Quaternion.AngleAxis(rad/3.14f*180+180, Vector3.forward);
     }
 
+    private void ChangeColor() {
+        //グルグル出来てる時と出来てない時で色を変える
+        if (isGuruguru == true) {
+            for (int i = 0; i < (int)LineIndex.MAX; ++i) {
+                line[i].materials[0].color = Color.green;
+                line[i].materials[0].SetColor("_EmissionColor", Color.green);
+            }
+        } else {
+            for (int i = 0; i < (int)LineIndex.MAX; ++i) {
+                line[i].materials[0].color = Color.red;
+                line[i].materials[0].SetColor("_EmissionColor", Color.red);
+            }
+        }
+    }
     private void Line() {
         //マウスカーソルの軌道を線で描画
         // 先頭に挿入

@@ -74,7 +74,7 @@ public class PlayerIaiAction : PlayerMoveAction {
     private void End() {
         if (isEnd == true) {
             //ˆÚ“®‘¬“x‚ğ–ß‚·
-            player.moveSpeed = moveSpeedBuffer*0.9f;
+            player.moveSpeed *= 0.9f;
 
             //ü‚ğÁ‚·
             player.line[0].SetActive(false);

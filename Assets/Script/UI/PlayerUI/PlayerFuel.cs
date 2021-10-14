@@ -39,13 +39,13 @@ public class PlayerFuel : MonoBehaviour {
             fuel += Time.deltaTime * 14;
             gauge.color = Color.white;
         } else {
-            fuel += Time.deltaTime * 80;
+            fuel += Time.deltaTime * 40;
             gauge.color = Color.red;
         }
     }
 
     public void Use() {
-        fuel -= maxFuel*2;
+        fuel -= 35;
 
         if (fuel <= 0) {
             fuel = 0;

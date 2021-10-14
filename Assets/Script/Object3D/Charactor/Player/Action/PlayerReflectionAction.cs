@@ -41,7 +41,7 @@ public class PlayerReflectionAction : PlayerAction {
         float h = Mathf.Abs((Vector3.Dot(player.moveSpeed, n)));
         Vector3 r = player.moveSpeed + 2 * n * h;
         player.moveSpeed = r;
-        player.moveSpeed *= 0.9f;
+        player.moveSpeed *= 0.7f;
 
         int rand = Random.Range(0, 5);
         switch (rand) {
