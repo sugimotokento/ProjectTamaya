@@ -113,7 +113,6 @@ public class PlayerGuruguruAction : PlayerAction {
             count++;
 
         }
-        Debug.Log(count);
 
         guruguruCrossBuffer = Vector3.Cross(dist2, dist1);
     }
@@ -144,6 +143,7 @@ public class PlayerGuruguruAction : PlayerAction {
             }
             //Destroy(rope);
             player.visual.transform.localPosition = Vector3.zero;
+            player.visual.transform.rotation = Quaternion.AngleAxis(0, Vector3.forward);
             player.ChangeAction<PlayerGuruguruAction, PlayerMoveAction>();
         }
     }
@@ -152,6 +152,7 @@ public class PlayerGuruguruAction : PlayerAction {
         float rad = Mathf.Atan2(mouseDist.y, mouseDist.x);
 
         player.visual.transform.position = target.transform.position + new Vector3(-Mathf.Cos(rad), -Mathf.Sin(rad), 0) * 2;
+        player.visual.transform.rotation = Quaternion.AngleAxis(rad/3.14f*180+180, Vector3.forward);
     }
 
     private void Line() {
