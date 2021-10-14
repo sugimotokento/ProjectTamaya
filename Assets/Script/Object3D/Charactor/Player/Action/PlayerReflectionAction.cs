@@ -11,7 +11,7 @@ public class PlayerReflectionAction : PlayerAction {
         renderer = player.transform.GetChild(0).GetChild(0).gameObject.GetComponent<Renderer>();
     }
 
-    public override void Action() {
+    public override void CollisionEnter(Collision collision) {
         Ray rayUp = new Ray(player.transform.position, Vector3.up);
         Ray rayDown = new Ray(player.transform.position, Vector3.down);
         Ray rayLeft = new Ray(player.transform.position, Vector3.left);
@@ -38,9 +38,10 @@ public class PlayerReflectionAction : PlayerAction {
 
         // 反射ベクトルを計算する
         Vector3 n = normal;
-        float h = Mathf.Abs(Mathf.Cos(90/180*3.14f));
+        float h = Mathf.Abs((Vector3.Dot(player.moveSpeed, n)));
         Vector3 r = player.moveSpeed + 2 * n * h;
-        player.moveSpeed = r*1.01f;
+        player.moveSpeed = r;
+        player.moveSpeed *= 0.9f;
 
         int rand = Random.Range(0, 5);
         switch (rand) {

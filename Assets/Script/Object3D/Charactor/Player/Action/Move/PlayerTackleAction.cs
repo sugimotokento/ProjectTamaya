@@ -23,7 +23,7 @@ public class PlayerTackleAction : PlayerMoveAction {
         }
     }
 
-    public override void CollisionEnter() {
+    public override void CollisionEnter(Collision collision) {
         //•Ç‚Æ‚©‚É“–‚½‚Á‚½‚ç’ÊíˆÚ“®‚É‚È‚é
         player.ChangeAction<PlayerTackleAction, PlayerMoveAction>();
         

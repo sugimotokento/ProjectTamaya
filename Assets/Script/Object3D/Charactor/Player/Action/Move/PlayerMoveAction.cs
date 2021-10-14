@@ -5,8 +5,10 @@ using UnityEngine;
 public class PlayerMoveAction : PlayerAction {
     protected float accelerationBaseSpeed = 10;
 
-    private float rightCrickTimer = 0;
     private const float CHANGE_ACTION_INTERVAL = 1.4f;
+    private const float BOOST_POWER = 30;
+    private float rightCrickTimer = 0;
+    private bool isLeftMouseDown = false;
 
     public override void Init(Player p) {
         base.Init(p);
@@ -14,8 +16,8 @@ public class PlayerMoveAction : PlayerAction {
     }
 
     public override void UpdateAction() {
-        if (Input.GetMouseButtonDown(0) && player.fuel.canUse == true) {
-            player.sound.PlayShot(PlayerSound.SoundIndex.MOVE);
+        if (Input.GetMouseButtonDown(0)) {
+            isLeftMouseDown = true;
         }
     }
 
@@ -26,11 +28,14 @@ public class PlayerMoveAction : PlayerAction {
 
 
     protected virtual void Move() {
-        if (Input.GetMouseButton(0) && player.fuel.canUse == true) {
+        if (isLeftMouseDown==true && player.fuel.canUse == true) {
+            isLeftMouseDown = false;
+            player.sound.PlayShot(PlayerSound.SoundIndex.MOVE);
+
             //マウスカーソルの3D座標とプレイヤーの座標の距離を取って加速する向きを計算
             Vector3 dist = GetWorldMousePos() - player.transform.position;
             dist.z = 0;
-            player.moveSpeed += dist.normalized * accelerationBaseSpeed * Time.fixedDeltaTime;
+            player.moveSpeed += dist.normalized * accelerationBaseSpeed * Time.fixedDeltaTime*BOOST_POWER;
 
             player.fuel.Use(); //燃料を減らす
         }

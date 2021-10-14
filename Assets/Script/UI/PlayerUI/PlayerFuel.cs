@@ -36,18 +36,18 @@ public class PlayerFuel : MonoBehaviour {
 
     private void Charge() {
         if (canUse == true) {
-            fuel += Time.deltaTime * 10;
+            fuel += Time.deltaTime * 14;
             gauge.color = Color.white;
         } else {
-            fuel += Time.deltaTime * 20;
+            fuel += Time.deltaTime * 80;
             gauge.color = Color.red;
         }
     }
 
     public void Use() {
-        fuel -= Time.deltaTime * 20;
+        fuel -= maxFuel*2;
 
-        if (fuel < 0) {
+        if (fuel <= 0) {
             fuel = 0;
             canUse = false;
         }

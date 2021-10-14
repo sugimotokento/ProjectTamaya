@@ -49,9 +49,8 @@ public class Player : MonoBehaviour {
 
     private void OnCollisionEnter(Collision collision) {
         for (int i = 0; i < action.Count; ++i) {
-            action[i].CollisionEnter();
+            action[i].CollisionEnter(collision);
         }
-        moveSpeed *= 0.9f;
     }
 
 
