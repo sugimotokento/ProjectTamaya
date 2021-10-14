@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41307ed39989c0b498f64831e3b5e08e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timer: 0.4
+  timer: 0.3
 --- !u!198 &1786313608492947833
 ParticleSystem:
   m_ObjectHideFlags: 0
@@ -236,7 +236,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 0, g: 0.22516632, b: 1, a: 1}
+      maxColor: {r: 0, g: 0.22352934, b: 1, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}

@@ -15,7 +15,7 @@ public class PlayerAction : MonoBehaviour {
         Vector3 mousePos = Input.mousePosition;
         mousePos.z = 10.0f;
         mousePos = Camera.main.ScreenToWorldPoint(mousePos);
-
+        mousePos.z = 0;
         return mousePos;
     }
 }

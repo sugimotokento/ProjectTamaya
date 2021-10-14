@@ -10,7 +10,8 @@ public class Player : MonoBehaviour {
 
     public GameObject visual;
     public GameObject rope;
-    public GameObject[] guruguruLine=new GameObject[2];
+    public GameObject[] line=new GameObject[2];
+    public GameObject iaiEffect;
 
     public Vector3 positionBuffer;
     public Vector3 moveSpeed;

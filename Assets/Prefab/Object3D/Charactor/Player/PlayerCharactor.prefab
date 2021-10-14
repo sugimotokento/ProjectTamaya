@@ -469,9 +469,10 @@ MonoBehaviour:
   sound: {fileID: 5397116342761518764}
   visual: {fileID: 2249781097717101499}
   rope: {fileID: 3612462937524136993, guid: 0191060e9a1bccc48a7d18009a8f859a, type: 3}
-  guruguruLine:
+  line:
   - {fileID: 7700404105004475011}
   - {fileID: 6668701057621496254}
+  iaiEffect: {fileID: 385815538847433257, guid: 2094de789394cd543b71f97cb69da1d5, type: 3}
   positionBuffer: {x: 0, y: 0, z: 0}
   moveSpeed: {x: 0, y: 0, z: 0}
 --- !u!65 &8042726863604454944

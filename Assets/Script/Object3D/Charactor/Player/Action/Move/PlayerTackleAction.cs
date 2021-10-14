@@ -10,7 +10,7 @@ public class PlayerTackleAction : PlayerMoveAction {
 
     public override void Init(Player p) {
         base.Init(p);
-
+        mousePos = GetWorldMousePos();
     }
 
     public override void Action() {

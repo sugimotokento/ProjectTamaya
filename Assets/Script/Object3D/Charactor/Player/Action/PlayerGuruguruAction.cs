@@ -9,8 +9,6 @@ public class PlayerGuruguruAction : PlayerAction {
         MAX
     };
 
-
-
     GameObject target;
     GameObject rope;
 
@@ -31,14 +29,12 @@ public class PlayerGuruguruAction : PlayerAction {
     bool isEnd = false;
     bool isRightMouseDown = false;
 
-
-
     public override void Init(Player p) {
         base.Init(p);
 
         //Lineの初期化
-        line[(int)LineIndex.ROLL] = player.guruguruLine[(int)LineIndex.ROLL].GetComponent<LineRenderer>();
-        line[(int)LineIndex.JOIN] = player.guruguruLine[(int)LineIndex.JOIN].GetComponent<LineRenderer>();
+        line[(int)LineIndex.ROLL] = player.line[(int)LineIndex.ROLL].GetComponent<LineRenderer>();
+        line[(int)LineIndex.JOIN] = player.line[(int)LineIndex.JOIN].GetComponent<LineRenderer>();
         line[(int)LineIndex.ROLL].positionCount = LINE_MAX;
         line[(int)LineIndex.JOIN].positionCount = 2;
         for (int i = 0; i < LINE_MAX; ++i) {
@@ -48,7 +44,7 @@ public class PlayerGuruguruAction : PlayerAction {
 
         //Lineを表示
         for (int i = 0; i < (int)LineIndex.MAX; ++i) {
-            player.guruguruLine[i].SetActive(true);
+            player.line[i].SetActive(true);
         }
     }
 
@@ -128,8 +124,8 @@ public class PlayerGuruguruAction : PlayerAction {
             isEnd = true;
         }
 
-        //8回転で終了
-        if (count >= 8) {
+        //10回転で終了
+        if (count >= 10) {
             isEnd = true;
         }
 
@@ -139,7 +135,7 @@ public class PlayerGuruguruAction : PlayerAction {
         //グルグル終了
         if (isEnd == true) {
             for (int i = 0; i < (int)LineIndex.MAX; ++i) {
-                player.guruguruLine[i].SetActive(false);
+                player.line[i].SetActive(false);
             }
             //Destroy(rope);
             player.visual.transform.localPosition = Vector3.zero;
