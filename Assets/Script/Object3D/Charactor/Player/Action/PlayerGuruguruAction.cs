@@ -12,6 +12,7 @@ public class PlayerGuruguruAction : PlayerAction {
 
 
     GameObject target;
+    GameObject rope;
 
     LineRenderer[] line = new LineRenderer[(int)LineIndex.MAX];
 
@@ -58,11 +59,11 @@ public class PlayerGuruguruAction : PlayerAction {
     }
 
     public override void Action() {
-        Line();
         Guruguru();
         GuruguruCount();
         GuruguruAnimatioin();
         GuruguruEnd();
+        Line();
         isRightMouseDown = false;
     }
 
@@ -117,16 +118,18 @@ public class PlayerGuruguruAction : PlayerAction {
         guruguruCrossBuffer = Vector3.Cross(dist2, dist1);
     }
     private void GuruguruEnd() {
+        //7秒経過で終了
         timer += Time.fixedDeltaTime;
         if (timer > 7) {
             isEnd = true;
         }
 
+        //右クリックで終了
         if (isRightMouseDown == true) {
             isEnd = true;
         }
 
-
+        //8回転で終了
         if (count >= 8) {
             isEnd = true;
         }
@@ -134,10 +137,12 @@ public class PlayerGuruguruAction : PlayerAction {
         //攻撃を受けても解除
 
 
+        //グルグル終了
         if (isEnd == true) {
             for (int i = 0; i < (int)LineIndex.MAX; ++i) {
                 player.guruguruLine[i].SetActive(false);
             }
+            //Destroy(rope);
             player.visual.transform.localPosition = Vector3.zero;
             player.ChangeAction<PlayerGuruguruAction, PlayerMoveAction>();
         }
@@ -150,6 +155,7 @@ public class PlayerGuruguruAction : PlayerAction {
     }
 
     private void Line() {
+        //マウスカーソルの軌道を線で描画
         // 先頭に挿入
         linePos.RemoveAt(linePos.Count - 1);
         linePos.Insert(0, GetWorldMousePos());
@@ -163,10 +169,22 @@ public class PlayerGuruguruAction : PlayerAction {
         line[(int)LineIndex.JOIN].SetPosition(0, target.transform.position);
         line[(int)LineIndex.JOIN].SetPosition(1, player.visual.transform.position);
 
+
+        //敵をグルグル巻きにする
+        if (count >= 8) {
+            rope.transform.localScale = new Vector3(rope.transform.localScale.x, 0.4f, rope.transform.localScale.z);
+        } else if (count >= 6) {
+            rope.transform.localScale = new Vector3(rope.transform.localScale.x, 0.28f, rope.transform.localScale.z);
+        } else if (count >= 3) {
+            rope.transform.localScale = new Vector3(rope.transform.localScale.x, 0.15f, rope.transform.localScale.z);
+        }
+
     }
 
     public void SetTartegt(GameObject obj) {
         target = obj;
         initTargetDist = target.transform.position - GetWorldMousePos();
+        rope = Instantiate(player.rope, target.transform.position, Quaternion.identity);
+        rope.transform.localScale = new Vector3(rope.transform.localScale.x, 0.08f, rope.transform.localScale.z);
     }
 }

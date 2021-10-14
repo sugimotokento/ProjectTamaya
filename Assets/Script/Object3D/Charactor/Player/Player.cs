@@ -9,6 +9,7 @@ public class Player : MonoBehaviour {
     public PlayerSound sound;
 
     public GameObject visual;
+    public GameObject rope;
     public GameObject[] guruguruLine=new GameObject[2];
 
     public Vector3 positionBuffer;
