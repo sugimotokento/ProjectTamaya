@@ -45,7 +45,7 @@ public class PlayerFuel : MonoBehaviour {
     }
 
     public void Use() {
-        fuel -= 35;
+        fuel -= 35*Time.fixedDeltaTime;
 
         if (fuel <= 0) {
             fuel = 0;

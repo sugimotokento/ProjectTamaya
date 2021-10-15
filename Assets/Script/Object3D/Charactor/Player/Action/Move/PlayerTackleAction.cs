@@ -11,6 +11,7 @@ public class PlayerTackleAction : PlayerMoveAction {
     public override void Init(Player p) {
         base.Init(p);
         mousePos = GetWorldMousePos();
+        accelerationBaseSpeed *= 5;
     }
 
     public override void Action() {
@@ -43,7 +44,7 @@ public class PlayerTackleAction : PlayerMoveAction {
 
         //‰Á‘¬‚µ‚ÄˆÚ“®‚·‚é
         player.moveSpeed += dist.normalized * accelerationBaseSpeed * Time.fixedDeltaTime;
-        player.transform.position += (player.moveSpeed * (1 + timer * 2)) * Time.fixedDeltaTime;
+        player.transform.position +=player.moveSpeed * Time.fixedDeltaTime;
 
         //”R—¿‚ðŒ¸‚ç‚·
         player.fuel.Use(); 
