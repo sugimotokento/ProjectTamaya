@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerGuruguruAction : PlayerAction {
     enum LineIndex {
-        ROLL,
+        MOUSE,
         JOIN,
         MAX
     };
@@ -33,13 +33,13 @@ public class PlayerGuruguruAction : PlayerAction {
         base.Init(p);
 
         //LineÇÃèâä˙âª
-        line[(int)LineIndex.ROLL] = player.line[(int)LineIndex.ROLL].GetComponent<LineRenderer>();
+        line[(int)LineIndex.MOUSE] = player.line[(int)LineIndex.MOUSE].GetComponent<LineRenderer>();
         line[(int)LineIndex.JOIN] = player.line[(int)LineIndex.JOIN].GetComponent<LineRenderer>();
-        line[(int)LineIndex.ROLL].positionCount = LINE_MAX;
+        line[(int)LineIndex.MOUSE].positionCount = LINE_MAX;
         line[(int)LineIndex.JOIN].positionCount = 2;
         for (int i = 0; i < LINE_MAX; ++i) {
             linePos.Add(GetWorldMousePos());
-            line[(int)LineIndex.ROLL].SetPosition(i, linePos[i]);
+            line[(int)LineIndex.MOUSE].SetPosition(i, linePos[i]);
         }
 
         //LineÇï\é¶
@@ -164,7 +164,7 @@ public class PlayerGuruguruAction : PlayerAction {
         linePos.Insert(0, GetWorldMousePos());
 
         for (int i = 0; i < linePos.Count; ++i) {
-            line[(int)LineIndex.ROLL].SetPosition(i, linePos[i]);
+            line[(int)LineIndex.MOUSE].SetPosition(i, linePos[i]);
         }
 
 

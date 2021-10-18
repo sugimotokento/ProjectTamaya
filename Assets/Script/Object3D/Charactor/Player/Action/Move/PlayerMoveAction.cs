@@ -18,6 +18,7 @@ public class PlayerMoveAction : PlayerAction {
     public override void UpdateAction() {
         if (Input.GetMouseButtonDown(0)) {
             isLeftMouseDown = true;
+            player.sound.PlayShot(PlayerSound.SoundIndex.MOVE);
         }
     }
 
@@ -29,7 +30,7 @@ public class PlayerMoveAction : PlayerAction {
 
     protected virtual void Move() {
         if (Input.GetMouseButton(0) && player.fuel.canUse == true) {
-            player.sound.PlayShot(PlayerSound.SoundIndex.MOVE);
+            
 
             //マウスカーソルの3D座標とプレイヤーの座標の距離を取って加速する向きを計算
             Vector3 dist = GetWorldMousePos() - player.transform.position;
