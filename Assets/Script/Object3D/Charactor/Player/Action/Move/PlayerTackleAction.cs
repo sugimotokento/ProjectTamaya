@@ -24,16 +24,14 @@ public class PlayerTackleAction : PlayerMoveAction {
         timer += Time.fixedDeltaTime;
         if (timer > 0.5f) {
             player.ChangeAction<PlayerTackleAction, PlayerMoveAction>();
-            PlayerMoveAction moveAction = player.GetAction<PlayerMoveAction>();
-            moveAction.SetBrake();
+            player.moveSpeed *= 0.5f;
         }
     }
 
     public override void CollisionEnter(Collision collision) {
         //ï«Ç∆Ç©Ç…ìñÇΩÇ¡ÇΩÇÁí èÌà⁄ìÆÇ…Ç»ÇÈ
         player.ChangeAction<PlayerTackleAction, PlayerMoveAction>();
-        PlayerMoveAction moveAction = player.GetAction<PlayerMoveAction>();
-        moveAction.SetBrake();
+        player.moveSpeed *= 0.5f;
 
     }
     public override void TriggerEnter(Collider collider) {

@@ -19,6 +19,7 @@ public class PlayerGuruguruAction : PlayerAction {
     Vector3 mousePosBuffer;
     Vector3 initTargetDist;
     Vector3 guruguruCrossBuffer;
+    Vector3 positionBuffer;
 
     float timer = 0;
 
@@ -46,6 +47,8 @@ public class PlayerGuruguruAction : PlayerAction {
         for (int i = 0; i < (int)LineIndex.MAX; ++i) {
             player.line[i].SetActive(true);
         }
+
+     
     }
 
     public override void UpdateAction() {
@@ -135,6 +138,7 @@ public class PlayerGuruguruAction : PlayerAction {
             player.visual.transform.localPosition = Vector3.zero;
             player.visual.transform.rotation = Quaternion.AngleAxis(0, Vector3.forward);
             player.ChangeAction<PlayerGuruguruAction, PlayerMoveAction>();
+            player.transform.position = positionBuffer;
         }
     }
     private void GuruguruAnimatioin() {
@@ -191,5 +195,10 @@ public class PlayerGuruguruAction : PlayerAction {
         initTargetDist = target.transform.position - GetWorldMousePos();
         rope = Instantiate(player.rope, target.transform.position, Quaternion.identity);
         rope.transform.localScale = new Vector3(rope.transform.localScale.x, 0.08f, rope.transform.localScale.z);
+
+
+        positionBuffer = player.transform.position;
+        player.transform.position = obj.transform.position;
+        player.transform.position -= Vector3.back * 4;
     }
 }

@@ -61,7 +61,7 @@ public class PlayerIaiAction : PlayerMoveAction {
                 attackPos = GetWorldMousePos();
                 moveSpeedBuffer = player.moveSpeed;
 
-                player.moveSpeed = (attackPos - player.transform.position).normalized * accelerationBaseSpeed;
+                player.moveSpeed = (attackPos - player.transform.position).normalized * accelerationBaseSpeed*3;
             }
         } else {
             //目標地点に到達
@@ -74,7 +74,7 @@ public class PlayerIaiAction : PlayerMoveAction {
     private void End() {
         if (isEnd == true) {
             //移動速度を戻す
-            player.moveSpeed *= 0.9f;
+            player.moveSpeed *= 0.1f;
 
             //線を消す
             player.line[0].SetActive(false);

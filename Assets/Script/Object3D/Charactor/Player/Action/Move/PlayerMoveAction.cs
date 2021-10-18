@@ -9,7 +9,6 @@ public class PlayerMoveAction : PlayerAction {
     private float rightCrickTimer = 0;
     private bool isLeftMouseDown = false;
 
-    private float brakeTimer = 0;
 
     public override void Init(Player p) {
         base.Init(p);
@@ -28,21 +27,16 @@ public class PlayerMoveAction : PlayerAction {
         Move();
         ChangeAction();
 
-        brakeTimer -= Time.fixedDeltaTime;
-        if (brakeTimer > 0) {
-            player.moveSpeed *= 0.985f;
-        }
     }
 
 
     protected virtual void Move() {
         if (Input.GetMouseButton(0) && player.fuel.canUse == true) {
-            brakeTimer = 0;
 
             //マウスカーソルの3D座標とプレイヤーの座標の距離を取って加速する向きを計算
             Vector3 dist = GetWorldMousePos() - player.transform.position;
             dist.z = 0;
-            player.moveSpeed += dist.normalized * accelerationBaseSpeed*Time.fixedDeltaTime;
+            player.moveSpeed += dist.normalized * accelerationBaseSpeed * Time.fixedDeltaTime;
 
             player.fuel.Use(); //燃料を減らす
         }
@@ -54,9 +48,6 @@ public class PlayerMoveAction : PlayerAction {
     private void ChangeAction() {
         if (Input.GetMouseButton(1)) {
             rightCrickTimer += Time.fixedDeltaTime;
-            brakeTimer = 0;
-
-
 
             //エフェクト生成
             if (rightCrickTimer > 0.5f) {
@@ -72,14 +63,12 @@ public class PlayerMoveAction : PlayerAction {
 
                 //クラスの切り替え
                 player.ChangeAction<PlayerMoveAction, PlayerTackleAction>();
-               
+
 
             }
         }
     }
 
-    
-    public void SetBrake() {
-        brakeTimer = 1.4f;
-    }
+
+
 }
