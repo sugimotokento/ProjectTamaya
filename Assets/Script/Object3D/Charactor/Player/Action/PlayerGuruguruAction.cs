@@ -10,7 +10,7 @@ public class PlayerGuruguruAction : PlayerAction {
     };
 
     GameObject target;
-    GameObject rope;
+    GameObject rope;//円柱オブジェクト
 
     LineRenderer[] line = new LineRenderer[(int)LineIndex.MAX];
 
@@ -62,6 +62,8 @@ public class PlayerGuruguruAction : PlayerAction {
         ChangeColor();
         Line();
         isRightMouseDown = false;
+
+       
     }
 
 
