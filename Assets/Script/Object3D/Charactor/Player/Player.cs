@@ -12,9 +12,13 @@ public class Player : MonoBehaviour {
     public GameObject rope;
     public GameObject[] line=new GameObject[2];
     public GameObject iaiEffect;
+    public GameObject noise;
 
+    [HideInInspector]
     public Vector3 positionBuffer;
+    [HideInInspector]
     public Vector3 moveSpeed;
+
 
     
     private void Awake() {
@@ -51,6 +55,7 @@ public class Player : MonoBehaviour {
         for (int i = 0; i < action.Count; ++i) {
             action[i].CollisionEnter(collision);
         }
+
     }
     private void OnTriggerEnter(Collider other) {
         for (int i = 0; i < action.Count; ++i) {

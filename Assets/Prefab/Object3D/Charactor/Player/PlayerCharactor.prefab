@@ -473,6 +473,7 @@ MonoBehaviour:
   - {fileID: 7700404105004475011}
   - {fileID: 6668701057621496254}
   iaiEffect: {fileID: 385815538847433257, guid: 2094de789394cd543b71f97cb69da1d5, type: 3}
+  noise: {fileID: 1991358878741500532, guid: 2133831c453ace442b864019919da78e, type: 3}
   positionBuffer: {x: 0, y: 0, z: 0}
   moveSpeed: {x: 0, y: 0, z: 0}
 --- !u!65 &8042726863604454944

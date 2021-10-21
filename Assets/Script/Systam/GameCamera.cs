@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GameCamera : MonoBehaviour {
     private Player playerScript;
-    public float len;
+    public float distRange;
 
     // Start is called before the first frame update
     void Start() {
@@ -30,8 +30,8 @@ public class GameCamera : MonoBehaviour {
         Vector3 followPos = mousePos - playerScript.transform.position + playerScript.transform.position;
 
 
-        if ((followPos - playerScript.transform.position).magnitude > len) {
-            followPos = followPos.normalized * len + playerScript.transform.position;
+        if ((followPos - playerScript.transform.position).magnitude > distRange) {
+            followPos = followPos.normalized * distRange + playerScript.transform.position;
         }
 
         Vector3 dist = followPos - cameraPos;
