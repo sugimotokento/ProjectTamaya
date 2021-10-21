@@ -26,12 +26,14 @@ public class GameCamera : MonoBehaviour {
         mousePos = Camera.main.ScreenToWorldPoint(mousePos);
         mousePos.z = 0;
 
-        Vector3 cameraPos = this.transform.position + Vector3.back * -10;
-        Vector3 followPos = mousePos - playerScript.transform.position + playerScript.transform.position;
+        float late = 0.35f;
+
+        Vector3 cameraPos = this.transform.position + Vector3.back * -15;
+        Vector3 followPos = mousePos - playerScript.transform.position + playerScript.moveSpeed* late;
 
 
-        if ((followPos - playerScript.transform.position).magnitude > distRange) {
-            followPos = followPos.normalized * distRange + playerScript.transform.position;
+        if ((followPos - playerScript.moveSpeed * late).magnitude > distRange) {
+            followPos = followPos.normalized * distRange + playerScript.moveSpeed * late;
         }
 
         Vector3 dist = followPos - cameraPos;
