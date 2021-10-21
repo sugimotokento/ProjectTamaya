@@ -7,7 +7,7 @@ public class StageManager : MonoBehaviour {
     public static StageManager instance=null;
 
     public GameObject player;
-
+    public GameObject enemy;
     private void Awake() {
         instance = this;
     }

@@ -43,6 +43,7 @@ public class Player : MonoBehaviour {
         for (int i=0; i < action.Count; ++i) {
             action[i].Action();
         }
+        
     }
 
 
@@ -65,6 +66,14 @@ public class Player : MonoBehaviour {
             }
         }
         return (T)(object)null;
+    }
+    public bool CheckAction<T>()where T : PlayerAction {
+        for (int i = 0; i < action.Count; ++i) {
+            if (typeof(T) == action[i].GetType()) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public void ChangeAction<T, C>() where C : PlayerAction, new() {
