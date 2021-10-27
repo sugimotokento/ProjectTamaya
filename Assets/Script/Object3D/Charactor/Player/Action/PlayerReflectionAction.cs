@@ -4,11 +4,9 @@ using UnityEngine;
 
 public class PlayerReflectionAction : PlayerAction {
 
-    Renderer renderer;
 
     public override void Init(Player p) {
         base.Init(p);
-        renderer = player.transform.GetChild(0).GetChild(0).gameObject.GetComponent<Renderer>();
     }
 
     public override void CollisionEnter(Collision collision) {
@@ -43,33 +41,7 @@ public class PlayerReflectionAction : PlayerAction {
         player.moveSpeed = r;
         player.moveSpeed *= 0.7f;
 
-        int rand = Random.Range(0, 5);
-        switch (rand) {
-            case 0:
-                renderer.material.color = Color.red;
-                break;
 
-            case 1:
-                renderer.material.color = Color.blue;
-                break;
-
-            case 2:
-                renderer.material.color = Color.green;
-                break;
-
-            case 3:
-                renderer.material.color = Color.magenta;
-                break;
-
-
-            case 4:
-                renderer.material.color = Color.yellow;
-                break;
-
-            default:
-                renderer.material.color = Color.white;
-                break;
-        }
 
     }
 
