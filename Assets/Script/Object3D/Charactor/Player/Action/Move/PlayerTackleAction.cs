@@ -45,7 +45,6 @@ public class PlayerTackleAction : PlayerMoveAction {
 
     protected override void Move() {
         //‰Á‘¬‚µ‚ÄˆÚ“®‚·‚é
-      //  player.moveSpeed += direction.normalized * accelerationBaseSpeed * Time.fixedDeltaTime;
         player.transform.position +=player.moveSpeed * Time.fixedDeltaTime;
 
         //”R—¿‚ðŒ¸‚ç‚·

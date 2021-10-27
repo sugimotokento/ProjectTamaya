@@ -41,7 +41,8 @@ public class PlayerFuel : MonoBehaviour {
         if (canUse == true) {
             boostGauge.color = Color.white;
         } else {
-            boostGauge.color = Color.red;
+            float flickerLate = 0.75f;
+            boostGauge.color = Color.red * (1 - Mathf.Sin(fuel * flickerLate)) + Color.gray * Mathf.Sin(fuel * flickerLate);
         }
     }
 
