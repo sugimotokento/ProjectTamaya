@@ -31,7 +31,7 @@ public class PlayerMoveAction : PlayerAction {
 
 
     protected virtual void Move() {
-        if (Input.GetMouseButton(0) && player.fuel.canUse == true) {
+        if (Input.GetMouseButton(0) && player.fuel.GetCanUse() == true) {
 
             //マウスカーソルの3D座標とプレイヤーの座標の距離を取って加速する向きを計算
             Vector3 dist = GetWorldMousePos() - player.transform.position;

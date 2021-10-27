@@ -13,7 +13,7 @@ public class PlayerAction : MonoBehaviour {
 
     protected Vector3 GetWorldMousePos() {
         Vector3 mousePos = Input.mousePosition;
-        mousePos.z = 10.0f;
+        mousePos.z = -Camera.main.transform.position.z;
         mousePos = Camera.main.ScreenToWorldPoint(mousePos);
         mousePos.z = 0;
         return mousePos;

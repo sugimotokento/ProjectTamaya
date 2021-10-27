@@ -5,53 +5,67 @@ using UnityEngine.UI;
 
 
 public class PlayerFuel : MonoBehaviour {
-    float maxFuel = 100;
-    float fuel;
+    [SerializeField]
+    private Image boostGauge;
 
-    public bool canUse = true;
+    private float maxFuel = 100;
+    private float fuel;
 
-    private Image gauge;
+    private bool canUse = true;
+
+
+    //UIが変な形してるから調整用
+    private const float START_LATE = 0.77f;
+    private const float END_LATE = 0.02f;
+
     // Start is called before the first frame update
     void Start() {
-        fuel = maxFuel;
+        fuel = maxFuel * START_LATE;
 
-        gauge = transform.GetChild(0).gameObject.GetComponent<Image>();
     }
 
     // Update is called once per frame
     void Update() {
-        gauge.fillAmount = fuel / maxFuel;
+        boostGauge.fillAmount = fuel / maxFuel;
 
         //燃料を一度使い切ったら再チャージする
-        if (fuel > maxFuel) {
-            fuel = maxFuel;
+        if (fuel > maxFuel * START_LATE) {
+            fuel = maxFuel * START_LATE;
             canUse = true;
 
         } else {
             Charge();
-            
+
+        }
+
+        if (canUse == true) {
+            boostGauge.color = Color.white;
+        } else {
+            boostGauge.color = Color.red;
         }
     }
 
 
     private void Charge() {
         if (canUse == true) {
-            fuel += Time.deltaTime * 14;
-            gauge.color = Color.white;
+            fuel += Time.deltaTime * 14 * (START_LATE - END_LATE);
         } else {
-            fuel += Time.deltaTime * 40;
-            gauge.color = Color.red;
+            fuel += Time.deltaTime * 40 * (START_LATE - END_LATE);
         }
     }
 
     public void Use() {
-        fuel -= 35*Time.fixedDeltaTime;
+        fuel -= 35 * Time.fixedDeltaTime * (START_LATE - END_LATE);
 
-        if (fuel <= 0) {
-            fuel = 0;
+        if (fuel <= maxFuel * END_LATE) {
+            fuel = maxFuel * END_LATE;
             canUse = false;
         }
     }
 
+
+    public bool GetCanUse() {
+        return canUse;
+    }
 
 }

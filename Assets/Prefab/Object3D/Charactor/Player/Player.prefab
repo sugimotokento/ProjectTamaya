@@ -145,9 +145,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3672eb5aa2a55434eb983aa2c5b39f82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &7199167014820005296 stripped
+--- !u!114 &3052570830474046128 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1102006506177558993, guid: 08cfcff5ee63cc248b4a12f1b7975b34, type: 3}
+  m_CorrespondingSourceObject: {fileID: 5115915087507379921, guid: 08cfcff5ee63cc248b4a12f1b7975b34, type: 3}
   m_PrefabInstance: {fileID: 7828251579524299873}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
@@ -218,7 +218,7 @@ PrefabInstance:
     - target: {fileID: 7378424357854251995, guid: 9a3b8670629e8a6488b984f311c98f1b, type: 3}
       propertyPath: fuel
       value: 
-      objectReference: {fileID: 7199167014820005296}
+      objectReference: {fileID: 3052570830474046128}
     - target: {fileID: 7378424357854251995, guid: 9a3b8670629e8a6488b984f311c98f1b, type: 3}
       propertyPath: action.Array.size
       value: 3
