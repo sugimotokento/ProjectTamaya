@@ -20,6 +20,7 @@ public class Player : MonoBehaviour {
     public Vector3 moveSpeed;
 
 
+
     
     private void Awake() {
         action.Add(new PlayerReflectionAction());
@@ -47,6 +48,8 @@ public class Player : MonoBehaviour {
         for (int i=0; i < action.Count; ++i) {
             action[i].Action();
         }
+        
+
         Vector3 dist = this.transform.position - positionBuffer;
         float angle = Mathf.Atan2(dist.y, dist.x) / 3.14f * 180;
         visual.transform.rotation = Quaternion.Euler(0.0f, 0.0f, angle);

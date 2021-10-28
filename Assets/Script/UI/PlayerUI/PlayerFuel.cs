@@ -15,8 +15,8 @@ public class PlayerFuel : MonoBehaviour {
 
 
     //UI‚ª•Ï‚ÈŒ`‚µ‚Ä‚é‚©‚ç’²®—p
-    private const float START_LATE = 0.77f;
-    private const float END_LATE = 0.02f;
+    private const float START_LATE = 0.97f;
+    private const float END_LATE = 0.23f;
 
     // Start is called before the first frame update
     void Start() {

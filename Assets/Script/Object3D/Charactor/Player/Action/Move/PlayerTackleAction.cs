@@ -48,8 +48,12 @@ public class PlayerTackleAction : PlayerMoveAction {
         player.transform.position +=player.moveSpeed * Time.fixedDeltaTime;
 
         //”R—¿‚ðŒ¸‚ç‚·
-        player.fuel.Use(); 
+        player.fuel.Use();
 
-        
+
+        if (player.fuel.GetCanUse() == false) {
+            player.ChangeAction<PlayerTackleAction, PlayerMoveAction>();
+            player.moveSpeed *= 0.1f;
+        }
     }
 }

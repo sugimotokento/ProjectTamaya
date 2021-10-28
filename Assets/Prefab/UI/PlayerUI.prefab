@@ -998,7 +998,7 @@ MonoBehaviour:
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
-  m_FillClockwise: 1
+  m_FillClockwise: 0
   m_FillOrigin: 3
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
@@ -1230,7 +1230,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\xD70"
+  m_Text: "\u27160"
 --- !u!1 &7581359505637134189
 GameObject:
   m_ObjectHideFlags: 0
@@ -1286,6 +1286,7 @@ MonoBehaviour:
   hpGauge: {fileID: 2155312410886959438}
   number: {fileID: 3904706151838900697}
   maxHp: 100
+  damageInterval: 1
 --- !u!1 &8883391493133533563
 GameObject:
   m_ObjectHideFlags: 0

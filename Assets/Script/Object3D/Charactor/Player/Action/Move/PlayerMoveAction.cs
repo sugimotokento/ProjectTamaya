@@ -46,7 +46,7 @@ public class PlayerMoveAction : PlayerAction {
 
 
     private void ChangeAction() {
-        if (Input.GetMouseButton(1)) {
+        if (Input.GetMouseButton(1) && player.fuel.GetCanUse() == true) {
             rightCrickTimer += Time.fixedDeltaTime;
 
             //エフェクト生成
