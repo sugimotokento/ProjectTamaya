@@ -10,30 +10,25 @@ public class Player : MonoBehaviour {
 
     public GameObject visual;
     public GameObject rope;
-    public GameObject[] line=new GameObject[2];
+    public GameObject[] line = new GameObject[2];
     public GameObject iaiEffect;
     public GameObject noise;
 
-    [HideInInspector]
-    public Vector3 positionBuffer;
-    [HideInInspector]
-    public Vector3 moveSpeed;
+    [HideInInspector] public Vector3 positionBuffer;
+    [HideInInspector] public Vector3 moveSpeed;
 
 
 
-    
+
     private void Awake() {
-        action.Add(new PlayerReflectionAction());
-        action.Add(new PlayerMoveAction());
-     
-        
+        AddAction<PlayerReflectionAction>();
+        AddAction<PlayerMoveAction>();
+
     }
 
     // Start is called before the first frame update
     private void Start() {
-        for (int i = 0; i < action.Count; ++i) {
-            action[i].Init(this);
-        }
+   
     }
 
     private void Update() {
@@ -44,11 +39,11 @@ public class Player : MonoBehaviour {
 
     private void FixedUpdate() {
         positionBuffer = transform.position;
- 
-        for (int i=0; i < action.Count; ++i) {
+
+        for (int i = 0; i < action.Count; ++i) {
             action[i].Action();
         }
-        
+
 
         Vector3 dist = this.transform.position - positionBuffer;
         float angle = Mathf.Atan2(dist.y, dist.x) / 3.14f * 180;
@@ -68,7 +63,10 @@ public class Player : MonoBehaviour {
         }
     }
 
-
+    public void AddAction<T>() where T : PlayerAction, new() {
+        action.Add(new T());
+        action[action.Count - 1].Init(this);
+    }
     public T GetAction<T>() where T : PlayerAction {
         for (int i = 0; i < action.Count; ++i) {
             if (typeof(T) == action[i].GetType()) {
@@ -77,7 +75,7 @@ public class Player : MonoBehaviour {
         }
         return (T)(object)null;
     }
-    public bool CheckAction<T>()where T : PlayerAction {
+    public bool CheckAction<T>() where T : PlayerAction {
         for (int i = 0; i < action.Count; ++i) {
             if (typeof(T) == action[i].GetType()) {
                 return true;
@@ -85,11 +83,17 @@ public class Player : MonoBehaviour {
         }
         return false;
     }
-
+    public void RemoveAction<T>() where T : PlayerAction {
+        for (int i = 0; i < action.Count; ++i) {
+            if (typeof(T) == action[i].GetType()) {
+                action.RemoveAt(i);
+            }
+        }
+    }
     public void ChangeAction<T, C>() where C : PlayerAction, new() {
         for (int i = 0; i < action.Count; ++i) {
             if (typeof(T) == action[i].GetType()) {
-                action[i]=new C();
+                action[i] = new C();
                 action[i].Init(this);
             }
         }
