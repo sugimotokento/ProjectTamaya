@@ -16,10 +16,14 @@ public class RotationDoor : MonoBehaviour {
     private void FixedUpdate() {
         if (isRotation == true) {
             float angle = Mathf.Lerp(startAngle, startAngle + 180, rotationLate);
-            this.transform.eulerAngles = Vector3.forward*angle;
+            this.transform.eulerAngles = Vector3.forward * angle;
             rotationLate += Time.fixedDeltaTime;
-            player.transform.position= standObj.transform.position;
 
+            //プレイヤーの座標を待機地点に固定する
+            player.transform.position = standObj.transform.position;
+            player.visual.transform.eulerAngles = Vector3.forward * (angle + 180);
+
+            //回転終了
             if (rotationLate >= 1) {
                 isRotation = false;
                 this.transform.eulerAngles = Vector3.forward * (startAngle + 180);

@@ -47,6 +47,10 @@ public class PlayerTackleAction : PlayerMoveAction {
         //‰Á‘¬‚µ‚ÄˆÚ“®‚·‚é
         player.transform.position +=player.moveSpeed * Time.fixedDeltaTime;
 
+        Vector3 dist = player.transform.position - player.positionBuffer;
+        float angle = Mathf.Atan2(dist.y, dist.x) / 3.14f * 180;
+        player.visual.transform.rotation = Quaternion.Euler(0.0f, 0.0f, angle);
+
         //”R—¿‚ðŒ¸‚ç‚·
         player.fuel.Use();
 

@@ -69,6 +69,10 @@ public class PlayerIaiAction : PlayerMoveAction {
                 isEnd = true;
             }
         }
+
+        Vector3 dist = player.transform.position - player.positionBuffer;
+        float angle = Mathf.Atan2(dist.y, dist.x) / 3.14f * 180;
+        player.visual.transform.rotation = Quaternion.Euler(0.0f, 0.0f, angle);
     }
 
     private void End() {
