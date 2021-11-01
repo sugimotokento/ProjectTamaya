@@ -10,26 +10,27 @@ public class PlayerReflectionAction : PlayerAction {
     }
 
     public override void CollisionEnter(Collision collision) {
-        Ray rayUp = new Ray(player.transform.position, Vector3.up);
-        Ray rayDown = new Ray(player.transform.position, Vector3.down);
-        Ray rayLeft = new Ray(player.transform.position, Vector3.left);
-        Ray rayRight = new Ray(player.transform.position, Vector3.right);
+        if (collision.gameObject.CompareTag("Stage")) {
+            Ray rayUp = new Ray(player.transform.position, Vector3.up);
+            Ray rayDown = new Ray(player.transform.position, Vector3.down);
+            Ray rayLeft = new Ray(player.transform.position, Vector3.left);
+            Ray rayRight = new Ray(player.transform.position, Vector3.right);
 
-        RaycastHit hit;
+            RaycastHit hit;
 
-        if (Physics.Raycast(rayUp, out hit, 0.6f)) {
-            Reflection(Vector3.down);
+            if (Physics.Raycast(rayUp, out hit, 0.6f)) {
+                Reflection(Vector3.down);
+            }
+            if (Physics.Raycast(rayDown, out hit, 0.6f)) {
+                Reflection(Vector3.up);
+            }
+            if (Physics.Raycast(rayLeft, out hit, 0.6f)) {
+                Reflection(Vector3.right);
+            }
+            if (Physics.Raycast(rayRight, out hit, 0.6f)) {
+                Reflection(Vector3.left);
+            }
         }
-        if (Physics.Raycast(rayDown, out hit, 0.6f)) {
-            Reflection(Vector3.up);
-        }
-        if (Physics.Raycast(rayLeft, out hit, 0.6f)) {
-            Reflection(Vector3.right);
-        }
-        if (Physics.Raycast(rayRight, out hit, 0.6f)) {
-            Reflection(Vector3.left);
-        }
-
     }
 
     private void Reflection(Vector3 normal) {

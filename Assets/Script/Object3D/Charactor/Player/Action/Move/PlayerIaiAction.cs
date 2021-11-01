@@ -61,7 +61,7 @@ public class PlayerIaiAction : PlayerMoveAction {
                 attackPos = GetWorldMousePos();
                 moveSpeedBuffer = player.moveSpeed;
 
-                player.moveSpeed = (attackPos - player.transform.position).normalized * accelerationBaseSpeed*3;
+                player.moveSpeed = (attackPos - player.transform.position).normalized * accelerationBaseSpeed*5;
             }
         } else {
             //目標地点に到達
