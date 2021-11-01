@@ -919,7 +919,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1189876066542202597, guid: 7d6695a89417f4e4d820a67b529e94de, type: 3}
       propertyPath: accelerationLate
-      value: 5
+      value: 0.3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7d6695a89417f4e4d820a67b529e94de, type: 3}
