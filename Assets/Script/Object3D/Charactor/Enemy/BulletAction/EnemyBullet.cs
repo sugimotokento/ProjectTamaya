@@ -7,24 +7,34 @@ public class EnemyBullet : MonoBehaviour
     private Rigidbody rb;
     [SerializeField] private float speed;
 
+    private bool isdes;
+
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        Destroy(gameObject, 1.5f);
+        //Destroy(gameObject, 1.5f);
+        isdes = false;
     }
 
-    // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        rb.velocity = transform.forward * speed;
+        //ˆÚ“®
+        rb.velocity = transform.forward * speed * Time.fixedDeltaTime;
+
+        if (isdes)
+            Destroy(gameObject);
     }
 
+
+    //“–‚½‚è”»’è
     private void OnCollisionEnter(Collision other)
     {
         if (other.gameObject.tag == "Player")
         {
-            Destroy(gameObject);
+            isdes = true;
         }
+        else
+            Destroy(gameObject);
     }
 }
