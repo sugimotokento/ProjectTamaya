@@ -33,7 +33,7 @@ public class GameCamera : MonoBehaviour {
 
         //ƒJƒƒ‰‚Ì‹——£‚Ì§ŒÀ
         if ((followPos - playerScript.moveSpeed * late).magnitude > distRange) {
-            followPos = followPos.normalized * distRange + playerScript.moveSpeed * late;
+            followPos = followPos.normalized * distRange + playerScript.moveSpeed * late +playerScript.transform.position;
         }
 
         Vector3 dist = followPos - cameraPos;
