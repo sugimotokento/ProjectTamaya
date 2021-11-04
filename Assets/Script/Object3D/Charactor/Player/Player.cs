@@ -14,6 +14,7 @@ public class Player : MonoBehaviour {
     public GameObject[] line = new GameObject[2];
     public GameObject iaiEffect;
     public GameObject noise;
+    public GameObject afterimage;
 
     [HideInInspector] public Vector3 positionBuffer;
     [HideInInspector] public Vector3 moveSpeed;

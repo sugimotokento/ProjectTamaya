@@ -29,7 +29,7 @@ public class GameCamera : MonoBehaviour {
         float late = 0.1f;
 
         Vector3 cameraPos = this.transform.position + Vector3.back * -15;
-        Vector3 followPos =  - playerScript.transform.position + (mousePos*(1-late) + playerScript.moveSpeed * late);
+        Vector3 followPos =  - playerScript.transform.position + (mousePos*0.5f*(1-late) + playerScript.moveSpeed * late);
 
         //ƒJƒƒ‰‚Ì‹——£‚Ì§ŒÀ
         if ((followPos - playerScript.moveSpeed * late).magnitude > distRange) {

@@ -64,8 +64,13 @@ public class PlayerIaiAction : PlayerMoveAction {
                 player.moveSpeed = (attackPos - player.transform.position).normalized * accelerationBaseSpeed*5;
             }
         } else {
+            //残像
+            GameObject obj = Instantiate(player.afterimage, player.visual.transform.position, player.visual.transform.rotation);
+            obj.GetComponent<Renderer>().material.color = new Color(1, 1, 1, 0.5f);
+            Destroy(obj, 0.2f);
+
             //目標地点に到達
-            if ((attackPos - player.transform.position).magnitude < 0.2f) {
+            if ((attackPos - player.transform.position).magnitude < 0.5f) {
                 isEnd = true;
             }
         }
@@ -73,6 +78,8 @@ public class PlayerIaiAction : PlayerMoveAction {
         Vector3 dist = player.transform.position - player.positionBuffer;
         float angle = Mathf.Atan2(dist.y, dist.x) / 3.14f * 180;
         player.visual.transform.rotation = Quaternion.Euler(0.0f, 0.0f, angle);
+
+     
     }
 
     private void End() {

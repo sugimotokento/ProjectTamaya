@@ -6,6 +6,7 @@ public class PlayerTackleAction : PlayerMoveAction {
     public Vector3 mousePos;
     private float timer = 0;
     private float tackeTime = 0.5f;
+    private float afterimageTimer = 0;
 
     Vector3 direction;
 
@@ -54,6 +55,14 @@ public class PlayerTackleAction : PlayerMoveAction {
         //”R—¿‚ðŒ¸‚ç‚·
         player.fuel.Use();
 
+        //Žc‘œ
+        if (afterimageTimer > 0.03f) {
+            GameObject obj = Instantiate(player.afterimage, player.visual.transform.position, player.visual.transform.rotation);
+            obj.GetComponent<Renderer>().material.color = new Color(1, 1, 1, 0.5f);
+            Destroy(obj, 0.2f);
+            afterimageTimer = 0;
+        }
+        afterimageTimer += Time.fixedDeltaTime;
 
         if (player.fuel.GetCanUse() == false) {
             player.ChangeAction<PlayerTackleAction, PlayerMoveAction>();
