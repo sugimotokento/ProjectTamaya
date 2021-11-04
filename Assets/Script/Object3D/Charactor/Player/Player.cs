@@ -6,6 +6,7 @@ public class Player : MonoBehaviour {
     private List<PlayerAction> action = new List<PlayerAction>();
     public PlayerHP hP;
     public PlayerFuel fuel;
+    public PlayerItem item;
     public PlayerSound sound;
 
     public GameObject visual;
@@ -59,6 +60,12 @@ public class Player : MonoBehaviour {
     }
 
     public void AddAction<T>() where T : PlayerAction, new() {
+        for (int i = 0; i < action.Count; ++i) {
+            if (typeof(T) == action[i].GetType()) {
+                //Šù‚É‘¶Ý‚·‚éê‡’Ç‰Á‚µ‚È‚¢
+                return;
+            }
+        }
         action.Add(new T());
         action[action.Count - 1].Init(this);
     }
