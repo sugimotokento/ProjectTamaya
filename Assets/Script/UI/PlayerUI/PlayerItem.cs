@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class PlayerItem : MonoBehaviour {
     [SerializeField] private Text keyText;
 
-    private int key = 0;
+    private int key = 100;
 
     // Start is called before the first frame update
     void Start() {

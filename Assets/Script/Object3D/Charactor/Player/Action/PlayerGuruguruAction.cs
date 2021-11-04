@@ -197,7 +197,7 @@ public class PlayerGuruguruAction : PlayerAction {
         rope.transform.localScale = new Vector3(rope.transform.localScale.x, 0.08f, rope.transform.localScale.z);
 
 
-        positionBuffer = player.transform.position;
+        positionBuffer = target.transform.position - player.moveSpeed.normalized;
         player.transform.position = obj.transform.position;
         player.transform.position -= Vector3.back * 4;
     }

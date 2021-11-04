@@ -10,11 +10,12 @@ GameObject:
   m_Component:
   - component: {fileID: 4568144261542363481}
   - component: {fileID: 4568144261542363482}
+  - component: {fileID: 5825994392676837779}
   - component: {fileID: 4568144261542363483}
   - component: {fileID: 4568144261542363428}
   m_Layer: 0
   m_Name: DamagePipe
-  m_TagString: Untagged
+  m_TagString: Stage
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -47,6 +48,19 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 3, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!65 &5825994392676837779
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4568144261542363429}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.05, y: 3.05, z: 1.05}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &4568144261542363483
 Rigidbody:

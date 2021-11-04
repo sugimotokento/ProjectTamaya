@@ -20,11 +20,9 @@ public class Player : MonoBehaviour {
 
 
 
-
     private void Awake() {
         AddAction<PlayerReflectionAction>();
-        AddAction<PlayerMoveAction>();
-
+        AddAction<PlayerMoveAction>();  
     }
 
     // Start is called before the first frame update
@@ -41,6 +39,7 @@ public class Player : MonoBehaviour {
     private void FixedUpdate() {
         positionBuffer = transform.position;
 
+        if (CheckAction<PlayerMoveAction>() == false && CheckAction<PlayerTackleAction>() == false && CheckAction<PlayerIaiAction>() == false) moveSpeed = Vector3.zero;
         for (int i = 0; i < action.Count; ++i) {
             action[i].Action();
         }
