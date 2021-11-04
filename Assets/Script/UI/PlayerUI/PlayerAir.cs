@@ -20,7 +20,11 @@ public class PlayerAir : MonoBehaviour {
     // Update is called once per frame
     void Update() {
         gauge.fillAmount = timer / MAX_TIME;
-
+        if (timer <= MAX_TIME*0.3f) {
+            number.color = Color.red;
+        } else {
+            number.color = Color.white;
+        }
         SetText();
     }
 

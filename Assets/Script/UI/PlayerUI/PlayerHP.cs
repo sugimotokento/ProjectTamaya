@@ -27,6 +27,11 @@ public class PlayerHP : MonoBehaviour {
     void Update() {
         hpGauge.fillAmount = (float)hp / (float)maxHp;
         number.text = hp.ToString() + "/" + maxHp.ToString();
+        if (hp <= 30) {
+            number.color = Color.red;
+        } else {
+            number.color = Color.white;
+        }
 
         damageIntervalTimer -= Time.deltaTime;
         damageAnimetionTimer -= Time.deltaTime;
@@ -40,7 +45,7 @@ public class PlayerHP : MonoBehaviour {
         if (damageIntervalTimer <= 0) {
             hp -= damage;
             damageIntervalTimer = damageInterval;//–³“GŽžŠÔ‚ÌÝ’è
-            damageAnimetionTimer = 0.3f;
+            damageAnimetionTimer = 0.6f;
 
             if (hp > maxHp) {
                 hp = maxHp;
