@@ -2755,6 +2755,10 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 3844287535462182985, guid: aabfc82d5ad056c458eb853e78705a4d, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.07
+      objectReference: {fileID: 0}
     - target: {fileID: 6262874185896848199, guid: aabfc82d5ad056c458eb853e78705a4d, type: 3}
       propertyPath: startMaxTimer
       value: 12
