@@ -4,13 +4,10 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class PlayerAir : MonoBehaviour {
-    [SerializeField]
-    private Image gauge;
-    [SerializeField]
-    private Text number;
+    [SerializeField] private Image gauge;
+    [SerializeField] private Text number;
 
-    [SerializeField]
-    private float startMaxTimer;
+    [SerializeField] private float startMaxTimer;
     private const float MAX_TIME = 12 * 60;
     private float timer;
 

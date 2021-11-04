@@ -5,8 +5,7 @@ using UnityEngine.UI;
 
 
 public class PlayerFuel : MonoBehaviour {
-    [SerializeField]
-    private Image boostGauge;
+    [SerializeField] private Image boostGauge;
 
     private float maxFuel = 100;
     private float fuel;

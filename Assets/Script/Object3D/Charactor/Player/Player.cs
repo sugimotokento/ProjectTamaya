@@ -22,18 +22,19 @@ public class Player : MonoBehaviour {
 
     private void Awake() {
         AddAction<PlayerReflectionAction>();
-        AddAction<PlayerMoveAction>();  
+        AddAction<PlayerMoveAction>();
+        AddAction<PlayerDamageAnimationAction>();
     }
 
     // Start is called before the first frame update
     private void Start() {
-   
-    }
 
+    }
     private void Update() {
         for (int i = 0; i < action.Count; ++i) {
             action[i].UpdateAction();
         }
+
     }
 
     private void FixedUpdate() {

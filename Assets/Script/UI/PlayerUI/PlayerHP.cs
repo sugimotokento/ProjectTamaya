@@ -4,22 +4,19 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class PlayerHP : MonoBehaviour {
+    [SerializeField] private Image hpGauge;
+    [SerializeField] private Text number;
 
-    [SerializeField]
-    private Image hpGauge;
-    [SerializeField]
-    private Text number;
-
-    [SerializeField]
-    private int maxHp;
-    private int hp;
-
+    [SerializeField] private int maxHp;
     [SerializeField] private float damageInterval;
+
+    private int hp;
     private float damageIntervalTimer = 0;
+    private float damageAnimetionTimer = 0;
 
     private bool isDie = false;
 
-   
+
 
     // Start is called before the first frame update
     void Start() {
@@ -32,7 +29,9 @@ public class PlayerHP : MonoBehaviour {
         number.text = hp.ToString() + "/" + maxHp.ToString();
 
         damageIntervalTimer -= Time.deltaTime;
+        damageAnimetionTimer -= Time.deltaTime;
     }
+
 
 
     public int GetMaxHp() { return maxHp; }
@@ -41,6 +40,7 @@ public class PlayerHP : MonoBehaviour {
         if (damageIntervalTimer <= 0) {
             hp -= damage;
             damageIntervalTimer = damageInterval;//–³“GŽžŠÔ‚ÌÝ’è
+            damageAnimetionTimer = 0.3f;
 
             if (hp > maxHp) {
                 hp = maxHp;
@@ -49,5 +49,12 @@ public class PlayerHP : MonoBehaviour {
                 hp = 0;
             }
         }
+    }
+
+    public bool GetIsDamageAnimation() {
+        return damageAnimetionTimer > 0;
+    }
+    public bool GetIsDamageInterval() {
+        return damageIntervalTimer > 0;
     }
 }

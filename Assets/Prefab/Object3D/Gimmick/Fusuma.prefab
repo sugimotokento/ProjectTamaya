@@ -79,6 +79,7 @@ MonoBehaviour:
   point: {fileID: 1534467293871398145}
   door: {fileID: 1534467294286027456}
   moveSpeedLate: 3
+  closeInterval: 1.5
 --- !u!1 &1534467293871398145
 GameObject:
   m_ObjectHideFlags: 0
