@@ -48,7 +48,7 @@ public class PlayerGuruguruAction : PlayerAction {
             player.line[i].SetActive(true);
         }
 
-     
+   
     }
 
     public override void UpdateAction() {
@@ -134,6 +134,9 @@ public class PlayerGuruguruAction : PlayerAction {
             for (int i = 0; i < (int)LineIndex.MAX; ++i) {
                 player.line[i].SetActive(false);
             }
+
+            StageManager.instance.camera.SetAction<PlayerCameraAction>();
+
             //Destroy(rope);
             player.visual.transform.localPosition = Vector3.zero;
             player.visual.transform.rotation = Quaternion.AngleAxis(0, Vector3.forward);
@@ -200,5 +203,8 @@ public class PlayerGuruguruAction : PlayerAction {
         positionBuffer = target.transform.position - player.moveSpeed.normalized;
         player.transform.position = obj.transform.position;
         player.transform.position -= Vector3.back * 4;
+
+        StageManager.instance.camera.SetAction<PointCameraAction>();
+        StageManager.instance.camera.GetAction<PointCameraAction>().SetPoint(target.gameObject.transform.position + Vector3.forward * -5);
     }
 }

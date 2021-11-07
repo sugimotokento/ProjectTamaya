@@ -32,13 +32,12 @@ public class StageManager : MonoBehaviour {
     // Update is called once per frame
     void Update() {
         if (startEvent != null && startEvent.GetIsEvent() == true) {
-            camera.isEvent = true;
-            camera.SetEventPos(startEvent.GetEventPos());
+
             canSetPlayerAction = true;
+            player.ReMoveActionAll();
         } else {
             if (canSetPlayerAction == true) {
                 player.SetDefaultAction();
-                camera.isEvent = false;
                 canSetPlayerAction = false;
             }
         }
