@@ -4,12 +4,14 @@ using UnityEngine;
 
 public class GameEvent : MonoBehaviour {
     protected bool isEvent;
-    protected bool isEventEnd;
+    protected bool canEvent;
+
+    private int frameCount = 0;
 
     protected void SkipEvent() {
-        if (Input.GetKeyDown(KeyCode.Escape)) {
+        frameCount++;
+        if (Input.GetKeyDown(KeyCode.Escape) && frameCount>2) {
             isEvent = false;
-            isEventEnd = true;
            
         }
     }
@@ -19,8 +21,10 @@ public class GameEvent : MonoBehaviour {
     public bool GetIsEvent() {
         return isEvent;
     }
-    public bool GetisEventEnd() {
-        return isEventEnd;
+    public void SetCanEvent(bool flag) {
+        canEvent = flag;
     }
-
+    public bool GetCanEvent() {
+        return canEvent;
+    }
 }

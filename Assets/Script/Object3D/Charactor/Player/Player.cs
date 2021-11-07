@@ -22,20 +22,20 @@ public class Player : MonoBehaviour {
 
 
     public void SetDefaultAction() {
-        hP.gameObject.SetActive(true);
-        fuel.gameObject.SetActive(true);
-        item.gameObject.SetActive(true);
-        air.gameObject.SetActive(true);
+       
         AddAction<PlayerReflectionAction>();
         AddAction<PlayerMoveAction>();
         AddAction<PlayerDamageAnimationAction>();
     }
+    public void SetActiveUI(bool flag) {
+        hP.gameObject.SetActive(flag);
+        fuel.gameObject.SetActive(flag);
+        item.gameObject.SetActive(flag);
+        air.gameObject.SetActive(flag);
+    }
  
     private void Awake() {
-        hP.gameObject.SetActive(false);
-        fuel.gameObject.SetActive(false);
-        item.gameObject.SetActive(false);
-        air.gameObject.SetActive(false);
+       
     }
 
     // Start is called before the first frame update

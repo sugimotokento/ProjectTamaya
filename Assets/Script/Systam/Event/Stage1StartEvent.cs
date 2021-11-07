@@ -16,10 +16,10 @@ public class Stage1StartEvent : GameEvent {
     private int talkIndex = 0;
     private int textIndex = 0;
     private float addTextIntervalTimer = 0;
-
+    private bool isSetCameraAction = true;
     // Start is called before the first frame update
     void Start() {
-
+        isEvent = true;
         drawText = "";
         endText = "_";
         talkCharactorName[0] = "トシロー";
@@ -64,10 +64,13 @@ public class Stage1StartEvent : GameEvent {
 
     // Update is called once per frame
     void Update() {
-        if (isEventEnd == false) {
+        if (canEvent == true) {
             if (isEvent == true) {
-                StageManager.instance.camera.SetAction<PointCameraAction>();
-                StageManager.instance.camera.GetAction<PointCameraAction>().SetPoint(StageManager.instance.player.gameObject.transform.position - Vector3.forward * 1.5f);
+                if (isSetCameraAction == true) {
+                    isSetCameraAction = false;
+                    StageManager.instance.camera.SetAction<PointCameraAction>();
+                    StageManager.instance.camera.GetAction<PointCameraAction>().SetPoint(StageManager.instance.player.gameObject.transform.position - Vector3.forward * 1.5f);
+                }
                 visual.SetActive(true);
 
 
@@ -100,10 +103,10 @@ public class Stage1StartEvent : GameEvent {
 
                 //会話の終了
                 SkipEvent();
-                if (talkIndex >= talk.Length || isEventEnd == true) {
+                if (talkIndex >= talk.Length || isEvent == false) {
                     talkIndex = talk.Length - 1;
-                    isEventEnd = true;
                     isEvent = false;
+                    canEvent = false;
                     StageManager.instance.camera.SetAction<PlayerCameraAction>();
                     visual.SetActive(false);
                 }
@@ -111,9 +114,6 @@ public class Stage1StartEvent : GameEvent {
 
                 nameText.text = talkCharactorName[talkIndex];
                 text.text = "「" + drawText + endText + "」";
-            } else {
-                visual.SetActive(false);
-                StageManager.instance.camera.SetAction<PlayerCameraAction>();
             }
         }
     }

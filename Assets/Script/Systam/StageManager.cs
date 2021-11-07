@@ -6,7 +6,7 @@ public class StageManager : MonoBehaviour {
 
     public static StageManager instance = null;
 
-    public GameEvent startEvent;
+    public GameEvent[] gameEvent = new GameEvent[2];
     public Player player;
     public GameCamera camera;
     public GameObject enemy;
@@ -16,30 +16,34 @@ public class StageManager : MonoBehaviour {
     private void Awake() {
         instance = this;
 
-        if (startEvent == null) {
-            player.SetDefaultAction();
-        } else {
-            startEvent.SetIsEvent(true);
-            canSetPlayerAction = true;
-        }
     }
 
     // Start is called before the first frame update
     void Start() {
-
+        player.SetDefaultAction();
     }
 
     // Update is called once per frame
     void Update() {
-        if (startEvent != null && startEvent.GetIsEvent() == true) {
+        bool isActivEvent = false;
+        for (int i = 0; i < gameEvent.Length; ++i) {
+            if (gameEvent[i].GetIsEvent() == true) {
+                gameEvent[i].SetCanEvent(true);
+                canSetPlayerAction = true;
+                player.SetActiveUI(false);
+                player.ReMoveActionAll();
+                isActivEvent = true;
+                break;
+            }
+        }
 
-            canSetPlayerAction = true;
-            player.ReMoveActionAll();
-        } else {
+        if (isActivEvent == false) {
             if (canSetPlayerAction == true) {
+                player.SetActiveUI(true);
                 player.SetDefaultAction();
                 canSetPlayerAction = false;
             }
         }
+
     }
 }
