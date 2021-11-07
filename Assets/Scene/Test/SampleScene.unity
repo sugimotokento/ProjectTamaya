@@ -1495,13 +1495,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
 --- !u!114 &810592365 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1449174362389552588, guid: 550689979ed2217498d49bf5b06b9dbf, type: 3}
+  m_CorrespondingSourceObject: {fileID: 191955692796422610, guid: 550689979ed2217498d49bf5b06b9dbf, type: 3}
   m_PrefabInstance: {fileID: 657160861}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 91e89daea4ab37741b9d8adb649912ef, type: 3}
+  m_Script: {fileID: 11500000, guid: 130eaeed1f472c2439c51c804ab58f95, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &836852283
@@ -3017,6 +3017,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 381033880}
     - target: {fileID: 729428656429432025, guid: 9bbbdb22f65ecf048be15eb0303ce158, type: 3}
+      propertyPath: gameEvent.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 729428656429432025, guid: 9bbbdb22f65ecf048be15eb0303ce158, type: 3}
       propertyPath: gameEvent.Array.data[0]
       value: 
       objectReference: {fileID: 381033880}
@@ -3024,6 +3028,22 @@ PrefabInstance:
       propertyPath: gameEvent.Array.data[1]
       value: 
       objectReference: {fileID: 810592365}
+    - target: {fileID: 729428656429432025, guid: 9bbbdb22f65ecf048be15eb0303ce158, type: 3}
+      propertyPath: gameEvent.Array.data[2]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 729428656429432025, guid: 9bbbdb22f65ecf048be15eb0303ce158, type: 3}
+      propertyPath: gameEvent.Array.data[3]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 729428656429432025, guid: 9bbbdb22f65ecf048be15eb0303ce158, type: 3}
+      propertyPath: gameEvent.Array.data[4]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 729428656429432025, guid: 9bbbdb22f65ecf048be15eb0303ce158, type: 3}
+      propertyPath: gameEvent.Array.data[5]
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 4261576375418265395, guid: 9bbbdb22f65ecf048be15eb0303ce158, type: 3}
       propertyPath: m_Name
       value: StageManager

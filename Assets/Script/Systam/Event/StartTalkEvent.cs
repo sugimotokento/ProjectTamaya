@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Stage1StartEvent : GameEvent {
+public class StartTalkEvent : GameEvent {
     [SerializeField] GameObject visual;
     [SerializeField] Text text;
     [SerializeField] Text nameText;
 
-    private string[] talkCharactorName = new string[13];
-    private string[] talk = new string[13];
+    [SerializeField] private string[] talkCharactorName = new string[13];
+    [SerializeField] private string[] talk = new string[13];
     private string endText;
     private string drawText;
 
@@ -22,54 +22,23 @@ public class Stage1StartEvent : GameEvent {
         isEvent = true;
         drawText = "";
         endText = "_";
-        talkCharactorName[0] = "トシロー";
-        talk[0] = "引退したばっかなのにトラブルに巻き込まれるって・・・\n悪いもんでも憑いてるのかもしれねえ、今度お祓いでも行くか";
-
-        talkCharactorName[1] = "？？？";
-        talk[1] = "あの！！！！";
-
-        talkCharactorName[2] = "トシロー";
-        talk[2] = "ん、誰だ？";
-
-        talkCharactorName[3] = "？？？";
-        talk[3] = "初めまして、あなたは元OKPKのトシローさんですよね？";
-
-        talkCharactorName[4] = "トシロー";
-        talk[4] = "ああ、だがなんでそんな事知っているんだ？";
-
-        talkCharactorName[5] = "ビショップ";
-        talk[5] = "申し遅れました、ｱｰｼは新米OKPK隊員のビショップと言います！\n現役の頃のトシローさんの活躍っぷりに憧れていたんですっ";
-
-        talkCharactorName[6] = "トシロー";
-        talk[6] = "なるほど、じゃあ今回の騒ぎは君に任せていいってことだな？";
-
-        talkCharactorName[7] = "ビショップ";
-        talk[7] = "それが・・・ｱｰｼはまだ任務に当たったことがなく、\n怖くて動けないんです・・・";
-
-        talkCharactorName[8] = "トシロー";
-        talk[8] = "ったく、昔の俺を見ているようだな・・・\nよし、今回は俺に任せろ！ビショップは着いてきてくれ!\n電磁棒は持ってるか？";
-
-        talkCharactorName[9] = "ビショップ";
-        talk[9] = "っは、はい！どうぞ！";
-
-        talkCharactorName[10] = "トシロー";
-        talk[10] = "新品でピッカピカの電磁棒だな！\n・・・ん？俺が持ってたのとも少し形とか違うみたいだ";
-
-        talkCharactorName[11] = "ビショップ";
-        talk[11] = "新米隊員用の電磁棒にはARで再生される\n教育プログラムが組み込まれているんですっ";
-
-        talkCharactorName[12] = "トシロー";
-        talk[12] = "へえ・・・丁寧なこった。初心に戻ってみるか";
     }
 
     // Update is called once per frame
     void Update() {
+
+        Talk();
+
+    }
+
+    protected void Talk() {
         if (canEvent == true) {
             if (isEvent == true) {
                 if (isSetCameraAction == true) {
                     isSetCameraAction = false;
+                    //   StageManager.instance.camera.transform.position = new Vector3(0, 0, -15);
                     StageManager.instance.camera.SetAction<PointCameraAction>();
-                    StageManager.instance.camera.GetAction<PointCameraAction>().SetPoint(StageManager.instance.player.gameObject.transform.position - Vector3.forward * 1.5f);
+                    StageManager.instance.camera.GetAction<PointCameraAction>().SetPoint(StageManager.instance.player.gameObject.transform.position - Vector3.forward * 1.5f);//7
                 }
                 visual.SetActive(true);
 

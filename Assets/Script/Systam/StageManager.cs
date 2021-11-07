@@ -25,25 +25,29 @@ public class StageManager : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
-        bool isActivEvent = false;
+
+        Event();
+    }
+
+    private void Event(){
+        bool isActiveEvent = false;
         for (int i = 0; i < gameEvent.Length; ++i) {
             if (gameEvent[i].GetIsEvent() == true) {
                 gameEvent[i].SetCanEvent(true);
                 canSetPlayerAction = true;
                 player.SetActiveUI(false);
                 player.ReMoveActionAll();
-                isActivEvent = true;
+                isActiveEvent = true;
                 break;
             }
         }
 
-        if (isActivEvent == false) {
+        if (isActiveEvent == false) {
             if (canSetPlayerAction == true) {
                 player.SetActiveUI(true);
                 player.SetDefaultAction();
                 canSetPlayerAction = false;
             }
         }
-
     }
 }
