@@ -180,6 +180,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5bd33c6bbe670e47b791310c77bc2c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &6262874185896848199 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4200094518440613670, guid: 08cfcff5ee63cc248b4a12f1b7975b34, type: 3}
+  m_PrefabInstance: {fileID: 7828251579524299873}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98e340bc9efb30c49bdb9482a633adac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &4329778385217090789 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5815835787314907268, guid: 08cfcff5ee63cc248b4a12f1b7975b34, type: 3}
@@ -250,6 +261,10 @@ PrefabInstance:
       propertyPath: hP
       value: 
       objectReference: {fileID: 4610735100202181680}
+    - target: {fileID: 7378424357854251995, guid: 9a3b8670629e8a6488b984f311c98f1b, type: 3}
+      propertyPath: air
+      value: 
+      objectReference: {fileID: 6262874185896848199}
     - target: {fileID: 7378424357854251995, guid: 9a3b8670629e8a6488b984f311c98f1b, type: 3}
       propertyPath: fuel
       value: 

@@ -4,12 +4,24 @@ using UnityEngine;
 
 public class StageManager : MonoBehaviour {
 
-    public static StageManager instance=null;
+    public static StageManager instance = null;
 
-    public GameObject player;
+    public GameEvent startEvent;
+    public Player player;
+    public GameCamera camera;
     public GameObject enemy;
+
+    private bool canSetPlayerAction = false;
+
     private void Awake() {
         instance = this;
+
+        if (startEvent == null) {
+            player.SetDefaultAction();
+        } else {
+            startEvent.SetIsEvent(true);
+            canSetPlayerAction = true;
+        }
     }
 
     // Start is called before the first frame update
@@ -19,6 +31,16 @@ public class StageManager : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
-
+        if (startEvent != null && startEvent.GetIsEvent() == true) {
+            camera.isEvent = true;
+            camera.SetEventPos(startEvent.GetEventPos());
+            canSetPlayerAction = true;
+        } else {
+            if (canSetPlayerAction == true) {
+                player.SetDefaultAction();
+                camera.isEvent = false;
+                canSetPlayerAction = false;
+            }
+        }
     }
 }

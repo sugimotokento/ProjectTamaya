@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class GameCamera : MonoBehaviour {
     private Player playerScript;
+    private Vector3 eventPos;
     public float distRange;
+    public bool isEvent=false;
 
     // Start is called before the first frame update
     void Start() {
@@ -15,6 +17,10 @@ public class GameCamera : MonoBehaviour {
     void Update() {
         if (playerScript.CheckAction<PlayerGuruguruAction>() == true) {
             GuruguruCameraMove();
+
+        } else if (isEvent == true) {
+            EventCameraMove();
+
         } else {
             NormalCameraMove();
         }
@@ -41,7 +47,7 @@ public class GameCamera : MonoBehaviour {
         this.transform.position += dist * 0.5f * Time.deltaTime * 5;
     }
     void GuruguruCameraMove() {
-        Vector3 cameraPos = this.transform.position + Vector3.back * -10;
+        Vector3 cameraPos = this.transform.position + Vector3.forward * 10;
         Vector3 followPos = playerScript.transform.position;
 
         Vector3 dist = followPos - cameraPos;
@@ -49,4 +55,16 @@ public class GameCamera : MonoBehaviour {
 
         this.transform.position += dist * 0.5f * Time.deltaTime * 5;
     }
+    void EventCameraMove() {
+      
+
+        Vector3 dist = eventPos - this.transform.position;
+
+
+        this.transform.position += dist * 0.5f * Time.deltaTime * 5;
+    }
+    public void SetEventPos(Vector3 pos) {
+        eventPos = pos;
+    }
+
 }

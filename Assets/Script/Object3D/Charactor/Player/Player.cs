@@ -7,6 +7,7 @@ public class Player : MonoBehaviour {
     public PlayerHP hP;
     public PlayerFuel fuel;
     public PlayerItem item;
+    public PlayerAir air;
     public PlayerSound sound;
 
     public GameObject visual;
@@ -20,11 +21,21 @@ public class Player : MonoBehaviour {
     [HideInInspector] public Vector3 moveSpeed;
 
 
-
-    private void Awake() {
+    public void SetDefaultAction() {
+        hP.gameObject.SetActive(true);
+        fuel.gameObject.SetActive(true);
+        item.gameObject.SetActive(true);
+        air.gameObject.SetActive(true);
         AddAction<PlayerReflectionAction>();
         AddAction<PlayerMoveAction>();
         AddAction<PlayerDamageAnimationAction>();
+    }
+ 
+    private void Awake() {
+        hP.gameObject.SetActive(false);
+        fuel.gameObject.SetActive(false);
+        item.gameObject.SetActive(false);
+        air.gameObject.SetActive(false);
     }
 
     // Start is called before the first frame update
@@ -99,6 +110,11 @@ public class Player : MonoBehaviour {
                 action[i] = new C();
                 action[i].Init(this);
             }
+        }
+    }
+    public void ReMoveActionAll() {
+        for (int i = 0; i < action.Count; ++i) {
+            action.RemoveAt(i);
         }
     }
 }
