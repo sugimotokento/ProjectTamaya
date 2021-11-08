@@ -22,7 +22,7 @@ public class Player : MonoBehaviour {
 
 
     public void SetDefaultAction() {
-       
+
         AddAction<PlayerReflectionAction>();
         AddAction<PlayerMoveAction>();
         AddAction<PlayerDamageAnimationAction>();
@@ -35,13 +35,13 @@ public class Player : MonoBehaviour {
         air.gameObject.SetActive(flag);
     }
     private void Die() {
-        if (hP.GetHp() <= 0) {
+        if (hP != null && hP.GetHp() <= 0) {
             ReMoveActionAll();
             AddAction<PlayerDieAction>();
         }
     }
     private void Awake() {
-       
+
     }
 
     // Start is called before the first frame update

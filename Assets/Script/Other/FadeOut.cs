@@ -9,6 +9,8 @@ public class FadeOut : MonoBehaviour {
     bool isFadeEnd = false;
     private float addLate = 1;
 
+
+
     // Start is called before the first frame update
     void Start() {
 
@@ -17,7 +19,7 @@ public class FadeOut : MonoBehaviour {
     // Update is called once per frame
     void Update() {
 
-        image.color = new Color(0, 0, 0, alpha);
+        image.material.SetFloat("_Timer", alpha*2);
         if (isFadeEnd == false) {
             alpha += Time.deltaTime*addLate;
         }
