@@ -157,12 +157,12 @@ public class PlayerGuruguruAction : PlayerAction {
         if (isGuruguru == true) {
             for (int i = 0; i < (int)LineIndex.MAX; ++i) {
                 line[i].materials[0].color = Color.green;
-                line[i].materials[0].SetColor("_EmissionColor", Color.green);
+                line[i].materials[0].SetColor("_EmissionColor", Color.green*2);
             }
         } else {
             for (int i = 0; i < (int)LineIndex.MAX; ++i) {
                 line[i].materials[0].color = Color.red;
-                line[i].materials[0].SetColor("_EmissionColor", Color.red);
+                line[i].materials[0].SetColor("_EmissionColor", Color.red*2);
             }
         }
     }
