@@ -22,7 +22,7 @@ public class Player : MonoBehaviour {
 
 
     public void SetDefaultAction() {
-
+        
         AddAction<PlayerReflectionAction>();
         AddAction<PlayerMoveAction>();
         AddAction<PlayerDamageAnimationAction>();
@@ -37,6 +37,7 @@ public class Player : MonoBehaviour {
     private void Die() {
         if (hP != null && hP.GetHp() <= 0) {
             ReMoveActionAll();
+            visual.SetActive(true);
             AddAction<PlayerDieAction>();
         }
     }
@@ -52,7 +53,7 @@ public class Player : MonoBehaviour {
         for (int i = 0; i < action.Count; ++i) {
             action[i].UpdateAction();
         }
-
+            
     }
 
     private void FixedUpdate() {
