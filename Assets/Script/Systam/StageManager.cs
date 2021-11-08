@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class StageManager : MonoBehaviour {
 
     public static StageManager instance = null;
+    public static string sceneName;
 
     public GameEvent[] gameEvent = new GameEvent[2];
     public Player player;
@@ -20,6 +22,7 @@ public class StageManager : MonoBehaviour {
 
     // Start is called before the first frame update
     void Start() {
+        sceneName = SceneManager.GetActiveScene().name;
         player.SetDefaultAction();
     }
 

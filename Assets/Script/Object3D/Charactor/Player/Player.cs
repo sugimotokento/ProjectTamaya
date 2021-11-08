@@ -26,6 +26,7 @@ public class Player : MonoBehaviour {
         AddAction<PlayerReflectionAction>();
         AddAction<PlayerMoveAction>();
         AddAction<PlayerDamageAnimationAction>();
+        AddAction<PlayerNoiseAction>();
     }
     public void SetActiveUI(bool flag) {
         hP.gameObject.SetActive(flag);
@@ -33,7 +34,12 @@ public class Player : MonoBehaviour {
         item.gameObject.SetActive(flag);
         air.gameObject.SetActive(flag);
     }
- 
+    private void Die() {
+        if (hP.GetHp() <= 0) {
+            ReMoveActionAll();
+            AddAction<PlayerDieAction>();
+        }
+    }
     private void Awake() {
        
     }
@@ -52,6 +58,7 @@ public class Player : MonoBehaviour {
     private void FixedUpdate() {
         positionBuffer = transform.position;
 
+        Die();
         if (CheckAction<PlayerMoveAction>() == false && CheckAction<PlayerTackleAction>() == false && CheckAction<PlayerIaiAction>() == false) moveSpeed = Vector3.zero;
         for (int i = 0; i < action.Count; ++i) {
             action[i].Action();
@@ -70,7 +77,6 @@ public class Player : MonoBehaviour {
             action[i].TriggerEnter(other);
         }
     }
-
     public void AddAction<T>() where T : PlayerAction, new() {
         for (int i = 0; i < action.Count; ++i) {
             if (typeof(T) == action[i].GetType()) {

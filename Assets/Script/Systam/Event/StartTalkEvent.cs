@@ -58,12 +58,12 @@ public class StartTalkEvent : GameEvent {
                 }
 
                 //会話を進める
-                if (Input.GetKeyDown(KeyCode.Space) && textIndex >= talk[talkIndex].Length) {
+                if (Input.GetMouseButtonDown(0) && textIndex >= talk[talkIndex].Length) {
                     //次の会話
                     talkIndex++;
                     textIndex = 0;
                     drawText = "";
-                } else if (Input.GetKeyDown(KeyCode.Space)) {
+                } else if (Input.GetMouseButtonDown(0)) {
                     //今の会話を全て表示
                     textIndex = talk[talkIndex].Length;
                     drawText = talk[talkIndex];

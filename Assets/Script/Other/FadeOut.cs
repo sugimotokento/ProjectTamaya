@@ -7,6 +7,7 @@ public class FadeOut : MonoBehaviour {
     [SerializeField] private Image image;
     private float alpha = 0;
     bool isFadeEnd = false;
+    private float addLate = 1;
 
     // Start is called before the first frame update
     void Start() {
@@ -18,15 +19,19 @@ public class FadeOut : MonoBehaviour {
 
         image.color = new Color(0, 0, 0, alpha);
         if (isFadeEnd == false) {
-            alpha += Time.deltaTime;
+            alpha += Time.deltaTime*addLate;
         }
-
 
         if (alpha > 1) {
             isFadeEnd = true;
-            //image.enabled = false;
         }
     }
-
+    public void SetActive(bool flag) {
+        image.enabled = flag;
+    }
+    public void SetAddLate(float late) {
+        addLate = late;
+    }
     public bool GetIsFadeEnd() { return isFadeEnd; }
+
 }

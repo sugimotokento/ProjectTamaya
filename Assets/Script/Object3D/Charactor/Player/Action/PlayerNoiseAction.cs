@@ -8,7 +8,7 @@ public class PlayerNoiseAction : PlayerAction {
 
     public override void CollisionEnter(Collision collision) {
         //ÉmÉCÉYê∂ê¨
-        GameObject obj = Instantiate(player.noise, this.transform.position, Quaternion.identity);
+        GameObject obj = Instantiate(player.noise, player.transform.position, Quaternion.identity);
         Noise noiseScript = obj.GetComponent<Noise>();
         noiseScript.SetDestroy(0.5f);
         noiseScript.SetRadius(player.moveSpeed.magnitude*noiseLate);

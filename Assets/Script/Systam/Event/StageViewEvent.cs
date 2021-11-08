@@ -35,15 +35,15 @@ public class StageViewEvent : GameEvent {
                 cameraAction.start = start[index];
                 cameraAction.end = end[index];
                 cameraAction.SetLate(late[index]);
-                late[index] += 0.2f*Time.deltaTime;
+                late[index] += 0.2f * Time.deltaTime;
                 if (late[index] > 1) {
                     index++;
                 }
-                
+
 
                 SkipEvent();
                 //I—¹
-                if (index >= start.Length) {
+                if (index >= start.Length || isEvent == false) {
                     isEvent = false;
                     canEvent = false;
                     visual.SetActive(false);
