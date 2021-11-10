@@ -56,9 +56,8 @@ public class PlayerTackleAction : PlayerMoveAction {
         player.fuel.Use();
 
         //Žc‘œ
-        if (afterimageTimer > 0.03f) {
+        if (afterimageTimer > 0.02f) {
             GameObject obj = Instantiate(player.afterimage, player.visual.transform.position, player.visual.transform.rotation);
-            obj.GetComponent<Renderer>().material.color = new Color(1, 1, 1, 0.5f);
             Destroy(obj, 0.2f);
             afterimageTimer = 0;
         }

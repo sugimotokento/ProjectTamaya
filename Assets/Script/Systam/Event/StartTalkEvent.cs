@@ -38,7 +38,7 @@ public class StartTalkEvent : GameEvent {
                     isSetCameraAction = false;
                     //   StageManager.instance.camera.transform.position = new Vector3(0, 0, -15);
                     StageManager.instance.camera.SetAction<PointCameraAction>();
-                    StageManager.instance.camera.GetAction<PointCameraAction>().SetPoint(StageManager.instance.player.gameObject.transform.position - Vector3.forward * 1.5f);//7
+                    StageManager.instance.camera.GetAction<PointCameraAction>().SetPoint(StageManager.instance.player.gameObject.transform.position - Vector3.forward * 6);
                 }
                 visual.SetActive(true);
 

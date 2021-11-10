@@ -13,6 +13,8 @@ public class StageManager : MonoBehaviour {
     public GameCamera camera;
     public GameObject enemy;
 
+    [HideInInspector] public bool isClear = false;
+
     private bool canSetPlayerAction = false;
 
     private void Awake() {

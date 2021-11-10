@@ -66,7 +66,6 @@ public class PlayerIaiAction : PlayerMoveAction {
         } else {
             //残像
             GameObject obj = Instantiate(player.afterimage, player.visual.transform.position, player.visual.transform.rotation);
-            obj.GetComponent<Renderer>().material.color = new Color(1, 1, 1, 0.5f);
             Destroy(obj, 0.2f);
 
             //目標地点に到達
