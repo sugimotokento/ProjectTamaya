@@ -47,11 +47,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bullet: {fileID: 1390262012941802524, guid: 8c5f14e25858e264d970ada3d6ee492e, type: 3}
-  player: {fileID: 0}
+  player: {fileID: 7378424357854251992, guid: 9a3b8670629e8a6488b984f311c98f1b, type: 3}
   enemyUI: {fileID: 3484791724432482238}
   MovePos: []
   viewVigilant: 5
   viewDanger: 1
+  points: {fileID: 6747243218305117177, guid: 1703a2f2b44cbf4498873baa3744ce35, type: 3}
 --- !u!195 &3484791724454573399
 NavMeshAgent:
   m_ObjectHideFlags: 0

@@ -10,7 +10,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] private GameObject enemyUI;//エネミーのUIオブジェクト
     [SerializeField] private GameObject[] MovePos;//エネミーの移動用座標
 
-    private NavMeshAgent navAgent;
+    //private NavMeshAgent navAgent;
 
     private EnemyUI UIscript;//UIオブジェクトについてるスクリプト
 
@@ -30,19 +30,31 @@ public class Enemy : MonoBehaviour
     private float viewrad = 0;  //エネミーの視線角度
     private float viewrange = 15; //エネミーの視野の広さ
 
+    [SerializeField] private GameObject points;
+    private int index = 0;
+
     // Start is called before the first frame update
     void Start()
     {
         UIscript = enemyUI.GetComponent<EnemyUI>();
         viewrad = 180;
 
-        navAgent = GetComponent<NavMeshAgent>();
+        //navAgent = GetComponent<NavMeshAgent>();
     }
 
     void Update()
     {
+        Vector3 dist = points.transform.GetChild(index).gameObject.transform.position - this.transform.position;
+        this.transform.position += dist.normalized * Time.deltaTime * 15;
+
+        if (dist.magnitude < 0.5f)
+        {
+            index++;
+            if (index >= points.transform.childCount) index = 0;
+        }
+
         viewrad = -vec3.x;
-        navAgent.SetDestination(player.transform.position);
+        //navAgent.SetDestination(player.transform.position);
         EnemyMove();
     }
 
