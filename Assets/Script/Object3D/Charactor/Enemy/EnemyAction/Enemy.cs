@@ -1,12 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class Enemy : MonoBehaviour
 {
     [SerializeField] private GameObject bullet;//弾オブジェクト
     [SerializeField] private GameObject player;//プレイヤーオブジェクト
     [SerializeField] private GameObject enemyUI;//エネミーのUIオブジェクト
+    [SerializeField] private GameObject[] MovePos;//エネミーの移動用座標
+
+    private NavMeshAgent navAgent;
 
     private EnemyUI UIscript;//UIオブジェクトについてるスクリプト
 
@@ -31,6 +35,15 @@ public class Enemy : MonoBehaviour
     {
         UIscript = enemyUI.GetComponent<EnemyUI>();
         viewrad = 180;
+
+        navAgent = GetComponent<NavMeshAgent>();
+    }
+
+    void Update()
+    {
+        viewrad = -vec3.x;
+        navAgent.SetDestination(player.transform.position);
+        EnemyMove();
     }
 
     // Update is called once per frame
@@ -56,7 +69,7 @@ public class Enemy : MonoBehaviour
             Bpos.y = Bpos.y + r * Mathf.Sin(B_rad);
         }
         //角度は-180~180まで
-        Debug.Log(Mathf.Repeat(-vec3.x, 360));
+        //Debug.Log(Mathf.Repeat(-vec3.x, 360));
 
         //球の発射
         if (UIscript.GetAlertness() >= 100 == true && B_cnt > 0.5f)
@@ -68,6 +81,16 @@ public class Enemy : MonoBehaviour
 
         ViewEnemy();
         SeeingPlayer();
+    }
+
+    private void EnemyMove()
+    {
+        //transform.position = Vector3.MoveTowards(transform.position, player.transform.position, Time.deltaTime);
+
+        if (UIscript.GetAlertness() >= 100 == true)
+        {
+            transform.position = Vector3.MoveTowards(transform.position, player.transform.position, Time.deltaTime);
+        }
     }
 
     //エネミーの視線と身体の向き
@@ -86,16 +109,12 @@ public class Enemy : MonoBehaviour
         float range_max = range + viewrange;//視野の上限
         bool is_player = false;//視野にプレイヤーが入っているかのフラグ
         float playerrad = Mathf.Repeat(-vec3.x, 360);//プレイヤー一時保存角度
-        Debug.Log(range_min);
-        Debug.Log(range_max);
 
         //視野の上限、下限を超過したときの処理
         if (range_min < 0)
             range_min += 360;
-        Debug.Log(range_min);
         if (range_max > 360)
             range_max -= 360;
-        Debug.Log(range_max);
         if (range_max < range_min)
         {
             if (range_max >= playerrad || range_min <= playerrad)
@@ -118,7 +137,6 @@ public class Enemy : MonoBehaviour
                 is_player = false;
             }
         }
-        Debug.Log(is_player);
 
         //警戒区域に侵入
         if (dis <= viewVigilant && dis > viewDanger && is_player == true)
