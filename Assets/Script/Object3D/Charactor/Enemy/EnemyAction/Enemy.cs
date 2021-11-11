@@ -12,12 +12,11 @@ public class Enemy : MonoBehaviour
 
     //private NavMeshAgent navAgent;
 
+    private float Espeed = 7.5f;//エネミーの速さ
+
     private EnemyUI UIscript;//UIオブジェクトについてるスクリプト
 
     private Vector3 vec3 = new Vector3(0, 90, 0);//弾発射時のベクトル
-
-    private float   rad;//エネミーとプレイヤー間の角度
-    private Vector3 Epos, Ppos;//エネミー、プレイヤーの座標
 
     private float   B_cnt;   //弾の発射間隔（秒数）
     private Vector3 Bpos;    //弾の発射座標
@@ -29,8 +28,9 @@ public class Enemy : MonoBehaviour
 
     private float viewrad = 0;  //エネミーの視線角度
     private float viewrange = 15; //エネミーの視野の広さ
+    private Vector3 oldpos;//エネミーの前位置
 
-    [SerializeField] private GameObject points;
+    [SerializeField] private GameObject points;//移動ポイント
     private int index = 0;
 
     // Start is called before the first frame update
@@ -38,23 +38,13 @@ public class Enemy : MonoBehaviour
     {
         UIscript = enemyUI.GetComponent<EnemyUI>();
         viewrad = 180;
-
+        oldpos = transform.position;
         //navAgent = GetComponent<NavMeshAgent>();
     }
 
     void Update()
     {
-        Vector3 dist = points.transform.GetChild(index).gameObject.transform.position - this.transform.position;
-        this.transform.position += dist.normalized * Time.deltaTime * 15;
-
-        if (dist.magnitude < 0.5f)
-        {
-            index++;
-            if (index >= points.transform.childCount) index = 0;
-        }
-
         viewrad = -vec3.x;
-        //navAgent.SetDestination(player.transform.position);
         EnemyMove();
     }
 
@@ -64,12 +54,7 @@ public class Enemy : MonoBehaviour
         //球の設定
         {
             //球の発射方向
-            Epos.x = transform.position.x;
-            Epos.y = transform.position.y;
-            Ppos.x = player.transform.position.x;
-            Ppos.y = player.transform.position.y;
-
-            B_rad = Mathf.Atan2(Ppos.y - Epos.y, Ppos.x - Epos.x);
+            B_rad = VecRad(player.transform.position, transform.position);
             vec3.x = -1 * B_rad * Mathf.Rad2Deg;
 
             //発射間隔用カウント
@@ -95,21 +80,46 @@ public class Enemy : MonoBehaviour
         SeeingPlayer();
     }
 
+    private float VecRad(Vector3 a1, Vector3 a2)
+    {
+        float vecrad;
+
+        vecrad = Mathf.Atan2(a1.y - a2.y, a1.x - a2.x);
+
+        return vecrad;
+    }
+
     private void EnemyMove()
     {
-        //transform.position = Vector3.MoveTowards(transform.position, player.transform.position, Time.deltaTime);
+        //navAgent.SetDestination(player.transform.position);
 
         if (UIscript.GetAlertness() >= 100 == true)
         {
-            transform.position = Vector3.MoveTowards(transform.position, player.transform.position, Time.deltaTime);
+            transform.position = Vector3.MoveTowards(transform.position, player.transform.position, Time.deltaTime * Espeed);
+        }
+        else
+        {
+            Vector3 dist = points.transform.GetChild(index).gameObject.transform.position - this.transform.position;
+            this.transform.position += dist.normalized * Time.deltaTime * Espeed;
+
+            if (dist.magnitude < 0.5f)
+            {
+                index++;
+                if (index >= points.transform.childCount) index = 0;
+            }
         }
     }
 
     //エネミーの視線と身体の向き
     private void ViewEnemy()
     {
+        viewrad = VecRad(transform.position, oldpos);
+        viewrad = -1 * viewrad * Mathf.Rad2Deg;
+
         //視線の方向に向きを変える
-        transform.rotation = Quaternion.Euler(0.0f, 0.0f, viewrad);
+        transform.GetChild(0).gameObject.transform.rotation = Quaternion.Euler(0.0f, 0.0f, viewrad);
+
+        oldpos = transform.position;
     }
 
     //プレイヤーが視野に入った時のUI変化
