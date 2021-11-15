@@ -10,13 +10,13 @@ public class Enemy : MonoBehaviour
     [SerializeField] private GameObject enemyUI;//エネミーのUIオブジェクト
     [SerializeField] private GameObject[] MovePos;//エネミーの移動用座標
 
-    //private NavMeshAgent navAgent;
-
-    private float Espeed = 7.5f;//エネミーの速さ
-
     private EnemyUI UIscript;//UIオブジェクトについてるスクリプト
 
-    private Vector3 vec3 = new Vector3(0, 90, 0);//弾発射時のベクトル
+    //private NavMeshAgent navAgent;
+
+    private float Espeed = 3.5f;//エネミーの速さ
+    
+    private Vector3 Bvec = new Vector3(0, 90, 0);//弾発射時のベクトル
 
     private float   B_cnt;   //弾の発射間隔（秒数）
     private Vector3 Bpos;    //弾の発射座標
@@ -37,63 +37,139 @@ public class Enemy : MonoBehaviour
     void Start()
     {
         UIscript = enemyUI.GetComponent<EnemyUI>();
-        viewrad = 180;
+        viewrad = 0;
         oldpos = transform.position;
         //navAgent = GetComponent<NavMeshAgent>();
     }
 
     void Update()
     {
-        viewrad = -vec3.x;
-        EnemyMove();
+        if (UIscript.GetAlertness() <= 0)
+            SearchStatus();
+        else if (UIscript.GetAlertness() > 0 && UIscript.GetAlertness() < 100)
+            WarningStatus();
+        else if (UIscript.GetAlertness() >= 100)
+            FightStatus();
+
+
+        AllStatus();
     }
 
-    // Update is called once per frame
     void FixedUpdate()
     {
-        //球の設定
+    }
+
+    //void Update()
+    //{
+    //    EnemyMove();
+    //}
+
+    //// Update is called once per frame
+    //void FixedUpdate()
+    //{
+    //    //球の設定
+    //    {
+    //        //球の発射方向
+    //        B_rad = VecRad(player.transform.position, transform.position);
+    //        Bvec.x = -1 * B_rad * Mathf.Rad2Deg;
+
+    //        //発射間隔用カウント
+    //        B_cnt += Time.fixedDeltaTime;
+
+    //        //球の発射位置
+    //        Bpos = transform.position;
+    //        Bpos.x = Bpos.x + r * Mathf.Cos(B_rad);
+    //        Bpos.y = Bpos.y + r * Mathf.Sin(B_rad);
+    //    }
+    //    //角度は-180~180まで
+    //    //Debug.Log(Mathf.Repeat(-Bvec.x, 360));
+
+    //    //球の発射
+    //    if (UIscript.GetAlertness() >= 100 == true && B_cnt > 0.5f)
+    //    {
+    //        Instantiate(bullet, Bpos, Quaternion.Euler(Bvec));
+    //        B_cnt = 0;
+    //    }
+
+
+    //    ViewEnemy();
+    //    SeeingPlayer();
+    //}
+
+    //ステータス関数
+    //============================================================================
+    //全状態
+    //============================================================================
+    private void AllStatus()
+    {
+        //弾の設定
         {
-            //球の発射方向
+            //弾の発射方向
             B_rad = VecRad(player.transform.position, transform.position);
-            vec3.x = -1 * B_rad * Mathf.Rad2Deg;
+            Bvec.x = -1 * B_rad * Mathf.Rad2Deg;
 
             //発射間隔用カウント
             B_cnt += Time.fixedDeltaTime;
 
-            //球の発射位置
+            //弾の発射位置
             Bpos = transform.position;
             Bpos.x = Bpos.x + r * Mathf.Cos(B_rad);
             Bpos.y = Bpos.y + r * Mathf.Sin(B_rad);
         }
-        //角度は-180~180まで
-        //Debug.Log(Mathf.Repeat(-vec3.x, 360));
-
-        //球の発射
-        if (UIscript.GetAlertness() >= 100 == true && B_cnt > 0.5f)
-        {
-            Instantiate(bullet, Bpos, Quaternion.Euler(vec3));
-            B_cnt = 0;
-        }
-
-
-        ViewEnemy();
         SeeingPlayer();
     }
 
-    private float VecRad(Vector3 a1, Vector3 a2)
+    //============================================================================
+    //索敵状態
+    //============================================================================
+    private void SearchStatus()
     {
-        float vecrad;
+        //移動
+        SearchMove(Espeed);
 
-        vecrad = Mathf.Atan2(a1.y - a2.y, a1.x - a2.x);
-
-        return vecrad;
+        //視線
+        ViewEnemy();
     }
 
+    //============================================================================
+    //警戒状態
+    //============================================================================
+    private void WarningStatus()
+    {
+        //移動
+        SearchMove(Espeed * 0.3f);
+
+        //視線
+        ViewEnemy();
+    }
+
+    //============================================================================
+    //戦闘状態
+    //============================================================================
+    private void FightStatus()
+    {
+        //移動
+        transform.position = Vector3.MoveTowards(transform.position, player.transform.position, Time.deltaTime * Espeed * 1.2f);
+
+        
+        
+
+        //弾の発射
+        if (B_cnt > 2.0f)
+        {
+            Instantiate(bullet, Bpos, Quaternion.Euler(Bvec));
+            B_cnt = 0;
+        }
+    }
+
+
+    //その他関数
+    //============================================================================
     private void EnemyMove()
     {
         //navAgent.SetDestination(player.transform.position);
 
-        if (UIscript.GetAlertness() >= 100 == true)
+        if (UIscript.GetAlertness() >= 100)
         {
             transform.position = Vector3.MoveTowards(transform.position, player.transform.position, Time.deltaTime * Espeed);
         }
@@ -110,6 +186,28 @@ public class Enemy : MonoBehaviour
         }
     }
 
+    private void SearchMove(float sp)
+    {
+        Vector3 dist = points.transform.GetChild(index).gameObject.transform.position - this.transform.position;
+        this.transform.position += dist.normalized * Time.deltaTime * sp;
+
+        if (dist.magnitude < 0.5f)
+        {
+            index++;
+            if (index >= points.transform.childCount) index = 0;
+        }
+    }
+
+    //角度算出
+    private float VecRad(Vector3 a1, Vector3 a2)
+    {
+        float vecrad;
+
+        vecrad = Mathf.Atan2(a1.y - a2.y, a1.x - a2.x);
+
+        return vecrad;
+    }
+
     //エネミーの視線と身体の向き
     private void ViewEnemy()
     {
@@ -118,7 +216,6 @@ public class Enemy : MonoBehaviour
 
         //視線の方向に向きを変える
         transform.GetChild(0).gameObject.transform.rotation = Quaternion.Euler(0.0f, 0.0f, viewrad);
-
         oldpos = transform.position;
     }
 
@@ -126,11 +223,11 @@ public class Enemy : MonoBehaviour
     private void SeeingPlayer()
     {
         float dis = Vector3.Distance(transform.position, player.transform.position);
-        float range = transform.localEulerAngles.z;//角度は0~360まで
+        float range = Mathf.Repeat(-viewrad, 360);//角度は0~360まで
         float range_min = range - viewrange;//視野の下限
         float range_max = range + viewrange;//視野の上限
         bool is_player = false;//視野にプレイヤーが入っているかのフラグ
-        float playerrad = Mathf.Repeat(-vec3.x, 360);//プレイヤー一時保存角度
+        float playerrad = Mathf.Repeat(-Bvec.x, 360);//プレイヤー一時保存角度
 
         //視野の上限、下限を超過したときの処理
         if (range_min < 0)
@@ -159,6 +256,9 @@ public class Enemy : MonoBehaviour
                 is_player = false;
             }
         }
+        //Debug.Log(range);
+        //Debug.Log(range_max);
+        //Debug.Log(range_min);
 
         //警戒区域に侵入
         if (dis <= viewVigilant && dis > viewDanger && is_player == true)

@@ -28,8 +28,6 @@ public class EnemyUI : MonoBehaviour
     {
         eyeGauge.fillAmount = Alertness / maxAlertness;
 
-        //Alertness += Time.deltaTime * 5;
-
         if (Alertness >= 100)
         {
             eyeGauge.color = Color.red;
