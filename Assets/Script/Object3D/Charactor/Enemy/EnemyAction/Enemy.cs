@@ -102,20 +102,10 @@ public class Enemy : MonoBehaviour
     //============================================================================
     private void AllStatus()
     {
-        //’e‚ÌÝ’è
-        {
-            //’e‚Ì”­ŽË•ûŒü
-            B_rad = VecRad(player.transform.position, transform.position);
-            Bvec.x = -1 * B_rad * Mathf.Rad2Deg;
+        //’e‚Ì”­ŽË•ûŒü
+        B_rad = VecRad(player.transform.position, transform.position);
+        Bvec.x = -1 * B_rad * Mathf.Rad2Deg;
 
-            //”­ŽËŠÔŠu—pƒJƒEƒ“ƒg
-            B_cnt += Time.fixedDeltaTime;
-
-            //’e‚Ì”­ŽËˆÊ’u
-            Bpos = transform.position;
-            Bpos.x = Bpos.x + r * Mathf.Cos(B_rad);
-            Bpos.y = Bpos.y + r * Mathf.Sin(B_rad);
-        }
         SeeingPlayer();
     }
 
@@ -151,8 +141,16 @@ public class Enemy : MonoBehaviour
         //ˆÚ“®
         transform.position = Vector3.MoveTowards(transform.position, player.transform.position, Time.deltaTime * Espeed * 1.2f);
 
-        
-        
+        //’e‚ÌÝ’è
+        {
+            //”­ŽËŠÔŠu—pƒJƒEƒ“ƒg
+            B_cnt += Time.fixedDeltaTime;
+
+            //’e‚Ì”­ŽËˆÊ’u
+            Bpos = transform.position;
+            Bpos.x = Bpos.x + r * Mathf.Cos(B_rad);
+            Bpos.y = Bpos.y + r * Mathf.Sin(B_rad);
+        }
 
         //’e‚Ì”­ŽË
         if (B_cnt > 2.0f)
