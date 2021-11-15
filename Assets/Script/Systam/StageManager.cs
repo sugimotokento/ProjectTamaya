@@ -8,18 +8,23 @@ public class StageManager : MonoBehaviour {
     public static StageManager instance = null;
     public static string sceneName;
 
-    public GameEvent[] gameEvent = new GameEvent[2];
+    public GameObject eventObj;
     public Player player;
     public GameCamera camera;
     public GameObject enemy;
 
     [HideInInspector] public bool isClear = false;
 
+    private List<GameEvent> gameEvents=new List<GameEvent>();
     private bool canSetPlayerAction = false;
 
     private void Awake() {
         instance = this;
 
+
+        for(int i=0; i < eventObj.transform.childCount; ++i) {
+            gameEvents.Add(eventObj.transform.GetChild(i).gameObject.GetComponent<GameEvent>());
+        }
     }
 
     // Start is called before the first frame update
@@ -36,9 +41,9 @@ public class StageManager : MonoBehaviour {
 
     private void Event(){
         bool isActiveEvent = false;
-        for (int i = 0; i < gameEvent.Length; ++i) {
-            if (gameEvent[i].GetIsEvent() == true) {
-                gameEvent[i].SetCanEvent(true);
+        for (int i = 0; i < gameEvents.Count; ++i) {
+            if (gameEvents[i].GetIsEvent() == true) {
+                gameEvents[i].SetCanEvent(true);
                 canSetPlayerAction = true;
                 player.SetActiveUI(false);
                 player.ReMoveActionAll();

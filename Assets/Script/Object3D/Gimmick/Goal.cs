@@ -6,6 +6,7 @@ public class Goal : MonoBehaviour {
     [HideInInspector] public bool isGoal = false;
     [SerializeField] private Renderer renderer;
     [SerializeField] private GameObject bloomObject;
+    [SerializeField] private GameObject steam;
 
     private Color baseColor;
     private Vector3 mousePosBuffer;
@@ -25,13 +26,14 @@ public class Goal : MonoBehaviour {
             Gruguru();
 
             if (isGuruguru == true && isRevert == false) {
+                steam.SetActive(false);
                 renderer.material.SetColor("_EmissionColor", baseColor * Mathf.Pow(timer, 2));
-                bloomObject.transform.localScale += new Vector3(1, 1, 0) * Time.fixedDeltaTime * 2;
+                bloomObject.transform.localScale += new Vector3(1, 1, 0) * Time.fixedDeltaTime * 8;
                 timer += Time.fixedDeltaTime * 5;
 
                 //演出終了
                 if (timer > 10) {
-                    StageManager.instance.isClear = true;
+                    
                     isRevert = true;
                 }
             }
@@ -39,11 +41,13 @@ public class Goal : MonoBehaviour {
 
             //元の状態に戻す
             if (isRevert == true) {
+                steam.SetActive(true);
                 renderer.material.SetColor("_EmissionColor", baseColor * Mathf.Pow(timer, 2));
-                bloomObject.transform.localScale -= new Vector3(1, 1, 0) * Time.fixedDeltaTime * 2;
+                bloomObject.transform.localScale -= new Vector3(1, 1, 0) * Time.fixedDeltaTime * 16;
                 timer -= Time.fixedDeltaTime * 5;
 
-                if (timer <= 1) {
+                if (timer <= 5) {
+                    StageManager.instance.isClear = true;
                     renderer.material.SetColor("_EmissionColor", baseColor * Mathf.Pow(1, 2));
                     bloomObject.transform.localScale = baseScele;
                     isAnimationEnd = true;
@@ -53,7 +57,7 @@ public class Goal : MonoBehaviour {
     }
 
     private void OnTriggerStay(Collider other) {
-        if (other.gameObject.CompareTag("Player")) {
+        if (other.gameObject.CompareTag("Player") && isRevert == false) {
             Player player = other.gameObject.GetComponent<Player>();
 
             //プレイヤーの動きを止める

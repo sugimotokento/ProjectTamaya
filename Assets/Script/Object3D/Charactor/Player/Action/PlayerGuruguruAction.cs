@@ -48,7 +48,14 @@ public class PlayerGuruguruAction : PlayerAction {
             player.line[i].SetActive(true);
         }
 
-   
+
+        //ü‚Ì‘¾‚³‚ğİ’è
+        line[(int)LineIndex.MOUSE].startWidth = 0.1f;
+        line[(int)LineIndex.MOUSE].endWidth = 0.1f;
+
+        line[(int)LineIndex.JOIN].startWidth = 0.05f;
+        line[(int)LineIndex.JOIN].endWidth = 0.05f;
+
     }
 
     public override void UpdateAction() {
