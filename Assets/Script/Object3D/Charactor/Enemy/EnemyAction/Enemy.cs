@@ -5,109 +5,104 @@ using UnityEngine.AI;
 
 public class Enemy : MonoBehaviour
 {
+    //オブジェクト・スクリプト関連
     [SerializeField] private GameObject bullet;//弾オブジェクト
-    [SerializeField] private GameObject player;//プレイヤーオブジェクト
+    [SerializeField] private Player player;//プレイヤークラス
     [SerializeField] private GameObject enemyUI;//エネミーのUIオブジェクト
-    [SerializeField] private GameObject[] MovePos;//エネミーの移動用座標
 
     private EnemyUI UIscript;//UIオブジェクトについてるスクリプト
 
-    //private NavMeshAgent navAgent;
 
+    //エネミーのパラメータ関連
     private float Espeed = 3.5f;//エネミーの速さ
-    
-    private Vector3 Bvec = new Vector3(0, 90, 0);//弾発射時のベクトル
+    public bool isSumaki = false;//簀巻きにされているか
 
-    private float   B_cnt;   //弾の発射間隔（秒数）
-    private Vector3 Bpos;    //弾の発射座標
-    private float   B_rad;   //発射時のエネミー、プレイヤー間の角度
-    private float   r = 2.0f;//球の発射位置の距離
 
+    //弾関連
+    private Vector3 Bvec = new Vector3(0, 90, 0);//発射時のベクトル
+
+    private float     B_cnt;            //発射間隔（秒数保存用）
+    private float     B_interval = 2.0f;//発射間隔（定数）
+    private Vector3   Bpos;             //発射座標
+    private float     B_rad;            //発射時のエネミー、プレイヤー間の角度
+    private float     r = 2.0f;         //発射位置の距離
+
+
+    //視野関連
     [SerializeField] private float viewVigilant = 5.0f;//警戒 視野の距離
     [SerializeField] private float viewDanger = 1.0f;  //即戦闘 視野の距離
 
-    private float viewrad = 0;  //エネミーの視線角度
-    private float viewrange = 15; //エネミーの視野の広さ
-    private Vector3 oldpos;//エネミーの前位置
+    private bool VigPlayer;//警戒区域　入っているか
+    private bool DanPlayer;//戦闘区域　入っているか
 
+    private float viewrad = 0;    //エネミーの視線角度
+    private float viewrange = 15; //エネミーの視野の広さ
+    private Vector3 oldpos;       //エネミーの前位置
+
+
+    //探索関連
     [SerializeField] private GameObject points;//移動ポイント
     private int index = 0;
 
-    // Start is called before the first frame update
+    //UI関連
+    private float AddAlert = 5.0f;//UI加算値
+
+
+    //
+    //
+    //メイン関数
+    //============================================================================
     void Start()
     {
         UIscript = enemyUI.GetComponent<EnemyUI>();
+
         viewrad = 0;
         oldpos = transform.position;
-        //navAgent = GetComponent<NavMeshAgent>();
+        VigPlayer = false;
+        DanPlayer = false;
     }
+
 
     void Update()
     {
-        if (UIscript.GetAlertness() <= 0)
-            SearchStatus();
-        else if (UIscript.GetAlertness() > 0 && UIscript.GetAlertness() < 100)
-            WarningStatus();
-        else if (UIscript.GetAlertness() >= 100)
-            FightStatus();
+        float alert = UIscript.GetAlertness();
 
 
-        AllStatus();
+        if (isSumaki == false)
+        {
+            if (alert <= 0)
+                SearchStatus();
+            else if (alert > 0 && alert < 100)
+                WarningStatus();
+            else if (alert >= 100)
+                FightStatus();
+        }
     }
+
 
     void FixedUpdate()
     {
+        AllStatus();
     }
 
-    //void Update()
-    //{
-    //    EnemyMove();
-    //}
-
-    //// Update is called once per frame
-    //void FixedUpdate()
-    //{
-    //    //球の設定
-    //    {
-    //        //球の発射方向
-    //        B_rad = VecRad(player.transform.position, transform.position);
-    //        Bvec.x = -1 * B_rad * Mathf.Rad2Deg;
-
-    //        //発射間隔用カウント
-    //        B_cnt += Time.fixedDeltaTime;
-
-    //        //球の発射位置
-    //        Bpos = transform.position;
-    //        Bpos.x = Bpos.x + r * Mathf.Cos(B_rad);
-    //        Bpos.y = Bpos.y + r * Mathf.Sin(B_rad);
-    //    }
-    //    //角度は-180~180まで
-    //    //Debug.Log(Mathf.Repeat(-Bvec.x, 360));
-
-    //    //球の発射
-    //    if (UIscript.GetAlertness() >= 100 == true && B_cnt > 0.5f)
-    //    {
-    //        Instantiate(bullet, Bpos, Quaternion.Euler(Bvec));
-    //        B_cnt = 0;
-    //    }
 
 
-    //    ViewEnemy();
-    //    SeeingPlayer();
-    //}
-
+    //
+    //
     //ステータス関数
     //============================================================================
     //全状態
     //============================================================================
     private void AllStatus()
     {
-        //弾の発射方向
-        B_rad = VecRad(player.transform.position, transform.position);
+        //弾の発射方向・視線のプログラムに必須
+        B_rad = VecRad(player.gameObject.transform.position, transform.position);
         Bvec.x = -1 * B_rad * Mathf.Rad2Deg;
 
         SeeingPlayer();
+        ChangeUI();
     }
+
 
     //============================================================================
     //索敵状態
@@ -121,6 +116,7 @@ public class Enemy : MonoBehaviour
         ViewEnemy();
     }
 
+
     //============================================================================
     //警戒状態
     //============================================================================
@@ -133,13 +129,19 @@ public class Enemy : MonoBehaviour
         ViewEnemy();
     }
 
+    private void DieEnemy()
+    {
+        player.item.AddKey(1);
+    }
+
+
     //============================================================================
     //戦闘状態
     //============================================================================
     private void FightStatus()
     {
         //移動
-        transform.position = Vector3.MoveTowards(transform.position, player.transform.position, Time.deltaTime * Espeed * 1.2f);
+        transform.position = Vector3.MoveTowards(transform.position, player.gameObject.transform.position, Time.deltaTime * Espeed * 1.2f);
 
         //弾の設定
         {
@@ -153,7 +155,7 @@ public class Enemy : MonoBehaviour
         }
 
         //弾の発射
-        if (B_cnt > 2.0f)
+        if (B_cnt > B_interval)
         {
             Instantiate(bullet, Bpos, Quaternion.Euler(Bvec));
             B_cnt = 0;
@@ -161,29 +163,12 @@ public class Enemy : MonoBehaviour
     }
 
 
+
+    //
+    //
     //その他関数
     //============================================================================
-    private void EnemyMove()
-    {
-        //navAgent.SetDestination(player.transform.position);
-
-        if (UIscript.GetAlertness() >= 100)
-        {
-            transform.position = Vector3.MoveTowards(transform.position, player.transform.position, Time.deltaTime * Espeed);
-        }
-        else
-        {
-            Vector3 dist = points.transform.GetChild(index).gameObject.transform.position - this.transform.position;
-            this.transform.position += dist.normalized * Time.deltaTime * Espeed;
-
-            if (dist.magnitude < 0.5f)
-            {
-                index++;
-                if (index >= points.transform.childCount) index = 0;
-            }
-        }
-    }
-
+    //移動（探索時）
     private void SearchMove(float sp)
     {
         Vector3 dist = points.transform.GetChild(index).gameObject.transform.position - this.transform.position;
@@ -196,6 +181,7 @@ public class Enemy : MonoBehaviour
         }
     }
 
+
     //角度算出
     private float VecRad(Vector3 a1, Vector3 a2)
     {
@@ -205,6 +191,7 @@ public class Enemy : MonoBehaviour
 
         return vecrad;
     }
+
 
     //エネミーの視線と身体の向き
     private void ViewEnemy()
@@ -217,10 +204,11 @@ public class Enemy : MonoBehaviour
         oldpos = transform.position;
     }
 
-    //プレイヤーが視野に入った時のUI変化
+
+    //プレイヤーが視野に入っているか
     private void SeeingPlayer()
     {
-        float dis = Vector3.Distance(transform.position, player.transform.position);
+        float dis = Vector3.Distance(transform.position, player.gameObject.transform.position);
         float range = Mathf.Repeat(-viewrad, 360);//角度は0~360まで
         float range_min = range - viewrange;//視野の下限
         float range_max = range + viewrange;//視野の上限
@@ -254,19 +242,36 @@ public class Enemy : MonoBehaviour
                 is_player = false;
             }
         }
-        //Debug.Log(range);
-        //Debug.Log(range_max);
-        //Debug.Log(range_min);
 
         //警戒区域に侵入
         if (dis <= viewVigilant && dis > viewDanger && is_player == true)
         {
-            UIscript.SetAlertness(Time.deltaTime * 5);
+            VigPlayer = true;
         }
         //即戦闘区域に侵入
         if (dis <= viewDanger && is_player == true)
         {
-            UIscript.SetDanger();
+            DanPlayer = true;
         }
     }
+
+
+    //UI変化
+    private void ChangeUI()
+    {
+        //警戒区域に侵入
+        if (VigPlayer)
+        {
+            UIscript.SetAlertness(Time.deltaTime * AddAlert);
+        }
+        //即戦闘区域に侵入
+        if (DanPlayer)
+        {
+            UIscript.SetDanger();
+        }
+
+        VigPlayer = false;
+        DanPlayer = false;
+    }
+
 }

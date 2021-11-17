@@ -28,10 +28,11 @@ public class EnemyBullet : MonoBehaviour
 
 
     //“–‚½‚è”»’è
-    private void OnCollisionEnter(Collision other)
+    private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Player")
         {
+            other.gameObject.GetComponent<Player>().hP.Damage(10);
             isdes = true;
         }
         else
