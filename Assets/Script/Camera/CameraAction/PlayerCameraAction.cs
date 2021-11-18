@@ -7,7 +7,7 @@ public class PlayerCameraAction : CameraAction {
 
     public override void Action() {
         Vector3 mousePos = Input.mousePosition;
-        mousePos.z = 10.0f;
+        mousePos.z = camera.transform.position.z;
         mousePos = Camera.main.ScreenToWorldPoint(mousePos);
         mousePos.z = 0;
 
