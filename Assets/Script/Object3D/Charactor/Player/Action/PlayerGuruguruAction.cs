@@ -213,5 +213,11 @@ public class PlayerGuruguruAction : PlayerAction {
 
         StageManager.instance.camera.SetAction<PointCameraAction>();
         StageManager.instance.camera.GetAction<PointCameraAction>().SetPoint(target.gameObject.transform.position + Vector3.forward * -5);
+
+        target.GetComponent<Enemy>().isSumaki = true;
+    }
+
+    public GameObject GetTarget() {
+        return target;
     }
 }
