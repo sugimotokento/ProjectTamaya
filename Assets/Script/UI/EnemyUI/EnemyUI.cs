@@ -42,9 +42,14 @@ public class EnemyUI : MonoBehaviour
         }
     }
 
-    public void SetAlertness(float alert)
+    public void AddAlertness(float alert)
     {
         Alertness += alert;
+    }
+
+    public void SetAlertness(float alert)
+    {
+        Alertness = alert;
     }
 
     public void SetDanger()

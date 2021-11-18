@@ -20,20 +20,22 @@ public class Enemy : MonoBehaviour
 
     //弾関連
     private Vector3 Bvec = new Vector3(0, 90, 0);//発射時のベクトル
+    private Vector3 Bpos;             //発射座標
 
     private float     B_cnt;            //発射間隔（秒数保存用）
     private float     B_interval = 2.0f;//発射間隔（定数）
-    private Vector3   Bpos;             //発射座標
     private float     B_rad;            //発射時のエネミー、プレイヤー間の角度
     private float     r = 2.0f;         //発射位置の距離
 
 
     //視野関連
-    [SerializeField] private float viewVigilant = 5.0f;//警戒 視野の距離
-    [SerializeField] private float viewDanger = 1.0f;  //即戦闘 視野の距離
+    [SerializeField] private float RangeVigilant = 5.0f;//警戒 視野の距離
+    [SerializeField] private float RangeDanger = 1.0f;  //即戦闘 視野の距離
 
-    private bool VigPlayer;//警戒区域　入っているか
-    private bool DanPlayer;//戦闘区域　入っているか
+    private bool VigPlayer;             //警戒区域　入っているか
+    private bool DanPlayer;             //戦闘区域　入っているか
+    private Vector3 vigpos;             //警戒時enemyの移動場所
+    private float dantime;              //戦闘時見失った時間保存用
 
     private float viewrad = 0;    //エネミーの視線角度
     private float viewrange = 15; //エネミーの視野の広さ
@@ -57,6 +59,7 @@ public class Enemy : MonoBehaviour
         UIscript = enemyUI.GetComponent<EnemyUI>();
 
         viewrad = 0;
+        dantime = 0;
         oldpos = transform.position;
         VigPlayer = false;
         DanPlayer = false;
@@ -76,6 +79,11 @@ public class Enemy : MonoBehaviour
                 WarningStatus();
             else if (alert >= 100)
                 FightStatus();
+        }
+        else
+        {
+            //簀巻き成功時
+            //DieEnemy();
         }
     }
 
@@ -123,15 +131,10 @@ public class Enemy : MonoBehaviour
     private void WarningStatus()
     {
         //移動
-        SearchMove(Espeed * 0.3f);
+        transform.position = Vector3.MoveTowards(transform.position, vigpos, Time.deltaTime * Espeed * 0.3f);
 
         //視線
         ViewEnemy();
-    }
-
-    private void DieEnemy()
-    {
-        player.item.AddKey(1);
     }
 
 
@@ -141,7 +144,9 @@ public class Enemy : MonoBehaviour
     private void FightStatus()
     {
         //移動
-        transform.position = Vector3.MoveTowards(transform.position, player.gameObject.transform.position, Time.deltaTime * Espeed * 1.2f);
+        float dis = Vector3.Distance(transform.position, player.gameObject.transform.position);
+        if (dis > 1.5f)
+            transform.position = Vector3.MoveTowards(transform.position, player.gameObject.transform.position, Time.deltaTime * Espeed * 1.2f);
 
         //弾の設定
         {
@@ -160,8 +165,19 @@ public class Enemy : MonoBehaviour
             Instantiate(bullet, Bpos, Quaternion.Euler(Bvec));
             B_cnt = 0;
         }
+
+        //視線
+        ViewEnemy();
     }
 
+
+    //============================================================================
+    //戦闘不能状態
+    //============================================================================
+    private void DieEnemy()
+    {
+        player.item.AddKey(1);
+    }
 
 
     //
@@ -200,7 +216,7 @@ public class Enemy : MonoBehaviour
         viewrad = -1 * viewrad * Mathf.Rad2Deg;
 
         //視線の方向に向きを変える
-        transform.GetChild(0).gameObject.transform.rotation = Quaternion.Euler(0.0f, 0.0f, viewrad);
+        transform.GetChild(0).gameObject.transform.rotation = Quaternion.Euler(0.0f, 0.0f, -1 * viewrad);
         oldpos = transform.position;
     }
 
@@ -243,15 +259,25 @@ public class Enemy : MonoBehaviour
             }
         }
 
-        //警戒区域に侵入
-        if (dis <= viewVigilant && dis > viewDanger && is_player == true)
+        //戦闘状態時見失った時間
+        if (DanPlayer == true)
         {
+            dantime += Time.fixedDeltaTime;
+        }
+
+        //警戒区域に侵入
+        if (dis <= RangeVigilant && dis > RangeDanger && is_player == true)
+        {
+            dantime = 0;
             VigPlayer = true;
+            vigpos = player.gameObject.transform.position;
         }
         //即戦闘区域に侵入
-        if (dis <= viewDanger && is_player == true)
+        else if (dis <= RangeDanger && is_player == true)
         {
+            dantime = 0;
             DanPlayer = true;
+            vigpos = player.gameObject.transform.position;
         }
     }
 
@@ -259,19 +285,34 @@ public class Enemy : MonoBehaviour
     //UI変化
     private void ChangeUI()
     {
+        Debug.Log(dantime);
+        Debug.Log(DanPlayer);
+
+        //戦闘時見失った
+        if (dantime > 5.0f)
+        {
+            dantime = 0.0f;
+            DanPlayer = false;
+        }
         //警戒区域に侵入
         if (VigPlayer)
         {
-            UIscript.SetAlertness(Time.deltaTime * AddAlert);
+            UIscript.AddAlertness(Time.deltaTime * AddAlert);
         }
         //即戦闘区域に侵入
         if (DanPlayer)
         {
             UIscript.SetDanger();
         }
+        if (!VigPlayer && !DanPlayer)
+        {
+            UIscript.AddAlertness(-1 * Time.deltaTime * AddAlert);
+
+            if (UIscript.GetAlertness() <= 0.0f)
+                UIscript.SetAlertness(0);
+        }
 
         VigPlayer = false;
-        DanPlayer = false;
     }
 
 }
