@@ -9,13 +9,22 @@ public class BossIdleAction : BossAction {
         MAX
     }
 
+    public override void Init(Boss b) {
+        base.Init(b);
+        boss.line.SetActive(false);
+    }
+
     public override void Action() {
         int rand = Random.Range(0, 100);
 
-        if (rand >= 0 && rand < 50) {
+        if (rand >= 0 && rand < 33) {
             boss.SetAction<BossShotGunAction>();
-        }else if(rand >= 50 && rand < 100) {
+
+        }else if(rand >= 33 && rand < 66) {
             boss.SetAction<BossRotateShotAction>();
+
+        }else if (rand >= 66) {
+            boss.SetAction<BossLandmineAction>();
         }
 
     }

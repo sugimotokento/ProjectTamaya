@@ -30,6 +30,8 @@ public class PlayerReflectionAction : PlayerAction {
             if (Physics.Raycast(rayRight, out hit, 0.6f)) {
                 Reflection(Vector3.left);
             }
+        } else if (collision.gameObject.CompareTag("StageEX")) {
+            Reflection(collision.gameObject.transform.up);
         }
     }
 

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BossShotGunAction : BossAction {
     private const float SHOT_INTERVAL = 0.1f;
-    private const float SHOT_TIME = 2;
+    private const float SHOT_TIME = 1.5f;
 
     private LineRenderer line;
 
@@ -13,6 +13,8 @@ public class BossShotGunAction : BossAction {
     private float shotIntervalTimer = 0;
     private float shotTimer = 0;
 
+    private bool isShot = false;
+    private bool canShot = false;
 
     public override void Init(Boss b) {
         base.Init(b);
@@ -31,6 +33,7 @@ public class BossShotGunAction : BossAction {
     public override void Action() {
         LockAtPlayer();
         Shot();
+        End();
     }
 
     private void LockAtPlayer() {
@@ -43,19 +46,20 @@ public class BossShotGunAction : BossAction {
         angle = Mathf.Acos(angle) / 3.14f * 180;
 
         //ÉvÉåÉCÉÑÅ[ÇÃï˚Ç…âÒì]
-        if (angle < 177) {
-            if (cross.z > 0) {
-                boss.transform.Rotate(Vector3.forward * 150 * Time.fixedDeltaTime);
-            } else {
-                boss.transform.Rotate(Vector3.forward * -150 * Time.fixedDeltaTime);
+        if (isShot == false) {
+            if (angle < 177) {
+                if (cross.z > 0) {
+                    boss.transform.Rotate(Vector3.forward * 150 * Time.fixedDeltaTime);
+                } else {
+                    boss.transform.Rotate(Vector3.forward * -150 * Time.fixedDeltaTime);
+                }
             }
-        } else {
-            angle = Mathf.Atan2(dist.y, dist.x);
-            angle = angle / 3.14f * 180+90;
-
-            boss.gameObject.transform.rotation = Quaternion.Euler(0, 0, angle);
+            if (angle > 177) {
+                canShot = true;
+            } else {
+                canShot = false;
+            }
         }
-   
         
         line.SetPosition(0, boss.gameObject.transform.position);
         line.SetPosition(1, boss.gameObject.transform.position + boss.gameObject.transform.up * 100);
@@ -68,22 +72,23 @@ public class BossShotGunAction : BossAction {
         shotIntervalTimer += Time.fixedDeltaTime;
         shotTimer += Time.fixedDeltaTime;
 
-        if (shotIntervalTimer > SHOT_INTERVAL && shotTimer < SHOT_TIME * 0.5f) {
-            shotIntervalTimer = 0;
-
-            //íeê∂ê¨
-            for (int i = 0; i < LOOP_MAX; ++i) {
-                //É{ÉXÇÃå¸Ç¢ÇƒÇ¢ÇÈäpìxÇãÅÇﬂÇÈ
-                float angle = Mathf.Atan2(boss.gameObject.transform.up.y, boss.gameObject.transform.up.x);
-                angle = angle / 3.14f * 180;
-                boss.line.SetActive(false);
-                //äeíeÇÃî≠éÀäpìxÇåvéZ
-                float shotAngle = angle - SHOT_RANGE / 2 + (SHOT_RANGE / LOOP_MAX * i);
-                //5ïbå„Ç…è¡Ç¶ÇÈíeÇê∂ê¨
-                Destroy(Instantiate(boss.bullet, boss.gameObject.transform.position, Quaternion.Euler(0, 0, shotAngle - 90)), 5);
+        if (canShot == true) {
+            if (shotIntervalTimer > SHOT_INTERVAL) {
+                shotIntervalTimer = 0;
+                isShot = true;
+                //íeê∂ê¨
+                for (int i = 0; i < LOOP_MAX; ++i) {
+                    //É{ÉXÇÃå¸Ç¢ÇƒÇ¢ÇÈäpìxÇãÅÇﬂÇÈ
+                    float angle = Mathf.Atan2(boss.gameObject.transform.up.y, boss.gameObject.transform.up.x);
+                    angle = angle / 3.14f * 180;
+                    boss.line.SetActive(false);
+                    //äeíeÇÃî≠éÀäpìxÇåvéZ
+                    float shotAngle = angle - SHOT_RANGE / 2 + (SHOT_RANGE / LOOP_MAX * i);
+                    //5ïbå„Ç…è¡Ç¶ÇÈíeÇê∂ê¨
+                    Destroy(Instantiate(boss.bullet, boss.gameObject.transform.position, Quaternion.Euler(0, 0, shotAngle - 90)), 5);
+                }
             }
         }
-
         //ÉåÅ[ÉUÅ[ï`âÊ
         if (shotTimer > SHOT_TIME * 0.5f) {
             boss.line.SetActive(true);
@@ -94,6 +99,8 @@ public class BossShotGunAction : BossAction {
             shotIntervalTimer = 0;
             shotTimer = 0;
             shotCount++;
+
+            isShot = false;
         }
 
     }

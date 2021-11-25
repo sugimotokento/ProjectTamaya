@@ -17,7 +17,7 @@ public class BossEvent : GameEvent {
                 isSetCamera = true;
                 isEvent = false;
                 StageManager.instance.camera.SetAction<PointCameraAction>();
-                StageManager.instance.camera.GetAction<PointCameraAction>().SetPoint(new Vector3(0, 0, -20));
+                StageManager.instance.camera.GetAction<PointCameraAction>().SetPoint(new Vector3(0, 0, -30));
             }
         }
     }

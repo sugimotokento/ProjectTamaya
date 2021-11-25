@@ -8,9 +8,11 @@ public class Boss : MonoBehaviour {
     public GameObject bullet;
     public GameObject line;
 
+    public GameObject[] unchi = new GameObject[3];
+
     // Start is called before the first frame update
     void Start() {
-        SetAction<BossIdleAction>();
+        SetAction<BossShotGunAction>();
     }
 
     // Update is called once per frame
