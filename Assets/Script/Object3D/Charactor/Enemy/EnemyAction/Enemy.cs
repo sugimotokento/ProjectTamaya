@@ -14,8 +14,12 @@ public class Enemy : MonoBehaviour
 
 
     //エネミーのパラメータ関連
-    private float Espeed = 3.5f;//エネミーの速さ
-    public bool isSumaki = false;//簀巻きにされているか
+    [SerializeField] private float Espeed = 3.5f;//エネミーの速さ
+    public bool isSumaki = false;　　　　　　　　//簀巻きにされているか
+    private bool isDie = false;
+    [SerializeField] private int ItemNum;　　　　//持っているアイテムナンバー
+    private float VigTime;                       //警戒時継続時間
+    private float DanTime;                       //戦闘時継続時間
 
 
     //弾関連
@@ -32,18 +36,19 @@ public class Enemy : MonoBehaviour
     [SerializeField] private float RangeVigilant = 5.0f;//警戒 視野の距離
     [SerializeField] private float RangeDanger = 1.0f;  //即戦闘 視野の距離
 
+    private bool SeeRay;                //間に障害物があるか
+    private bool SeePlayer;             //プレイヤーが見えているか
     private bool VigPlayer;             //警戒区域　入っているか
     private bool DanPlayer;             //戦闘区域　入っているか
-    private Vector3 vigpos;             //警戒時enemyの移動場所
-    private float dantime;              //戦闘時見失った時間保存用
 
     private float viewrad = 0;    //エネミーの視線角度
-    private float viewrange = 15; //エネミーの視野の広さ
-    private Vector3 oldpos;       //エネミーの前位置
+    [SerializeField] private float viewrange = 15; //エネミーの視野の広さ
+    private Vector3 oldepos;       //エネミーの前位置
+    private Vector3 oldppos;       //プレイヤーの最終目撃位置 enemyの移動場所
 
 
     //探索関連
-    [SerializeField] private GameObject points;//移動ポイント
+    [SerializeField] private GameObject LocalPoints;//移動ポイント
     private int index = 0;
 
     //UI関連
@@ -59,10 +64,13 @@ public class Enemy : MonoBehaviour
         UIscript = enemyUI.GetComponent<EnemyUI>();
 
         viewrad = 0;
-        dantime = 0;
-        oldpos = transform.position;
+        oldepos = transform.position;
         VigPlayer = false;
         DanPlayer = false;
+        SeeRay = false;
+        SeePlayer = false;
+        VigTime = 0.0f;
+        DanTime = 0.0f;
     }
 
 
@@ -83,7 +91,7 @@ public class Enemy : MonoBehaviour
         else
         {
             //簀巻き成功時
-            //DieEnemy();
+            DieEnemy();
         }
     }
 
@@ -130,11 +138,29 @@ public class Enemy : MonoBehaviour
     //============================================================================
     private void WarningStatus()
     {
-        //移動
-        transform.position = Vector3.MoveTowards(transform.position, vigpos, Time.deltaTime * Espeed * 0.3f);
+        VigTime += Time.deltaTime;
 
-        //視線
-        ViewEnemy();
+        if (VigTime < 8.0f)
+        {
+            //移動
+            Vector3 dist = oldppos - transform.position;
+            this.transform.position += dist.normalized * Time.deltaTime * Espeed * 0.3f;
+
+
+            //視線
+            if (dist.magnitude < 0.5f)
+            {
+                LostPlayerViewEnemy();
+            }
+            else
+            {
+                ViewEnemy();
+            }
+        }
+        else
+        {
+            VigPlayer = false;
+        }
     }
 
 
@@ -143,31 +169,72 @@ public class Enemy : MonoBehaviour
     //============================================================================
     private void FightStatus()
     {
-        //移動
-        float dis = Vector3.Distance(transform.position, player.gameObject.transform.position);
-        if (dis > 1.5f)
-            transform.position = Vector3.MoveTowards(transform.position, player.gameObject.transform.position, Time.deltaTime * Espeed * 1.2f);
+        DanTime += Time.deltaTime;
 
-        //弾の設定
+        Debug.Log(DanTime);
+        if (DanTime < 5.0f)
         {
-            //発射間隔用カウント
-            B_cnt += Time.fixedDeltaTime;
+            if (SeePlayer == true)
+            {
+                //移動
+                float dis = Vector3.Distance(transform.position, player.gameObject.transform.position);
+                Vector3 dist = player.gameObject.transform.position - transform.position;
+                if (dis > 1.5f)
+                    this.transform.position += dist.normalized * Time.deltaTime * Espeed * 1.2f;
 
-            //弾の発射位置
-            Bpos = transform.position;
-            Bpos.x = Bpos.x + r * Mathf.Cos(B_rad);
-            Bpos.y = Bpos.y + r * Mathf.Sin(B_rad);
+                //弾の設定
+                {
+                    //発射間隔用カウント
+                    B_cnt += Time.fixedDeltaTime;
+
+                    //弾の発射位置
+                    Bpos = transform.position;
+                    Bpos.x = Bpos.x + r * Mathf.Cos(B_rad);
+                    Bpos.y = Bpos.y + r * Mathf.Sin(B_rad);
+                }
+
+                //弾の発射
+                if (B_cnt > B_interval)
+                {
+                    Instantiate(bullet, Bpos, Quaternion.Euler(Bvec));
+                    B_cnt = 0;
+                }
+
+                //視線
+                viewrad = VecRad(player.gameObject.transform.position, transform.position);
+                viewrad = -1 * viewrad * Mathf.Rad2Deg;
+
+                //視線の方向に向きを変える
+                transform.GetChild(0).gameObject.transform.rotation = Quaternion.Euler(0.0f, 0.0f, -1 * viewrad);
+                oldepos = transform.position;
+            }
+            else
+            {
+                //移動
+                Vector3 dist = oldppos - transform.position;
+                this.transform.position += dist.normalized * Time.deltaTime * Espeed * 1.2f;
+
+                //視線
+                if (dist.magnitude < 0.5f)
+                {
+                    ViewEnemy();
+                }
+                else
+                {
+                    viewrad = VecRad(player.gameObject.transform.position, transform.position);
+                    viewrad = -1 * viewrad * Mathf.Rad2Deg;
+
+                    //視線の方向に向きを変える
+                    transform.GetChild(0).gameObject.transform.rotation = Quaternion.Euler(0.0f, 0.0f, -1 * viewrad);
+                    oldepos = transform.position;
+                }
+            }
         }
-
-        //弾の発射
-        if (B_cnt > B_interval)
+        else
         {
-            Instantiate(bullet, Bpos, Quaternion.Euler(Bvec));
-            B_cnt = 0;
+            VigPlayer = false;
+            DanPlayer = false;
         }
-
-        //視線
-        ViewEnemy();
     }
 
 
@@ -176,7 +243,10 @@ public class Enemy : MonoBehaviour
     //============================================================================
     private void DieEnemy()
     {
-        player.item.AddKey(1);
+        if (!isDie && ItemNum == 0)
+            player.item.AddKey(1);
+
+        isDie = true;
     }
 
 
@@ -187,13 +257,13 @@ public class Enemy : MonoBehaviour
     //移動（探索時）
     private void SearchMove(float sp)
     {
-        Vector3 dist = points.transform.GetChild(index).gameObject.transform.position - this.transform.position;
+        Vector3 dist = LocalPoints.transform.GetChild(index).gameObject.transform.position - this.transform.position;
         this.transform.position += dist.normalized * Time.deltaTime * sp;
 
         if (dist.magnitude < 0.5f)
         {
             index++;
-            if (index >= points.transform.childCount) index = 0;
+            if (index >= LocalPoints.transform.childCount) index = 0;
         }
     }
 
@@ -212,19 +282,31 @@ public class Enemy : MonoBehaviour
     //エネミーの視線と身体の向き
     private void ViewEnemy()
     {
-        viewrad = VecRad(transform.position, oldpos);
+        viewrad = VecRad(transform.position, oldepos);
         viewrad = -1 * viewrad * Mathf.Rad2Deg;
 
         //視線の方向に向きを変える
         transform.GetChild(0).gameObject.transform.rotation = Quaternion.Euler(0.0f, 0.0f, -1 * viewrad);
-        oldpos = transform.position;
+        oldepos = transform.position;
+    }
+
+    //プレイヤーを見失ったときの視線と身体の向き
+    private void LostPlayerViewEnemy()
+    {
+        viewrad += -1 * Time.deltaTime;
+
+        //視線の方向に向きを変える
+        transform.GetChild(0).gameObject.transform.rotation = Quaternion.Euler(0.0f, 0.0f, -1 * viewrad);
+        oldepos = transform.position;
     }
 
 
     //プレイヤーが視野に入っているか
     private void SeeingPlayer()
     {
-        float dis = Vector3.Distance(transform.position, player.gameObject.transform.position);
+        Vector3 ppos = player.gameObject.transform.position;
+        Vector3 epos = transform.position;
+        float dis = Vector3.Distance(epos, ppos);
         float range = Mathf.Repeat(-viewrad, 360);//角度は0~360まで
         float range_min = range - viewrange;//視野の下限
         float range_max = range + viewrange;//視野の上限
@@ -259,25 +341,48 @@ public class Enemy : MonoBehaviour
             }
         }
 
-        //戦闘状態時見失った時間
-        if (DanPlayer == true)
+        //障害物の有無
+        RaycastHit hit;
+        Vector3 Rvec = ppos - epos;
+        if (Physics.Raycast(epos, Rvec, out hit, RangeVigilant))
         {
-            dantime += Time.fixedDeltaTime;
+            if (hit.collider.gameObject.tag == "Player")
+            {
+                SeeRay = true;
+            }
+            else
+            {
+                SeeRay = false;
+            }
+        }
+        else
+        {
+            SeeRay = false;
         }
 
-        //警戒区域に侵入
-        if (dis <= RangeVigilant && dis > RangeDanger && is_player == true)
+        if (is_player == true && SeeRay == true)
         {
-            dantime = 0;
-            VigPlayer = true;
-            vigpos = player.gameObject.transform.position;
+            SeePlayer = true;
+            //警戒区域に侵入
+            if (dis <= RangeVigilant && dis > RangeDanger)
+            {
+                VigTime = 0;
+                DanTime = 0;
+                VigPlayer = true;
+                oldppos = player.gameObject.transform.position;
+            }
+            //即戦闘区域に侵入
+            else if (dis <= RangeDanger)
+            {
+                VigTime = 0;
+                DanTime = 0;
+                DanPlayer = true;
+                oldppos = player.gameObject.transform.position;
+            }
         }
-        //即戦闘区域に侵入
-        else if (dis <= RangeDanger && is_player == true)
+        else
         {
-            dantime = 0;
-            DanPlayer = true;
-            vigpos = player.gameObject.transform.position;
+            SeePlayer = false;
         }
     }
 
@@ -285,17 +390,8 @@ public class Enemy : MonoBehaviour
     //UI変化
     private void ChangeUI()
     {
-        Debug.Log(dantime);
-        Debug.Log(DanPlayer);
-
-        //戦闘時見失った
-        if (dantime > 5.0f)
-        {
-            dantime = 0.0f;
-            DanPlayer = false;
-        }
         //警戒区域に侵入
-        if (VigPlayer)
+        if (VigPlayer && SeePlayer == true)
         {
             UIscript.AddAlertness(Time.deltaTime * AddAlert);
         }
@@ -304,15 +400,15 @@ public class Enemy : MonoBehaviour
         {
             UIscript.SetDanger();
         }
+
+        //ゲージ減少
         if (!VigPlayer && !DanPlayer)
         {
-            UIscript.AddAlertness(-1 * Time.deltaTime * AddAlert);
+            //UIscript.AddAlertness(-1 * Time.deltaTime * AddAlert);
 
-            if (UIscript.GetAlertness() <= 0.0f)
-                UIscript.SetAlertness(0);
+
+            UIscript.SetAlertness(0);
         }
-
-        VigPlayer = false;
     }
 
 }
