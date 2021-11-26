@@ -50,10 +50,15 @@ MonoBehaviour:
   bullet: {fileID: 1390262012941802524, guid: 8c5f14e25858e264d970ada3d6ee492e, type: 3}
   player: {fileID: 7378424357854251995, guid: 9a3b8670629e8a6488b984f311c98f1b, type: 3}
   enemyUI: {fileID: 3484791724432482238}
-  viewVigilant: 5
-  viewDanger: 1
+  Espeed: 3.5
   isSumaki: 0
-  points: {fileID: 6747243218305117177, guid: 1703a2f2b44cbf4498873baa3744ce35, type: 3}
+  ItemNum: 0
+  isHelp: 0
+  RangeVigilant: 5
+  RangeDanger: 1
+  viewrange: 15
+  LocalPoints: {fileID: 0}
+  GlobalPoints: {fileID: 0}
 --- !u!65 &319160524473677133
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -141,6 +146,18 @@ PrefabInstance:
     - target: {fileID: 1842017515168243642, guid: 59e52a0d67651c84b9856f23aa50c1b9, type: 3}
       propertyPath: m_TagString
       value: Untagged
+      objectReference: {fileID: 0}
+    - target: {fileID: 4526391094632846218, guid: 59e52a0d67651c84b9856f23aa50c1b9, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 4526391094632846218, guid: 59e52a0d67651c84b9856f23aa50c1b9, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 4526391094632846218, guid: 59e52a0d67651c84b9856f23aa50c1b9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 90
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 1842017515168243588, guid: 59e52a0d67651c84b9856f23aa50c1b9, type: 3}
