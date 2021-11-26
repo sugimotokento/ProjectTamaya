@@ -56,6 +56,14 @@ public class Goal : MonoBehaviour {
         }
     }
 
+    private void OnTriggerEnter(Collider other) {
+        if (other.gameObject.CompareTag("Player")) {
+            Player player = other.gameObject.GetComponent<Player>();
+
+            //ÉXÉRÉAê›íË
+            ScoreManager.SetAir(player.air.GetTimer());
+        }
+    }
     private void OnTriggerStay(Collider other) {
         if (other.gameObject.CompareTag("Player") && isRevert == false) {
             Player player = other.gameObject.GetComponent<Player>();

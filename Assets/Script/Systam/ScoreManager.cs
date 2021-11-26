@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class ScoreManager : MonoBehaviour {
+    //ゴールでスコアを設定、ゴールイベントでスコアを表示
+
+
     public enum RankIndex {
         RANK_C,
         RANK_B,
@@ -11,6 +14,8 @@ public class ScoreManager : MonoBehaviour {
         RANK_LEGEND,
         RANK_MAX
     }
+
+
 
 
     static private float air = -1;
@@ -47,9 +52,10 @@ public class ScoreManager : MonoBehaviour {
         int score = GetScore();
 
         if (score >= 100000) {
-            rank = RankIndex.RANK_LEGEND;
+            // rank = RankIndex.RANK_LEGEND;
+            rank = RankIndex.RANK_S;
 
-        }else if (score >= 70000) {
+        } else if (score >= 70000) {
             rank = RankIndex.RANK_S;
 
         }else if (score >= 40000) {

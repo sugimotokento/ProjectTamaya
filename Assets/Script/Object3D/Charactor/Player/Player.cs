@@ -17,12 +17,13 @@ public class Player : MonoBehaviour {
     public GameObject noise;
     public GameObject afterimage;
 
+    public Animator animator;
+
     [HideInInspector] public Vector3 positionBuffer;
     [HideInInspector] public Vector3 moveSpeed;
 
 
-    public void SetDefaultAction() {
-        
+    public void SetDefaultAction() {        
         AddAction<PlayerReflectionAction>();
         AddAction<PlayerMoveAction>();
         AddAction<PlayerDamageAnimationAction>();

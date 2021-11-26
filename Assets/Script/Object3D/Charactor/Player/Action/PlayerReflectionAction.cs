@@ -3,10 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerReflectionAction : PlayerAction {
-
+    private bool isReflection = false;
 
     public override void Init(Player p) {
         base.Init(p);
+    }
+
+    public override void Action() {
+        if (isReflection == false) {
+            player.animator.SetBool("isSpin", false);
+        }
+        isReflection = false;
     }
 
     public override void CollisionEnter(Collision collision) {
@@ -30,8 +37,10 @@ public class PlayerReflectionAction : PlayerAction {
             if (Physics.Raycast(rayRight, out hit, 0.6f)) {
                 Reflection(Vector3.left);
             }
+
         } else if (collision.gameObject.CompareTag("StageEX")) {
             Reflection(collision.gameObject.transform.up);
+            
         }
     }
 
@@ -45,8 +54,8 @@ public class PlayerReflectionAction : PlayerAction {
         player.moveSpeed = r;
         player.moveSpeed *= 0.7f;
 
-
-
+        isReflection = true;
+        player.animator.SetBool("isSpin", true);
     }
 
 }

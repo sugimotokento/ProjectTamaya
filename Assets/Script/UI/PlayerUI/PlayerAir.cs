@@ -53,4 +53,9 @@ public class PlayerAir : MonoBehaviour {
         number.text = munutesText + ":" + secondsText + ":" + decimalsText;
         timer -= Time.deltaTime;
     }
+
+
+    public float GetTimer() {
+        return timer;
+    }
 }

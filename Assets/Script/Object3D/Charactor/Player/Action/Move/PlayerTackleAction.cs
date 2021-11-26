@@ -17,6 +17,9 @@ public class PlayerTackleAction : PlayerMoveAction {
 
         direction = mousePos - player.transform.position;
         player.moveSpeed = direction.normalized * accelerationBaseSpeed;
+
+        player.animator.SetBool("isTacle", true);
+        player.animator.SetBool("isMove", false);
     }
 
     public override void Action() {

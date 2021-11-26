@@ -9,11 +9,13 @@ public class PlayerMoveAction : PlayerAction {
     private float rightCrickTimer = 0;
     private bool isLeftMouseDown = false;
 
-
     public override void Init(Player p) {
         base.Init(p);
         rightCrickTimer = 0;
         accelerationBaseSpeed = 10;
+
+        player.animator.SetBool("isTacle", false);
+        player.animator.SetBool("isIai", false);
     }
 
     public override void UpdateAction() {
@@ -24,6 +26,7 @@ public class PlayerMoveAction : PlayerAction {
     }
 
     public override void Action() {
+ 
         Move();
         ChangeAction();
 
@@ -47,6 +50,14 @@ public class PlayerMoveAction : PlayerAction {
         player.visual.transform.rotation = Quaternion.Euler(0.0f, 0.0f, angle);
 
         isLeftMouseDown = false;
+
+        //モーション
+        dist = player.gameObject.transform.position - player.positionBuffer;
+        if (dist.magnitude < 0.02f) {
+            player.animator.SetBool("isMove", false);
+        } else {
+            player.animator.SetBool("isMove", true);
+        }
     }
 
 
@@ -61,6 +72,7 @@ public class PlayerMoveAction : PlayerAction {
 
             if (rightCrickTimer >= CHANGE_ACTION_INTERVAL) {
                 player.ChangeAction<PlayerMoveAction, PlayerIaiAction>();
+                player.animator.SetBool("isMove", false);
             }
         } else {
             //タックルモード
@@ -69,6 +81,7 @@ public class PlayerMoveAction : PlayerAction {
                 //クラスの切り替え
                 player.ChangeAction<PlayerMoveAction, PlayerTackleAction>();
 
+                player.animator.SetBool("isMove", false);
 
             }
         }

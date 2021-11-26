@@ -23,6 +23,8 @@ public class PlayerIaiAction : PlayerMoveAction {
 
         line.materials[0].color = Color.green;
         line.materials[0].SetColor("_EmissionColor", Color.green);
+
+        player.animator.SetBool("isMove", false);
     }
 
     public override void CollisionEnter(Collision collision) {
@@ -47,6 +49,8 @@ public class PlayerIaiAction : PlayerMoveAction {
         player.transform.position += player.moveSpeed * Time.fixedDeltaTime;
 
         if (isCharge == true) {
+            player.animator.SetBool("isCharge", true);
+
             //エフェクト生成
             Instantiate(player.iaiEffect, player.transform.position, Quaternion.identity);
 
@@ -62,6 +66,9 @@ public class PlayerIaiAction : PlayerMoveAction {
                 moveSpeedBuffer = player.moveSpeed;
 
                 player.moveSpeed = (attackPos - player.transform.position).normalized * accelerationBaseSpeed*5;
+
+                player.animator.SetBool("isCharge", false);
+                player.animator.SetBool("isIai", true);
             }
         } else {
             //残像
@@ -90,6 +97,8 @@ public class PlayerIaiAction : PlayerMoveAction {
             player.line[0].SetActive(false);
 
 
+            player.animator.SetBool("isMove", true);
+            player.animator.SetBool("isIai", false);
             if (isEnemyHit == true) {
                 //敵に当たってた
                 player.ChangeAction<PlayerIaiAction, PlayerGuruguruAction>();
