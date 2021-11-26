@@ -40,7 +40,7 @@ public class PlayerMoveAction : PlayerAction {
             Vector3 distance = GetWorldMousePos() - player.transform.position;
             distance.z = 0;
             player.moveSpeed += distance.normalized * accelerationBaseSpeed * Time.fixedDeltaTime;
-
+            player.moveSpeed.z = 0;
             player.fuel.Use(); //”R—¿‚ðŒ¸‚ç‚·
         }
         player.transform.position += player.moveSpeed * Time.fixedDeltaTime;

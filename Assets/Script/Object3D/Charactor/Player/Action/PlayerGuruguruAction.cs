@@ -148,6 +148,7 @@ public class PlayerGuruguruAction : PlayerAction {
             player.visual.transform.localPosition = Vector3.zero;
             player.visual.transform.rotation = Quaternion.AngleAxis(0, Vector3.forward);
             player.ChangeAction<PlayerGuruguruAction, PlayerMoveAction>();
+            positionBuffer.z = 0;
             player.transform.position = positionBuffer;
         }
     }
