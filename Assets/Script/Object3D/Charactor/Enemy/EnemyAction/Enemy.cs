@@ -20,7 +20,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] private int ItemNum;　　　　//持っているアイテムナンバー
     private float VigTime;                       //警戒時継続時間
     private float DanTime;                       //戦闘時継続時間
-    [SerializeField] private bool isHelp;                         //お呼ばれされたか
+    public bool isHelp;                          //お呼ばれされたか
 
 
     //弾関連
@@ -158,6 +158,8 @@ public class Enemy : MonoBehaviour
     //============================================================================
     private void WarningStatus()
     {
+        isHelp = true;
+
         VigTime += Time.deltaTime;
 
         if (VigTime < 8.0f)
@@ -269,7 +271,7 @@ public class Enemy : MonoBehaviour
             RaycastHit hit;
             KeepLenS = 100;
             KeepLenG = 100;
-            for (int i = 0; i< GlobalPoints.transform.childCount; i++)
+            for (int i = 0; i < GlobalPoints.transform.childCount; i++)
             {
                 dist = GlobalPoints.transform.GetChild(i).gameObject.transform.position;
 
@@ -317,12 +319,12 @@ public class Enemy : MonoBehaviour
             if (dist.magnitude < 0.5f && (IndexStart > IndexGoal))
             {
 
-                if (Gindex == IndexGoal) Gindex = IndexGoal;
+                if (Gindex == IndexGoal) isHelp = false;
                 else Gindex--;
             }
             else if(dist.magnitude < 0.5f && (IndexStart < IndexGoal))
             {
-                if (Gindex == IndexGoal) Gindex = IndexGoal;
+                if (Gindex == IndexGoal) isHelp = false;
                 else Gindex++;
             }
 
