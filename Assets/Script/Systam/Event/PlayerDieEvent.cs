@@ -25,7 +25,7 @@ public class PlayerDieEvent : GameEvent {
                 StageManager.instance.camera.GetAction<PointCameraAction>().SetPoint(StageManager.instance.player.gameObject.transform.position - Vector3.forward * 6);
                 StageManager.instance.camera.GetAction<PointCameraAction>().SetAddLate(0.35f);
             }
-            fade.SetAddLate(0.2f);
+            fade.SetAddLate(0.1f);
             fade.gameObject.SetActive(true);
 
             if (fade.GetIsFadeEnd() == true) {

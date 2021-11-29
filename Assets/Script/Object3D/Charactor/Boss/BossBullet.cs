@@ -6,6 +6,7 @@ public class BossBullet : MonoBehaviour {
     [HideInInspector] public bool isObjectMode = false;
     [HideInInspector] public bool isHit = false;
     [HideInInspector] public bool isDestroy = false;
+    [SerializeField] private GameObject effect;
 
     private float destroyTimer =0;
     private float moveSpeed = 10;
@@ -24,10 +25,22 @@ public class BossBullet : MonoBehaviour {
         }
     }
 
+    private void OnDestroy() {
+        Destroy(Instantiate(effect, this.transform.position, Quaternion.identity), 0.5f);
+    }
+
     private void OnTriggerEnter(Collider other) {
        
-        if (other.gameObject.CompareTag("Stage") || other.gameObject.CompareTag("Player")) {
+        if (other.gameObject.CompareTag("Stage") || other.gameObject.CompareTag("StageEX")) {
             isHit = true;
+            if (isObjectMode == false) {
+                Destroy(this.gameObject);
+            }
+        }
+
+        if (other.gameObject.CompareTag("Player")) {
+            isHit = true;
+            other.gameObject.GetComponent<Player>().hP.Damage(15);
             if (isObjectMode == false) {
                 Destroy(this.gameObject);
             }

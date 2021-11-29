@@ -51,12 +51,21 @@ public class PlayerTackleAction : PlayerMoveAction {
         //‰Á‘¬‚µ‚ÄˆÚ“®‚·‚é
         player.transform.position +=player.moveSpeed * Time.fixedDeltaTime;
 
+        //ƒvƒŒƒCƒ„[‚ÌŒ©‚½–Ú‚ð‰ñ“]
         Vector3 dist = player.transform.position - player.positionBuffer;
-        float angle = Mathf.Atan2(dist.y, dist.x) / 3.14f * 180;
-        player.visual.transform.rotation = Quaternion.Euler(0.0f, 0.0f, angle);
+        Vector3 angle = Vector3.zero;
+        angle.z = Mathf.Atan2((dist.y), Mathf.Abs(dist.x)) / 3.14f * 180;
+        if (dist.x > 0) {
+            angle.y = 0;
+        } else {
+            angle.y = 180;
+        }
+
+        player.visual.transform.rotation = Quaternion.Euler(0.0f, angle.y, angle.z);
 
         //”R—¿‚ðŒ¸‚ç‚·
-        player.fuel.Use();
+        player.fuel.Use(3);
+
 
         //Žc‘œ
         if (afterimageTimer > 0.02f) {

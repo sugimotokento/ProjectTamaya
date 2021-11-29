@@ -81,11 +81,20 @@ public class PlayerIaiAction : PlayerMoveAction {
             }
         }
 
-        Vector3 dist = player.transform.position - player.positionBuffer;
-        float angle = Mathf.Atan2(dist.y, dist.x) / 3.14f * 180;
-        player.visual.transform.rotation = Quaternion.Euler(0.0f, 0.0f, angle);
 
-     
+        //ƒvƒŒƒCƒ„[‚ÌŒ©‚½–Ú‚ð‰ñ“]
+        Vector3 dist = player.transform.position - player.positionBuffer;
+        Vector3 angle = Vector3.zero;
+        angle.z = Mathf.Atan2((dist.y), Mathf.Abs(dist.x)) / 3.14f * 180;
+        if (dist.x > 0) {
+            angle.y = 0;
+        } else {
+            angle.y = 180;
+        }
+
+        player.visual.transform.rotation = Quaternion.Euler(0.0f, angle.y, angle.z);
+
+
     }
 
     private void End() {

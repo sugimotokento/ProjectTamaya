@@ -78,6 +78,7 @@ MonoBehaviour:
   isObjectMode: 0
   isHit: 0
   isDestroy: 0
+  effect: {fileID: 4769161075409611615, guid: 7eb0e835092308943b8b4c44deb2aacd, type: 3}
 --- !u!1 &7182004607679441047
 GameObject:
   m_ObjectHideFlags: 0

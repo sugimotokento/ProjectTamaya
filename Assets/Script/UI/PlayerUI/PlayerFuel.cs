@@ -54,8 +54,8 @@ public class PlayerFuel : MonoBehaviour {
         }
     }
 
-    public void Use() {
-        fuel -= 35 * Time.fixedDeltaTime * (START_LATE - END_LATE);
+    public void Use(float late=1) {
+        fuel -= 35*late * Time.fixedDeltaTime * (START_LATE - END_LATE);
 
         if (fuel <= maxFuel * END_LATE) {
             fuel = maxFuel * END_LATE;
