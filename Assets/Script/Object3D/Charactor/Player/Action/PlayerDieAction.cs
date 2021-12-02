@@ -10,5 +10,6 @@ public class PlayerDieAction : PlayerAction {
         player.animator.SetBool("isDown", true);
         player.animator.SetBool("isSpin", false);
         player.animator.SetBool("isIai", false);
+        player.animator.SetBool("isGoal", false);
     }
 }

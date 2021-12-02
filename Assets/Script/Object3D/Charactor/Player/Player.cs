@@ -11,7 +11,7 @@ public class Player : MonoBehaviour {
     public PlayerSound sound;
 
     public GameObject visual;
-    public GameObject rope;
+   [SerializeField] public GameObject rope;
     public GameObject[] line = new GameObject[2];
     public GameObject iaiEffect;
     public GameObject noise;
@@ -28,6 +28,7 @@ public class Player : MonoBehaviour {
         AddAction<PlayerMoveAction>();
         AddAction<PlayerDamageAnimationAction>();
         AddAction<PlayerNoiseAction>();
+        AddAction<PlayerGoalAction>();
     }
     public void SetActiveUI(bool flag) {
         hP.gameObject.SetActive(flag);

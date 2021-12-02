@@ -7,12 +7,14 @@ public class Goal : MonoBehaviour {
     [SerializeField] private Renderer renderer;
     [SerializeField] private GameObject bloomObject;
     [SerializeField] private GameObject steam;
+    [SerializeField] private GameObject playerPosObj;
 
     private Color baseColor;
     private Vector3 mousePosBuffer;
     private Vector3 baseScele;
     float timer = 0;
     float flashTimer = 0;
+    float animationIntervalTimer = 0;
     private bool isGuruguru = false;
     private bool isFlash = false;
     private bool isAnimationEnd = false;
@@ -24,6 +26,9 @@ public class Goal : MonoBehaviour {
     }
 
     private void Update() {
+        animationIntervalTimer += Time.deltaTime;
+        if (animationIntervalTimer < 2) return;
+
         if (isGoal == true && isAnimationEnd == false) {
             Gruguru();
 
@@ -72,8 +77,7 @@ public class Goal : MonoBehaviour {
             Player player = other.gameObject.GetComponent<Player>();
 
             //プレイヤーの動きを止める
-            player.ReMoveActionAll();
-            player.gameObject.transform.position = this.transform.position;
+            player.gameObject.transform.position = playerPosObj.transform.position;
 
             //注視カメラに変更
             StageManager.instance.camera.SetAction<PointCameraAction>();

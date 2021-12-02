@@ -6,7 +6,7 @@ public class PlayerIaiAction : PlayerMoveAction {
     GameObject hitEnemy;
 
     LineRenderer line;
-
+    GameObject effect;
     Vector3 attackPos;
     Vector3 moveSpeedBuffer;
 
@@ -17,7 +17,7 @@ public class PlayerIaiAction : PlayerMoveAction {
     public override void Init(Player p) {
         base.Init(p);
 
-       
+
         line = player.line[0].GetComponent<LineRenderer>();
         line.positionCount = 2;
 
@@ -51,8 +51,8 @@ public class PlayerIaiAction : PlayerMoveAction {
         if (isCharge == true) {
             player.animator.SetBool("isCharge", true);
 
-            //エフェクト生成
-            Instantiate(player.iaiEffect, player.transform.position, Quaternion.identity);
+            effect.transform.position = player.gameObject.transform.position;
+            effect.transform.rotation = player.visual.transform.rotation;
 
             //線の座標設定
             line.SetPosition(0, player.transform.position);
@@ -79,6 +79,7 @@ public class PlayerIaiAction : PlayerMoveAction {
             if ((attackPos - player.transform.position).magnitude < 0.5f) {
                 isEnd = true;
             }
+            effect.SetActive(false);
         }
 
 
@@ -104,7 +105,7 @@ public class PlayerIaiAction : PlayerMoveAction {
 
             //線を消す
             player.line[0].SetActive(false);
-
+            Destroy(effect);
 
             player.animator.SetBool("isMove", true);
             player.animator.SetBool("isIai", false);
@@ -120,6 +121,10 @@ public class PlayerIaiAction : PlayerMoveAction {
             }
         }
 
+    }
+
+    public void SetEffect(GameObject obj) {
+        effect = obj;
     }
 
 }

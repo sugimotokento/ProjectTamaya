@@ -389,11 +389,11 @@ MonoBehaviour:
   air: {fileID: 0}
   sound: {fileID: 5397116342761518764}
   visual: {fileID: 5438727560753250234}
-  rope: {fileID: 3612462937524136993, guid: 0191060e9a1bccc48a7d18009a8f859a, type: 3}
+  rope: {fileID: 8929789087171214734, guid: 0191060e9a1bccc48a7d18009a8f859a, type: 3}
   line:
   - {fileID: 7700404105004475011}
   - {fileID: 6668701057621496254}
-  iaiEffect: {fileID: 385815538847433257, guid: 2094de789394cd543b71f97cb69da1d5, type: 3}
+  iaiEffect: {fileID: 8936151326301979121, guid: 96335e3421cafc54f89ec72334aa9046, type: 3}
   noise: {fileID: 1991358878741500532, guid: 2133831c453ace442b864019919da78e, type: 3}
   afterimage: {fileID: 820211984594760710, guid: 9e87ac4e88bde7645a176b91c2f27098, type: 3}
   animator: {fileID: 2962401056725776808}
