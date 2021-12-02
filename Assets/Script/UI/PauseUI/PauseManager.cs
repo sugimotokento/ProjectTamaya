@@ -10,6 +10,8 @@ public class PauseManager : MonoBehaviour
     [SerializeField] GameObject toOptionMenuPanel;
     [SerializeField] GameObject GameEndMenuPanel;
     [SerializeField] GameObject NonePanel;
+    // PauseButton
+    [SerializeField] GameObject PauseButton;
     // Panel‘Þ”ð—p
     private GameObject nowPanel;
     private GameObject nextPanel;
@@ -29,6 +31,10 @@ public class PauseManager : MonoBehaviour
     {
         if (nowPanel != nextPanel)
             ChangeMenu();
+        if (StageManager.instance.isEventActive)
+            PauseButton.SetActive(false);
+        if (!StageManager.instance.isEventActive)
+            PauseButton.SetActive(true);
     }
 
     public void OnClickPauseButton()
