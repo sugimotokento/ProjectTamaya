@@ -14,6 +14,7 @@ public class StageManager : MonoBehaviour {
     public GameObject enemy;
 
     [HideInInspector] public bool isClear = false;
+    [HideInInspector] public bool isEventActive = false;
 
     private List<GameEvent> gameEvents=new List<GameEvent>();
     private bool canSetPlayerAction = false;
@@ -40,19 +41,19 @@ public class StageManager : MonoBehaviour {
     }
 
     private void Event(){
-        bool isActiveEvent = false;
+        isEventActive = false;
         for (int i = 0; i < gameEvents.Count; ++i) {
             if (gameEvents[i].GetIsEvent() == true) {
                 gameEvents[i].SetCanEvent(true);
                 canSetPlayerAction = true;
                 player.SetActiveUI(false);
                 player.ReMoveActionAll();
-                isActiveEvent = true;
+                isEventActive = true;
                 break;
             }
         }
 
-        if (isActiveEvent == false) {
+        if (isEventActive == false) {
             if (canSetPlayerAction == true) {
                 player.SetActiveUI(true);
                 player.SetDefaultAction();
