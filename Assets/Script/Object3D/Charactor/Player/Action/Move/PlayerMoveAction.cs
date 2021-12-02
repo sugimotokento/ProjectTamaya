@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerMoveAction : PlayerAction {
     protected float accelerationBaseSpeed;
 
+    GameObject chargeEffect;
     private const float CHANGE_ACTION_INTERVAL = 1.4f;
     private float rightCrickTimer = 0;
     private bool isLeftMouseDown = false;
@@ -16,6 +17,9 @@ public class PlayerMoveAction : PlayerAction {
 
         player.animator.SetBool("isTacle", false);
         player.animator.SetBool("isIai", false);
+
+        chargeEffect = Instantiate(player.iaiEffect, player.visual.transform);
+        chargeEffect.SetActive(false);
     }
 
     public override void UpdateAction() {
@@ -75,14 +79,19 @@ public class PlayerMoveAction : PlayerAction {
 
             //エフェクト生成
             if (rightCrickTimer > 0.5f) {
-                Instantiate(player.iaiEffect, player.transform.position, Quaternion.identity);
+                chargeEffect.SetActive(true);
+                chargeEffect.transform.position = player.gameObject.transform.position;
+                chargeEffect.transform.rotation = player.visual.transform.rotation;
             }
 
             if (rightCrickTimer >= CHANGE_ACTION_INTERVAL) {
                 player.ChangeAction<PlayerMoveAction, PlayerIaiAction>();
+                player.GetAction<PlayerIaiAction>().SetEffect(chargeEffect);
                 player.animator.SetBool("isMove", false);
             }
         } else {
+            chargeEffect.SetActive(false);
+
             //タックルモード
             if (rightCrickTimer > 0 && rightCrickTimer < CHANGE_ACTION_INTERVAL) {
 
