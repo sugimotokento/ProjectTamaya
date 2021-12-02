@@ -12,41 +12,42 @@ public class Goal : MonoBehaviour {
     private Vector3 mousePosBuffer;
     private Vector3 baseScele;
     float timer = 0;
+    float flashTimer = 0;
     private bool isGuruguru = false;
-    private bool isRevert = false;
+    private bool isFlash = false;
     private bool isAnimationEnd = false;
+
     // Start is called before the first frame update
     void Start() {
         baseColor = renderer.material.GetColor("_EmissionColor");
         baseScele = bloomObject.transform.localScale;
     }
 
-    private void FixedUpdate() {
+    private void Update() {
         if (isGoal == true && isAnimationEnd == false) {
             Gruguru();
 
-            if (isGuruguru == true && isRevert == false) {
+            if (isGuruguru == true && isFlash == false) {
                 steam.SetActive(false);
-                renderer.material.SetColor("_EmissionColor", baseColor * Mathf.Pow(timer, 2));
-                bloomObject.transform.localScale += new Vector3(1, 1, 0) * Time.fixedDeltaTime * 8;
-                timer += Time.fixedDeltaTime * 5;
-
+                timer += Time.deltaTime;
+                bloomObject.transform.Rotate(Vector3.up * 100* timer * Time.deltaTime);
                 //演出終了
-                if (timer > 10) {
-                    
-                    isRevert = true;
+                if (timer > 3) {
+
+                    isFlash = true;
                 }
             }
 
 
             //元の状態に戻す
-            if (isRevert == true) {
+            if (isFlash == true) {
+                flashTimer += Time.deltaTime;
                 steam.SetActive(true);
-                renderer.material.SetColor("_EmissionColor", baseColor * Mathf.Pow(timer, 2));
-                bloomObject.transform.localScale -= new Vector3(1, 1, 0) * Time.fixedDeltaTime * 16;
-                timer -= Time.fixedDeltaTime * 5;
+                renderer.material.SetColor("_EmissionColor", baseColor * Mathf.Pow(Mathf.Sin(flashTimer * Mathf.PI) * 20, 3));
+                //bloomObject.transform.localScale += new Vector3(1, 1, 1) * Time.fixedDeltaTime * 16;
 
-                if (timer <= 5) {
+                if (flashTimer > 1) {
+                    steam.SetActive(true);
                     StageManager.instance.isClear = true;
                     renderer.material.SetColor("_EmissionColor", baseColor * Mathf.Pow(1, 2));
                     bloomObject.transform.localScale = baseScele;
@@ -54,6 +55,8 @@ public class Goal : MonoBehaviour {
                 }
             }
         }
+
+        
     }
 
     private void OnTriggerEnter(Collider other) {
@@ -65,7 +68,7 @@ public class Goal : MonoBehaviour {
         }
     }
     private void OnTriggerStay(Collider other) {
-        if (other.gameObject.CompareTag("Player") && isRevert == false) {
+        if (other.gameObject.CompareTag("Player") && isFlash == false) {
             Player player = other.gameObject.GetComponent<Player>();
 
             //プレイヤーの動きを止める
