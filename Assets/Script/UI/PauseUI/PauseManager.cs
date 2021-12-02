@@ -19,12 +19,14 @@ public class PauseManager : MonoBehaviour
     private float SlideFrame;
     bool SlideInFlg;
     bool SlideOutFlg;
+    // SlideFlgŽæ“¾
+    [HideInInspector] public bool isSlideActive = false;
 
     void Start()
     {
         nowPanel = nextPanel = NonePanel;
         SlideFrame = 0.0f;
-        SlideInFlg = SlideOutFlg = false;
+        SlideInFlg = SlideOutFlg = isSlideActive = false;
     }
 
     void Update()
@@ -78,6 +80,7 @@ public class PauseManager : MonoBehaviour
         if (!SlideInFlg && !SlideOutFlg)
         {
             SlideOutFlg = true;
+            isSlideActive = true;
             SlideFrame = 0.0f;
         }
 
@@ -105,12 +108,14 @@ public class PauseManager : MonoBehaviour
                 Debug.Log("UnPause!!");
                 Time.timeScale = 1.0f;
                 SlideInFlg = false;
+                isSlideActive = false;
                 nowPanel = nextPanel;
                 return;
             }
             if (SlideFrame >= 1.0f)
             {
                 SlideInFlg = false;
+                isSlideActive = false;
                 nowPanel = nextPanel;
                 return;
             }
