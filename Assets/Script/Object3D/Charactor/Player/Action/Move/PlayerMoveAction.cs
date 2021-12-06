@@ -23,7 +23,7 @@ public class PlayerMoveAction : PlayerAction {
     }
 
     public override void UpdateAction() {
-        if (Input.GetMouseButtonDown(0)) {
+        if (Input.GetMouseButtonDown(0) ) {
             isLeftMouseDown = true;
             player.sound.PlayShot(PlayerSound.SoundIndex.MOVE);
         }

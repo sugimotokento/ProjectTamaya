@@ -11,7 +11,7 @@ public class StageManager : MonoBehaviour {
     public GameObject eventObj;
     public Player player;
     public GameCamera camera;
-    public GameObject enemy;
+    public PauseManager pause;
 
     [HideInInspector] public bool isClear = false;
     [HideInInspector] public bool isEventActive = false;
@@ -21,7 +21,6 @@ public class StageManager : MonoBehaviour {
 
     private void Awake() {
         instance = this;
-
 
         for(int i=0; i < eventObj.transform.childCount; ++i) {
             gameEvents.Add(eventObj.transform.GetChild(i).gameObject.GetComponent<GameEvent>());

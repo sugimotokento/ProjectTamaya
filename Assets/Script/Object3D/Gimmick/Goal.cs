@@ -12,7 +12,7 @@ public class Goal : MonoBehaviour {
     private Color baseColor;
     private Vector3 mousePosBuffer;
     private Vector3 baseScele;
-    float timer = 0;
+    float rotationSpeed = 0;
     float flashTimer = 0;
     float animationIntervalTimer = 0;
     private bool isGuruguru = false;
@@ -28,34 +28,38 @@ public class Goal : MonoBehaviour {
     private void Update() {
         animationIntervalTimer += Time.deltaTime;
         if (animationIntervalTimer < 2) return;
+        bloomObject.transform.Rotate(Vector3.up * 100 * rotationSpeed * Time.deltaTime);
 
         if (isGoal == true && isAnimationEnd == false) {
             Gruguru();
 
             if (isGuruguru == true && isFlash == false) {
                 steam.SetActive(false);
-                timer += Time.deltaTime;
-                bloomObject.transform.Rotate(Vector3.up * 100* timer * Time.deltaTime);
+                rotationSpeed +=Time.deltaTime;
                 //‰‰oI—¹
-                if (timer > 3) {
-
+                if (rotationSpeed > 3.5f) {
+                    StageManager.instance.isClear = true;
                     isFlash = true;
+                }
+            } else {
+                rotationSpeed -= Time.deltaTime;
+                if (rotationSpeed < 0) {
+                    rotationSpeed = 0;
                 }
             }
 
 
             //Œ³‚Ìó‘Ô‚É–ß‚·
             if (isFlash == true) {
-                flashTimer += Time.deltaTime;
+                flashTimer += Time.deltaTime*0.5f;
                 steam.SetActive(true);
-                renderer.material.SetColor("_EmissionColor", baseColor * Mathf.Pow(Mathf.Sin(flashTimer * Mathf.PI) * 20, 3));
+                renderer.material.SetColor("_EmissionColor", baseColor * Mathf.Pow(Mathf.Sin(flashTimer * Mathf.PI) * 10, 3));
                 //bloomObject.transform.localScale += new Vector3(1, 1, 1) * Time.fixedDeltaTime * 16;
 
                 if (flashTimer > 1) {
                     steam.SetActive(true);
-                    StageManager.instance.isClear = true;
+                   
                     renderer.material.SetColor("_EmissionColor", baseColor * Mathf.Pow(1, 2));
-                    bloomObject.transform.localScale = baseScele;
                     isAnimationEnd = true;
                 }
             }

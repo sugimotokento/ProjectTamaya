@@ -30,9 +30,8 @@ public class ScoreManager : MonoBehaviour {
     }
 
     static public void SetAir(float score) {
-        if (air != -1) {
-            air = score;
-        }
+
+        air = score;
     }
     static public float GetAir() {
         return air;

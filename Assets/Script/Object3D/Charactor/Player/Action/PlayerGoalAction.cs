@@ -6,8 +6,10 @@ public class PlayerGoalAction : PlayerAction
 {
     private bool isGoal = false;
     public override void Action() {
+
         if (isGoal == true) {
             player.visual.transform.rotation = Quaternion.Euler(0, -90, 0);
+            player.moveSpeed = Vector3.zero;
             player.animator.SetBool("isMove", false);
             player.animator.SetBool("isCharge", false);
             player.animator.SetBool("isTacle", false);
@@ -16,6 +18,8 @@ public class PlayerGoalAction : PlayerAction
             player.animator.SetBool("isIai", false);
             player.animator.SetBool("isGoal", true);
         }
+
+
     }
 
     public override void TriggerEnter(Collider collider) {

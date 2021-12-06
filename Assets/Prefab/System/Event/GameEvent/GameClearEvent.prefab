@@ -394,6 +394,7 @@ MonoBehaviour:
   - {fileID: 839459033430738038}
   - {fileID: 7697436288679521263}
   - {fileID: 2274899050859314335}
+  airText: {fileID: 2139439952919381182}
 --- !u!1 &161806772043302836
 GameObject:
   m_ObjectHideFlags: 0

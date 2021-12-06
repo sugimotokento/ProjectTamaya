@@ -55,7 +55,9 @@ public class Player : MonoBehaviour {
         for (int i = 0; i < action.Count; ++i) {
             action[i].UpdateAction();
         }
-            
+        if (StageManager.instance.isClear == true) {
+            visual.transform.rotation = Quaternion.Euler(0, 90, 0);
+        }
     }
 
     private void FixedUpdate() {
