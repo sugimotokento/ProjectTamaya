@@ -70,7 +70,7 @@ public class Enemy : MonoBehaviour
     //============================================================================
     void Start()
     {
-        UIscript = enemyUI.GetComponent<EnemyUI>();
+        UIscript = enemyUI.transform.GetChild(0).GetComponent<EnemyUI>();
 
         viewrad = 0;
         oldepos = transform.position;
