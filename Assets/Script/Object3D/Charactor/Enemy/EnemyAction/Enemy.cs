@@ -6,11 +6,11 @@ using UnityEngine.AI;
 public class Enemy : MonoBehaviour
 {
     //オブジェクト・スクリプト関連
-    [SerializeField] private GameObject bullet;//弾オブジェクト
-    [SerializeField] private Player player;//プレイヤークラス
+    [SerializeField] private GameObject bullet; //弾オブジェクト
+    [SerializeField] private Player player;     //プレイヤークラス
     [SerializeField] private GameObject enemyUI;//エネミーのUIオブジェクト
 
-    private EnemyUI UIscript;//UIオブジェクトについてるスクリプト
+    private EnemyUI UIscript;                   //UIオブジェクトについてるスクリプト
 
 
     //エネミーのパラメータ関連
@@ -36,16 +36,18 @@ public class Enemy : MonoBehaviour
     //視野関連
     [SerializeField] private float RangeVigilant = 5.0f;//警戒 視野の距離
     [SerializeField] private float RangeDanger = 1.0f;  //即戦闘 視野の距離
+    private float AfterRangeDanger;
+    [SerializeField] private float AddDangerArea = 1.0f;
 
     private bool SeeRay;                //間に障害物があるか
     private bool SeePlayer;             //プレイヤーが見えているか
     private bool VigPlayer;             //警戒区域　入っているか
     private bool DanPlayer;             //戦闘区域　入っているか
 
-    private float viewrad = 0;    //エネミーの視線角度
+    private float viewrad = 0;                     //エネミーの視線角度
     [SerializeField] private float viewrange = 15; //エネミーの視野の広さ
-    private Vector3 oldepos;       //エネミーの前位置
-    private Vector3 oldppos;       //プレイヤーの最終目撃位置 enemyの移動場所
+    private Vector3 oldepos;                       //エネミーの前位置
+    private Vector3 oldppos;                       //プレイヤーの最終目撃位置 enemyの移動場所
 
 
     //探索関連
@@ -63,6 +65,7 @@ public class Enemy : MonoBehaviour
     //UI関連
     private float AddAlert = 5.0f;//UI加算値
 
+    private int SCENE_NUM;
 
     //
     //
@@ -70,7 +73,7 @@ public class Enemy : MonoBehaviour
     //============================================================================
     void Start()
     {
-        UIscript = enemyUI.GetComponent<EnemyUI>();
+        UIscript = enemyUI.transform.GetChild(0).GetComponent<EnemyUI>();
 
         viewrad = 0;
         oldepos = transform.position;
@@ -86,6 +89,9 @@ public class Enemy : MonoBehaviour
         IndexGoal = 0;
         KeepLenS = 100.0f;
         KeepLenG = 100.0f;
+
+        AfterRangeDanger = RangeDanger;
+        SCENE_NUM = 1;
     }
 
 
@@ -99,14 +105,24 @@ public class Enemy : MonoBehaviour
             if (alert < 1 && isHelp == true)
             {
                 HelpEnemy();
+                SCENE_NUM = 0;
             }
 
-            if (alert <= 0 && isHelp == false)
+            if (alert <= 0 && SCENE_NUM != 0)
+            {
                 SearchStatus();
+                SCENE_NUM = 1;
+            }
             else if (alert > 0 && alert < 100)
+            {
                 WarningStatus();
+                SCENE_NUM = 2;
+            }
             else if (alert >= 100)
+            {
                 FightStatus();
+                SCENE_NUM = 3;
+            }
         }
         else
         {
@@ -455,19 +471,21 @@ public class Enemy : MonoBehaviour
             SeeRay = false;
         }
 
+
         if (is_player == true && SeeRay == true)
         {
             SeePlayer = true;
             //警戒区域に侵入
-            if (dis <= RangeVigilant && dis > RangeDanger)
+            if (dis <= RangeVigilant && dis > AfterRangeDanger)
             {
+                AfterRangeDanger += AddDangerArea * Time.fixedDeltaTime;
                 VigTime = 0;
                 DanTime = 0;
                 VigPlayer = true;
                 oldppos = player.gameObject.transform.position;
             }
             //即戦闘区域に侵入
-            else if (dis <= RangeDanger)
+            else if (dis <= AfterRangeDanger)
             {
                 VigTime = 0;
                 DanTime = 0;
@@ -477,6 +495,7 @@ public class Enemy : MonoBehaviour
         }
         else
         {
+            AfterRangeDanger = RangeDanger;
             SeePlayer = false;
         }
     }
@@ -488,7 +507,7 @@ public class Enemy : MonoBehaviour
         //警戒区域に侵入
         if (VigPlayer && SeePlayer == true)
         {
-            UIscript.AddAlertness(Time.deltaTime * AddAlert);
+            UIscript.AddAlertness(Time.fixedDeltaTime * AddAlert);
         }
         //即戦闘区域に侵入
         if (DanPlayer)
