@@ -65,6 +65,7 @@ public class Enemy : MonoBehaviour
     //UIŠÖ˜A
     private float AddAlert = 5.0f;//UI‰ÁŽZ’l
 
+    private int SCENE_NUM;
 
     //
     //
@@ -90,6 +91,7 @@ public class Enemy : MonoBehaviour
         KeepLenG = 100.0f;
 
         AfterRangeDanger = RangeDanger;
+        SCENE_NUM = 1;
     }
 
 
@@ -103,14 +105,24 @@ public class Enemy : MonoBehaviour
             if (alert < 1 && isHelp == true)
             {
                 HelpEnemy();
+                SCENE_NUM = 0;
             }
 
-            if (alert <= 0 && isHelp == false)
+            if (alert <= 0 && SCENE_NUM != 0)
+            {
                 SearchStatus();
+                SCENE_NUM = 1;
+            }
             else if (alert > 0 && alert < 100)
+            {
                 WarningStatus();
+                SCENE_NUM = 2;
+            }
             else if (alert >= 100)
+            {
                 FightStatus();
+                SCENE_NUM = 3;
+            }
         }
         else
         {
