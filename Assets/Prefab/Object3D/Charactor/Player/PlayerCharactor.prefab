@@ -396,6 +396,9 @@ MonoBehaviour:
   iaiEffect: {fileID: 3123866776188453444, guid: 3a2efc2a342015f4b91c9d37a1d2d3e8, type: 3}
   noise: {fileID: 1991358878741500532, guid: 2133831c453ace442b864019919da78e, type: 3}
   afterimage: {fileID: 820211984594760710, guid: 9e87ac4e88bde7645a176b91c2f27098, type: 3}
+  rendere:
+  - {fileID: 8082942584955045137}
+  - {fileID: 4259294106951648049}
   animator: {fileID: 2962401056725776808}
   positionBuffer: {x: 0, y: 0, z: 0}
   moveSpeed: {x: 0, y: 0, z: 0}
@@ -630,5 +633,15 @@ Transform:
 --- !u!95 &2962401056725776808 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 8777083198850248879, guid: 3661d63cda581354ea8b36c87e376bd0, type: 3}
+  m_PrefabInstance: {fileID: 5823970956223514887}
+  m_PrefabAsset: {fileID: 0}
+--- !u!137 &8082942584955045137 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 2377486976291605526, guid: 3661d63cda581354ea8b36c87e376bd0, type: 3}
+  m_PrefabInstance: {fileID: 5823970956223514887}
+  m_PrefabAsset: {fileID: 0}
+--- !u!137 &4259294106951648049 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 7768405712507603510, guid: 3661d63cda581354ea8b36c87e376bd0, type: 3}
   m_PrefabInstance: {fileID: 5823970956223514887}
   m_PrefabAsset: {fileID: 0}

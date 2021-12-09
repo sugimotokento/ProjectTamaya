@@ -17,6 +17,8 @@ public class Player : MonoBehaviour {
     public GameObject noise;
     public GameObject afterimage;
 
+    public Renderer[] rendere;
+
     public Animator animator;
 
     [HideInInspector] public Vector3 positionBuffer;
