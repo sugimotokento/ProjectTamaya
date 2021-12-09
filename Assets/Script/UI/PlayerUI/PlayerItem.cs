@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class PlayerItem : MonoBehaviour {
     [SerializeField] private Text keyText;
+    [SerializeField] private Sprite[] sprite;
 
     private int key = 100;
 
@@ -18,11 +19,21 @@ public class PlayerItem : MonoBehaviour {
         keyText.text = "✖" + key.ToString();
     }
 
+
+    public void UseItem() {
+
+    }
+
+
+
     public int GetKey() {
         return key;
     }
     public void AddKey(int add = 1) {
         key += add;
+    }
+    public void AddItem() {
+        int rand = Random.Range(0, sprite.Length);
     }
     public void UseKey(int num = 1) {
         key -= num;

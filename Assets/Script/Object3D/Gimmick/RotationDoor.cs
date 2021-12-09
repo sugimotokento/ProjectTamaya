@@ -22,6 +22,10 @@ public class RotationDoor : MonoBehaviour {
     private bool isInputMouseDown = false;
     private bool isInteractInterval = false;
 
+    private void Start() {
+        interact.SetActive(false);
+    }
+
     private void Update() {
         if (Input.GetMouseButtonDown(0) == true) {
             isInputMouseDown = true;
