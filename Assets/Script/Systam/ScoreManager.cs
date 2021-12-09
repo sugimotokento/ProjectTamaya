@@ -5,7 +5,7 @@ using UnityEngine;
 public class ScoreManager : MonoBehaviour {
     //ゴールでスコアを設定、ゴールイベントでスコアを表示
 
-
+    static public ScoreManager instance;
     public enum RankIndex {
         RANK_C,
         RANK_B,
@@ -16,7 +16,9 @@ public class ScoreManager : MonoBehaviour {
     }
 
 
-
+    private void Awake() {
+        instance = this;
+    }
 
     static private float air = -1;
     // Start is called before the first frame update
