@@ -393,7 +393,7 @@ MonoBehaviour:
   line:
   - {fileID: 7700404105004475011}
   - {fileID: 6668701057621496254}
-  iaiEffect: {fileID: 8936151326301979121, guid: 96335e3421cafc54f89ec72334aa9046, type: 3}
+  iaiEffect: {fileID: 3123866776188453444, guid: 3a2efc2a342015f4b91c9d37a1d2d3e8, type: 3}
   noise: {fileID: 1991358878741500532, guid: 2133831c453ace442b864019919da78e, type: 3}
   afterimage: {fileID: 820211984594760710, guid: 9e87ac4e88bde7645a176b91c2f27098, type: 3}
   animator: {fileID: 2962401056725776808}

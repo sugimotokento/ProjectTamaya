@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: charge_mtl
+  m_Name: charge_streche_mtl
   m_Shader: {fileID: 211, guid: 0000000000000000f000000000000000, type: 0}
   m_ShaderKeywords: _ALPHABLEND_ON
   m_LightmapFlags: 0
@@ -42,7 +42,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 40d2567a1efc45544a08b0a79065511d, type: 3}
+        m_Texture: {fileID: 2800000, guid: 8eb378e50234b5b479b83c94744c36f2, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
@@ -67,10 +67,10 @@ Material:
     - _Cull: 2
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
-    - _DistortionBlend: 0.5
+    - _DistortionBlend: 0.548
     - _DistortionEnabled: 0
     - _DistortionStrength: 1
-    - _DistortionStrengthScaled: 0
+    - _DistortionStrengthScaled: 0.1
     - _DstBlend: 1
     - _EmissionEnabled: 0
     - _FlipbookMode: 0
@@ -92,7 +92,7 @@ Material:
     - _ZWrite: 0
     m_Colors:
     - _CameraFadeParams: {r: 0, g: Infinity, b: 0, a: 0}
-    - _Color: {r: 8.084173, g: 41.73181, b: 0, a: 1}
+    - _Color: {r: 2.4881957, g: 12.844469, b: 0, a: 1}
     - _ColorAddSubDiff: {r: 0, g: 0, b: 0, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _SoftParticleFadeParams: {r: 0, g: 0, b: 0, a: 0}
