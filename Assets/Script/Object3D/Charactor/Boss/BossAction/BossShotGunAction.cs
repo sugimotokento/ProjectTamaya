@@ -41,8 +41,8 @@ public class BossShotGunAction : BossAction {
 
         //Ç¢ÇÎÇ¢ÇÎåvéZ
         Vector3 dist = boss.gameObject.transform.position - player.gameObject.transform.position;
-        Vector3 cross = Vector3.Cross(dist.normalized, boss.gameObject.transform.up);
-        float angle = Vector3.Dot(dist.normalized, boss.gameObject.transform.up);
+        Vector3 cross = Vector3.Cross(dist.normalized, boss.gameObject.transform.right);
+        float angle = Vector3.Dot(dist.normalized, boss.gameObject.transform.right);
         angle = Mathf.Acos(angle) / 3.14f * 180;
 
         //ÉvÉåÉCÉÑÅ[ÇÃï˚Ç…âÒì]
@@ -62,7 +62,7 @@ public class BossShotGunAction : BossAction {
         }
         
         line.SetPosition(0, boss.gameObject.transform.position);
-        line.SetPosition(1, boss.gameObject.transform.position + boss.gameObject.transform.up * 100);
+        line.SetPosition(1, boss.gameObject.transform.position + boss.gameObject.transform.right * 100);
 
     }
     private void Shot() {
@@ -79,7 +79,7 @@ public class BossShotGunAction : BossAction {
                 //íeê∂ê¨
                 for (int i = 0; i < LOOP_MAX; ++i) {
                     //É{ÉXÇÃå¸Ç¢ÇƒÇ¢ÇÈäpìxÇãÅÇﬂÇÈ
-                    float angle = Mathf.Atan2(boss.gameObject.transform.up.y, boss.gameObject.transform.up.x);
+                    float angle = Mathf.Atan2(boss.gameObject.transform.right.y, boss.gameObject.transform.right.x);
                     angle = angle / 3.14f * 180;
                     boss.line.SetActive(false);
                     //äeíeÇÃî≠éÀäpìxÇåvéZ
