@@ -89,6 +89,7 @@ public class Enemy : MonoBehaviour
         IndexGoal = 0;
         KeepLenS = 100.0f;
         KeepLenG = 100.0f;
+        Lindex = 0;
 
         AfterRangeDanger = RangeDanger;
         SCENE_NUM = 1;
@@ -98,8 +99,7 @@ public class Enemy : MonoBehaviour
     void Update()
     {
         float alert = UIscript.GetAlertness();
-
-
+        
         if (isSumaki == false)
         {
             if (alert < 1 && isHelp == true)
@@ -107,11 +107,15 @@ public class Enemy : MonoBehaviour
                 HelpEnemy();
                 SCENE_NUM = 0;
             }
+            else if (SCENE_NUM == 0)
+            {
+                SCENE_NUM = 100;
+                isStart = true;
+            }
 
             if (alert <= 0 && SCENE_NUM != 0)
             {
                 SearchStatus();
-                SCENE_NUM = 1;
             }
             else if (alert > 0 && alert < 100)
             {
@@ -161,8 +165,96 @@ public class Enemy : MonoBehaviour
     //============================================================================
     private void SearchStatus()
     {
-        //ˆÚ“®
-        SearchMove(Espeed);
+        if (SCENE_NUM != 1 && SCENE_NUM != 4)
+        {
+            float length = 0.0f;
+            Vector3 Rvec, dist;
+            RaycastHit hit;
+            KeepLenS = 100;
+            KeepLenG = 100;
+
+            for (int i = 0; i < LocalPoints.transform.childCount; i++)
+            {
+                dist = LocalPoints.transform.GetChild(i).gameObject.transform.position;
+
+                //áŠQ•¨‚Ì—L–³
+                Rvec = transform.position - dist;
+                length = Rvec.magnitude;
+                if (Physics.Raycast(dist, Rvec, out hit, length + 1.0f))
+                {
+                    if (hit.collider.gameObject.tag == "Enemy")
+                    {
+                        if (KeepLenS > length)
+                        {
+                            KeepLenS = length;
+                            Lindex = i;
+                            SCENE_NUM = 1;
+                        }
+                    }
+                }
+            }
+
+            if (SCENE_NUM != 1)
+            {
+                for (int i = 0; i < GlobalPoints.transform.childCount; i++)
+                {
+                    dist = GlobalPoints.transform.GetChild(i).gameObject.transform.position;
+
+                    IndexGoal = IndexStart;
+
+                    //áŠQ•¨‚Ì—L–³
+                    Goal = transform.position;
+                    Rvec = Goal - dist;
+                    length = Rvec.magnitude;
+                    if (Physics.Raycast(dist, Rvec, out hit, length + 1.0f))
+                    {
+                        if (hit.collider.gameObject.tag == "Enemy")
+                        {
+                            if (KeepLenG > length)
+                            {
+                                KeepLenG = length;
+                                IndexStart = i;
+                            }
+                        }
+                    }
+                }
+                Gindex = IndexStart;
+
+                SCENE_NUM = 4;
+            }
+        }
+
+        if (SCENE_NUM == 4)
+        {
+            Vector3 dist = GlobalPoints.transform.GetChild(Gindex).gameObject.transform.position
+                - this.transform.position;
+            this.transform.position += dist.normalized * Time.deltaTime * Espeed;
+
+            if (dist.magnitude < 0.5f && (IndexStart > IndexGoal))
+            {
+                if (Gindex == IndexGoal)
+                {
+                    SCENE_NUM = 1;
+                }
+                else Gindex--;
+            }
+            else if (dist.magnitude < 0.5f && (IndexStart < IndexGoal))
+            {
+                if (Gindex == IndexGoal)
+                {
+                    SCENE_NUM = 1;
+                }
+                else Gindex++;
+            }
+        }
+
+        if (SCENE_NUM == 1)
+        {
+            //ˆÚ“®
+            SearchMove(Espeed);
+
+            SCENE_NUM = 1;
+        }
 
         //Ž‹ü
         ViewEnemy();
@@ -197,6 +289,8 @@ public class Enemy : MonoBehaviour
         }
         else
         {
+            isHelp = false;
+            isStart = true;
             VigPlayer = false;
         }
     }
@@ -269,6 +363,8 @@ public class Enemy : MonoBehaviour
         }
         else
         {
+            isHelp = false;
+            isStart = true;
             VigPlayer = false;
             DanPlayer = false;
         }
@@ -287,6 +383,7 @@ public class Enemy : MonoBehaviour
             RaycastHit hit;
             KeepLenS = 100;
             KeepLenG = 100;
+
             for (int i = 0; i < GlobalPoints.transform.childCount; i++)
             {
                 dist = GlobalPoints.transform.GetChild(i).gameObject.transform.position;
@@ -323,7 +420,7 @@ public class Enemy : MonoBehaviour
                 }
             }
             Gindex = IndexStart;
-
+            
             isStart = false;
         }
         else
@@ -334,15 +431,22 @@ public class Enemy : MonoBehaviour
 
             if (dist.magnitude < 0.5f && (IndexStart > IndexGoal))
             {
-
-                if (Gindex == IndexGoal) isHelp = false;
+                if (Gindex == IndexGoal)
+                {
+                    isHelp = false;
+                }
                 else Gindex--;
             }
             else if(dist.magnitude < 0.5f && (IndexStart < IndexGoal))
             {
-                if (Gindex == IndexGoal) isHelp = false;
+                if (Gindex == IndexGoal)
+                {
+                    isHelp = false;
+                }
                 else Gindex++;
             }
+
+            
 
             ViewEnemy();
         }
