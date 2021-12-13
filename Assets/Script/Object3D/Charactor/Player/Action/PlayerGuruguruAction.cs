@@ -192,11 +192,11 @@ public class PlayerGuruguruAction : PlayerAction {
 
         //“G‚ðƒOƒ‹ƒOƒ‹Šª‚«‚É‚·‚é
         if (count >= 8) {
-            rope.transform.localScale = new Vector3(rope.transform.localScale.x, 0.4f, rope.transform.localScale.z);
+            rope.transform.GetChild(0).gameObject.SetActive(true);
         } else if (count >= 6) {
-            rope.transform.localScale = new Vector3(rope.transform.localScale.x, 0.28f, rope.transform.localScale.z);
+            rope.transform.GetChild(1).gameObject.SetActive(true);
         } else if (count >= 3) {
-            rope.transform.localScale = new Vector3(rope.transform.localScale.x, 0.15f, rope.transform.localScale.z);
+            rope.transform.GetChild(2).gameObject.SetActive(true);
         }
 
     }
@@ -205,7 +205,6 @@ public class PlayerGuruguruAction : PlayerAction {
         target = obj;
         initTargetDist = target.transform.position - GetWorldMousePos();
         rope = Instantiate(player.rope, target.transform.position, Quaternion.identity);
-        rope.transform.localScale = new Vector3(rope.transform.localScale.x, 0.08f, rope.transform.localScale.z);
 
 
         positionBuffer = target.transform.position - player.moveSpeed.normalized;
