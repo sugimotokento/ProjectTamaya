@@ -1,18 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!65 &8393187629541475325
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 961241759959129861}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.55241036, y: 0.96179235, z: 0.059913184}
-  m_Center: {x: -0.0063746884, y: 0.48089617, z: -0.005528867}
 --- !u!54 &5370362462943473067
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -29,6 +16,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 120
   m_CollisionDetection: 0
+--- !u!65 &8393187629541475325
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 961241759959129861}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.55241036, y: 0.96179235, z: 0.059913184}
+  m_Center: {x: -0.0063746884, y: 0.48089617, z: -0.005528867}
 --- !u!1 &1534467293425995799
 GameObject:
   m_ObjectHideFlags: 0
@@ -42,7 +42,7 @@ GameObject:
   - component: {fileID: 1534467293425995801}
   - component: {fileID: 1534467293425995798}
   m_Layer: 0
-  m_Name: Fusuma
+  m_Name: FusumaMetal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -106,7 +106,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   point: {fileID: 1534467293871398145}
-  door: {fileID: 0}
+  door: {fileID: 1534467294269404415}
   moveSpeedLate: 3
   closeInterval: 1.5
 --- !u!1 &1534467293871398145

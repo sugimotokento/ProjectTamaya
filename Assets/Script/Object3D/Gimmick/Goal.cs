@@ -9,6 +9,9 @@ public class Goal : MonoBehaviour {
     [SerializeField] private GameObject steam;
     [SerializeField] private GameObject playerPosObj;
 
+    [SerializeField] private ParticleSystem thunder;
+    [SerializeField] private ParticleSystem spark;
+
     private Color baseColor;
     private Vector3 mousePosBuffer;
     private Vector3 baseScele;
@@ -23,6 +26,11 @@ public class Goal : MonoBehaviour {
     void Start() {
         baseColor = renderer.material.GetColor("_EmissionColor");
         baseScele = bloomObject.transform.localScale;
+
+        var thunderEmission = thunder.emission;
+        var sparkEmission = thunder.emission;
+        thunderEmission.rateOverTime = rotationSpeed * 100 + 40;
+        sparkEmission.rateOverTime = Mathf.Max(0, rotationSpeed * 100 - 50);
     }
 
     private void Update() {
@@ -36,6 +44,12 @@ public class Goal : MonoBehaviour {
             if (isGuruguru == true && isFlash == false) {
                 steam.SetActive(false);
                 rotationSpeed +=Time.deltaTime;
+
+                var thunderEmission = thunder.emission;
+                var sparkEmission = thunder.emission;
+                thunderEmission.rateOverTime = rotationSpeed* 100 + 40;
+                sparkEmission.rateOverTime =Mathf.Max(0, rotationSpeed* 100 - 50);
+
                 //‰‰oI—¹
                 if (rotationSpeed > 3.5f) {
                     StageManager.instance.isClear = true;

@@ -106,7 +106,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   point: {fileID: 1301829041884722417}
-  door: {fileID: 0}
+  door: {fileID: 1301829042006809871}
   moveSpeedLate: 3
   closeInterval: 1.5
 --- !u!1 &1301829041884722417
