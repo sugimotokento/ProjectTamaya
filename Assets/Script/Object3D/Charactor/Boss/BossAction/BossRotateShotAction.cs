@@ -24,6 +24,9 @@ public class BossRotateShotAction : BossAction {
 
         line.materials[0].color = Color.blue;
         line.materials[0].SetColor("_EmissionColor", Color.blue * 20);
+
+        boss.animator.SetBool("isShot", true);
+
     }
 
 
@@ -31,6 +34,14 @@ public class BossRotateShotAction : BossAction {
         LockAtPlayer();
         Shot();
         End();
+
+        if (boss.isDamage == true) {
+            if (boss.hp == 3) {
+                boss.SetAction<BossAngerAction>();
+            } else {
+                boss.SetAction<BossDamageAction>();
+            }
+        }
     }
 
 
@@ -57,8 +68,8 @@ public class BossRotateShotAction : BossAction {
             }
 
 
-            line.SetPosition(0, boss.gameObject.transform.position);
-            line.SetPosition(1, boss.gameObject.transform.position+boss.gameObject.transform.right * 100);
+            line.SetPosition(0, boss.mazzle.transform.position);
+            line.SetPosition(1, boss.mazzle.transform.position+boss.gameObject.transform.right * 100);
         }
     }
     private void Shot() {
@@ -74,7 +85,9 @@ public class BossRotateShotAction : BossAction {
                 angle = angle / 3.14f * 180;
 
                 //5•bŒã‚ÉÁ‚¦‚é’e‚ð¶¬
-                GameObject bullet = Instantiate(boss.bullet, boss.gameObject.transform.position, Quaternion.Euler(0, 0, angle - 90));
+                Vector3 pos = boss.mazzle.transform.position;
+                pos.z = 0;
+                GameObject bullet = Instantiate(boss.bullet,pos , Quaternion.Euler(0, 0, angle - 90));
                 Destroy(bullet, 5);
 
 
@@ -87,6 +100,9 @@ public class BossRotateShotAction : BossAction {
     private void End() {
         if (shotTimer > SHOT_TIME) {
             boss.SetAction<BossIdleAction>();
+
+            boss.animator.SetBool("isShot", false);
+
         }
     }
 }

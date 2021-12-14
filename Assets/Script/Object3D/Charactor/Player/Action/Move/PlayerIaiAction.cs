@@ -10,7 +10,7 @@ public class PlayerIaiAction : PlayerMoveAction {
     Vector3 attackPos;
     Vector3 moveSpeedBuffer;
 
-    bool isCharge = true;
+    public bool isCharge = true;
     bool isEnemyHit = false;
     bool isEnd = false;
 

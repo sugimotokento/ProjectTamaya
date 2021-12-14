@@ -6,13 +6,19 @@ public class Boss : MonoBehaviour {
     private BossAction action;
 
     public GameObject bullet;
+    public GameObject mazzle;
     public GameObject line;
-
     public GameObject[] unchi = new GameObject[3];
+
+    public Animator animator;
+
+    [HideInInspector] public int hp = 5;
+    [HideInInspector] public bool isDamage = false;
+    
 
     // Start is called before the first frame update
     void Start() {
-        SetAction<BossShotGunAction>();
+        SetAction<BossIdleAction>();
     }
 
     // Update is called once per frame
@@ -22,8 +28,16 @@ public class Boss : MonoBehaviour {
     
     private void FixedUpdate() {
         action.Action();
+
+        if (hp <= 0) {
+            SetAction<BossDieAction>();
+        }
     }
 
+    public void Damage() {
+        hp -= 1;
+        isDamage = true;
+    }
 
     public T GetAction<T>() where T : BossAction {
         return (T)(object)action;

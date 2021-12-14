@@ -15,6 +15,11 @@ public class BossLandmineAction : BossAction {
     private List<float> moveLate = new List<float>();
     private List<float> destroyTimer = new List<float>();
 
+    public override void Init(Boss b) {
+        base.Init(b);
+        boss.animator.SetBool("isShot", true);
+    }
+
     public override void Action() {
         ShotLandmine();
         Rotation();
@@ -24,6 +29,16 @@ public class BossLandmineAction : BossAction {
             
             for(int i=0; i<mine.Count; i++) {
                 mine[i].GetComponent<BossBullet>().isObjectMode = false;
+            }
+
+            boss.animator.SetBool("isShot", false);
+        }
+
+        if (boss.isDamage == true) {
+            if (boss.hp == 3) {
+                boss.SetAction<BossAngerAction>();
+            } else {
+                boss.SetAction<BossDamageAction>();
             }
         }
     }

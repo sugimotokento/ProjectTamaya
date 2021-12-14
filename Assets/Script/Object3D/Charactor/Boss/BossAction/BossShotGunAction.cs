@@ -28,12 +28,23 @@ public class BossShotGunAction : BossAction {
 
         line.materials[0].color = Color.blue;
         line.materials[0].SetColor("_EmissionColor", Color.blue * 20);
+
+        boss.animator.SetBool("isShot", true);
+
     }
 
     public override void Action() {
         LockAtPlayer();
         Shot();
         End();
+
+        if (boss.isDamage == true) {
+            if (boss.hp == 3) {
+                boss.SetAction<BossAngerAction>();
+            } else {
+                boss.SetAction<BossDamageAction>();
+            }
+        }
     }
 
     private void LockAtPlayer() {
@@ -61,8 +72,8 @@ public class BossShotGunAction : BossAction {
             }
         }
         
-        line.SetPosition(0, boss.gameObject.transform.position);
-        line.SetPosition(1, boss.gameObject.transform.position + boss.gameObject.transform.right * 100);
+        line.SetPosition(0, boss.mazzle.transform.position);
+        line.SetPosition(1, boss.mazzle.transform.position + boss.gameObject.transform.right * 100);
 
     }
     private void Shot() {
@@ -85,7 +96,9 @@ public class BossShotGunAction : BossAction {
                     //Še’e‚Ì”­ŽËŠp“x‚ðŒvŽZ
                     float shotAngle = angle - SHOT_RANGE / 2 + (SHOT_RANGE / LOOP_MAX * i);
                     //5•bŒã‚ÉÁ‚¦‚é’e‚ð¶¬
-                    Destroy(Instantiate(boss.bullet, boss.gameObject.transform.position, Quaternion.Euler(0, 0, shotAngle - 90)), 5);
+                    Vector3 pos = boss.mazzle.transform.position;
+                    pos.z = 0;
+                    Destroy(Instantiate(boss.bullet,pos, Quaternion.Euler(0, 0, shotAngle - 90)), 5);
                 }
             }
         }
@@ -107,6 +120,8 @@ public class BossShotGunAction : BossAction {
     private void End() {
         if (shotCount >= 3) {
             boss.SetAction<BossIdleAction>();
+            boss.animator.SetBool("isShot", false);
+
         }
     }
 }

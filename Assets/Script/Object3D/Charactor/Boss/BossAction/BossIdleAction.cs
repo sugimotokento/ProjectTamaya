@@ -12,20 +12,32 @@ public class BossIdleAction : BossAction {
     public override void Init(Boss b) {
         base.Init(b);
         boss.line.SetActive(false);
+
+        boss.animator.SetBool("isIdle", true);
     }
 
     public override void Action() {
         int rand = Random.Range(0, 100);
-
+        boss.animator.SetBool("isIdle", false);
         if (rand >= 0 && rand < 33) {
             boss.SetAction<BossShotGunAction>();
 
-        }else if(rand >= 33 && rand < 66) {
+        } else if (rand >= 33 && rand < 66) {
             boss.SetAction<BossRotateShotAction>();
 
-        }else if (rand >= 66) {
+        } else if (rand >= 66) {
             boss.SetAction<BossLandmineAction>();
         }
 
+
+        if (boss.isDamage == true) {
+            if (boss.hp == 2) {
+                boss.SetAction<BossAngerAction>();
+            } else {
+                boss.SetAction<BossDamageAction>();
+            }
+        }
+
+        
     }
 }
