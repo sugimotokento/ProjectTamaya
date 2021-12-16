@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 public class StartTalkEvent : GameEvent {
     [SerializeField] GameObject visual;
-    [SerializeField] GameObject soundObject;
 
     [SerializeField] Text text;
     [SerializeField] Image frameRight;
@@ -77,6 +76,8 @@ public class StartTalkEvent : GameEvent {
                         addTextIntervalTimer = 0;
                         textIndex++;
                         endText = "_";
+
+                        sound.Play();
 
                     } else {
                         endText = "Бе";

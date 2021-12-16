@@ -70,6 +70,8 @@ public class Player : MonoBehaviour {
         for (int i = 0; i < action.Count; ++i) {
             action[i].Action();
         }
+
+
     }
 
 

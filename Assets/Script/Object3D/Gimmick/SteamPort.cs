@@ -12,14 +12,12 @@ public class SteamPort : MonoBehaviour {
     private float steamTimer = 0;
     private float steamIntervalTimer = 0;
 
-    private bool isSteam = true;
+    private bool isSteam = false;
 
 
     private void Update() {
         if (isSteam == true) {
             //ö‹C•¬ŽË
-            particle.Play();
-
             steamTimer += Time.deltaTime;
             if (steamTimer > STEAM_TIME) {
                 steamTimer = 0;
@@ -34,6 +32,7 @@ public class SteamPort : MonoBehaviour {
                 steamIntervalTimer = 0;
                 isSteam = true;
                 sound.Play();
+                particle.Play();
             }
         }
 

@@ -45,11 +45,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   visual: {fileID: 6310958182371691005}
+  soundObject: {fileID: 0}
   text: {fileID: 6310958182540752301}
   frameRight: {fileID: 7727230462122773736}
   frameLeft: {fileID: 6310958182953827778}
   nameRightText: {fileID: 8250482891762821275}
   nameLeftText: {fileID: 6310958182315756529}
+  sound: {fileID: 5325994303680670545}
   talkCharactorName:
   - "\u30C8\u30B7\u30ED\u30FC"
   - "\u30D3\u30B7\u30E7\u30C3\u30D7"
@@ -294,3 +296,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!82 &5325994303680670545 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 2472916287300968063, guid: 9a28e8f7cb296bc428601756a1267ebe, type: 3}
+  m_PrefabInstance: {fileID: 7762002177596978478}
+  m_PrefabAsset: {fileID: 0}
