@@ -20,6 +20,8 @@ public class PlayerTackleAction : PlayerMoveAction {
 
         player.animator.SetBool("isTacle", true);
         player.animator.SetBool("isMove", false);
+
+        player.sound.PlayShot(PlayerSound.SoundIndex.TACKLE);
     }
 
     public override void Action() {
@@ -44,6 +46,8 @@ public class PlayerTackleAction : PlayerMoveAction {
             PlayerGuruguruAction guruguruAction = player.GetAction<PlayerGuruguruAction>();
             guruguruAction.SetTartegt(collider.gameObject);
             player.moveSpeed *= 0.1f;
+
+            player.sound.PlayShot(PlayerSound.SoundIndex.HIT_TACKLE);
         }
     }
 

@@ -11,6 +11,8 @@ public class RotationDoor : MonoBehaviour {
     [SerializeField] private GameObject standPointDown;
     [SerializeField] private GameObject interact;
 
+    [SerializeField] private AudioSource sound;
+
     private GameObject standObj;
 
     private const float INTERACT_INTERVAL = 3;
@@ -21,6 +23,7 @@ public class RotationDoor : MonoBehaviour {
 
     private bool isInputMouseDown = false;
     private bool isInteractInterval = false;
+    private bool canSoundPlay = false;
 
     private void Start() {
         interact.SetActive(false);
@@ -61,6 +64,14 @@ public class RotationDoor : MonoBehaviour {
                 this.transform.eulerAngles = Vector3.forward * (startAngle + 180);
                 player.AddAction<PlayerMoveAction>();
             }
+
+            //soundçƒê∂
+            if (canSoundPlay == true) {
+                canSoundPlay = false;
+                sound.Play();
+            }
+        } else {
+            canSoundPlay = true;
         }
     }
 
