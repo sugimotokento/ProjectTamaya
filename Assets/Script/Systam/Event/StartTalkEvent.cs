@@ -5,11 +5,15 @@ using UnityEngine.UI;
 
 public class StartTalkEvent : GameEvent {
     [SerializeField] GameObject visual;
+    [SerializeField] GameObject soundObject;
+
     [SerializeField] Text text;
     [SerializeField] Image frameRight;
     [SerializeField] Image frameLeft;
     [SerializeField] Text nameRightText;
     [SerializeField] Text nameLeftText;
+
+    [SerializeField] AudioSource sound;
 
     [SerializeField] private string[] talkCharactorName = new string[13];
     [SerializeField] private bool[] isRight = new bool[13];
@@ -26,6 +30,8 @@ public class StartTalkEvent : GameEvent {
         isEvent = true;
         drawText = "";
         endText = "_";
+
+
     }
 
     // Update is called once per frame
