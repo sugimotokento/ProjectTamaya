@@ -5,22 +5,23 @@ using UnityEngine;
 public class Bumper : MonoBehaviour {
 
     [SerializeField] private GameObject visual;
+    [SerializeField] private AudioSource sound;
+    [SerializeField] private Animator animator;
     [SerializeField] private float reflectionPower;
     private bool isAnimation = false;
-    private float animationTimer = 0;
+    private int frameCount = 0;
 
     private const float ANIMATION_TIME = 0.5f;
 
     private void Update() {
         if (isAnimation == true) {
-            animationTimer += Time.deltaTime;
-
-            visual.transform.localScale += Vector3.one * Mathf.Sin(animationTimer*50)*0.03f;
-            if (animationTimer > ANIMATION_TIME) {
+            frameCount++;
+            if (frameCount > 1) {
+                animator.SetBool("isReflection", false);
+                frameCount = 0;
                 isAnimation = false;
-                animationTimer = 0;
-                visual.transform.localScale = Vector3.one;//‘å‚«‚³‚ð–ß‚·
             }
+           
         }
     }
 
@@ -34,6 +35,9 @@ public class Bumper : MonoBehaviour {
             //”½ŽË
             player.moveSpeed = dist.normalized * moveSpeed * reflectionPower;
             isAnimation = true;
+
+            animator.SetBool("isReflection", true);
+            sound.Play();
         }
     }
 }

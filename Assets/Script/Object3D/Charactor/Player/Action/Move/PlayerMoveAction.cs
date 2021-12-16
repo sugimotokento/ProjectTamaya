@@ -25,12 +25,15 @@ public class PlayerMoveAction : PlayerAction {
     public override void UpdateAction() {
         if (Input.GetMouseButtonDown(0) ) {
             isLeftMouseDown = true;
-            player.sound.PlayShot(PlayerSound.SoundIndex.MOVE);
+            player.sound.PlayShot(PlayerSound.SoundIndex.BOOST);
+        }
+
+        if (Input.GetMouseButtonUp(0)) {
+            player.sound.Stop(PlayerSound.SoundIndex.BOOST);
         }
     }
 
     public override void Action() {
- 
         Move();
         ChangeAction();
 

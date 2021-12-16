@@ -26,25 +26,25 @@ public class PlayerReflectionAction : PlayerAction {
             RaycastHit hit;
 
             if (Physics.Raycast(rayUp, out hit, 0.6f)) {
-                Reflection(Vector3.down);
+                Reflection(Vector3.down, collision);
             }
             if (Physics.Raycast(rayDown, out hit, 0.6f)) {
-                Reflection(Vector3.up);
+                Reflection(Vector3.up, collision);
             }
             if (Physics.Raycast(rayLeft, out hit, 0.6f)) {
-                Reflection(Vector3.right);
+                Reflection(Vector3.right, collision);
             }
             if (Physics.Raycast(rayRight, out hit, 0.6f)) {
-                Reflection(Vector3.left);
+                Reflection(Vector3.left, collision);
             }
 
         } else if (collision.gameObject.CompareTag("StageEX")) {
-            Reflection(collision.gameObject.transform.up);
+            Reflection(collision.gameObject.transform.up, collision);
             
         }
     }
 
-    private void Reflection(Vector3 normal) {
+    private void Reflection(Vector3 normal, Collision collision) {
         PlayerMoveAction moveAction = player.GetAction<PlayerMoveAction>();
 
         // 反射ベクトルを計算する
@@ -56,6 +56,14 @@ public class PlayerReflectionAction : PlayerAction {
 
         isReflection = true;
         player.animator.SetBool("isSpin", true);
+
+        string name = collision.gameObject.name.Substring(0, 7);
+        if (name == "Cushion") {
+            player.sound.PlayShot(PlayerSound.SoundIndex.HIT_MAT);
+
+        } else {
+            player.sound.PlayShot(PlayerSound.SoundIndex.BOUND);
+        }
     }
 
 }

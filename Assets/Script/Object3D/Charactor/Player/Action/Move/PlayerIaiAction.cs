@@ -25,6 +25,7 @@ public class PlayerIaiAction : PlayerMoveAction {
         line.materials[0].SetColor("_EmissionColor", Color.green);
 
         player.animator.SetBool("isMove", false);
+        player.sound.Play(PlayerSound.SoundIndex.CHARGE);
     }
 
     public override void CollisionEnter(Collision collision) {
@@ -69,6 +70,9 @@ public class PlayerIaiAction : PlayerMoveAction {
 
                 player.animator.SetBool("isCharge", false);
                 player.animator.SetBool("isIai", true);
+
+                player.sound.Stop(PlayerSound.SoundIndex.CHARGE);
+                player.sound.PlayShot(PlayerSound.SoundIndex.DASH);
             }
         } else {
             //Žc‘œ

@@ -6,11 +6,13 @@ public class SecurityDoor : MonoBehaviour {
     [SerializeField] private GameObject point;
     [SerializeField] private GameObject door;
     [SerializeField] private GameObject interact;
+    [SerializeField] private AudioSource sound;
     [SerializeField] private float moveSpeedLate;
     [SerializeField] private int needKey = 1;
 
     private bool isOpen = false;
     private bool isInputMouseDown = false;
+    private bool canPlaySound = false;
     private float late;
 
     private void Start() {
@@ -29,6 +31,13 @@ public class SecurityDoor : MonoBehaviour {
             if (late > 1) late = 1;
 
             door.transform.position = Vector3.Lerp(transform.position, point.transform.position, late);
+
+            if (canPlaySound == true) {
+                sound.Play();
+                canPlaySound = false;
+            }
+        } else {
+            canPlaySound = true;
         }
     }
 

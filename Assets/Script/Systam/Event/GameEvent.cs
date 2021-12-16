@@ -10,7 +10,7 @@ public class GameEvent : MonoBehaviour {
 
     protected void SkipEvent() {
         frameCount++;
-        if (Input.GetKeyDown(KeyCode.Escape) && frameCount>2) {
+        if (Input.GetMouseButtonDown(1) && frameCount>2) {
             isEvent = false;
            
         }
