@@ -21,6 +21,7 @@ public class PlayerSound : MonoBehaviour {
         UNLOCK,
         GURUGURU,
         HIT_PIPE,
+        HIT_MAT,
         MAX
     }
 
