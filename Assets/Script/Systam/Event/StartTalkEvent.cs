@@ -9,6 +9,7 @@ public class StartTalkEvent : GameEvent {
     [SerializeField] Text text;
     [SerializeField] Image frameRight;
     [SerializeField] Image frameLeft;
+    [SerializeField] Image toshiro;
     [SerializeField] Text nameRightText;
     [SerializeField] Text nameLeftText;
 
@@ -53,6 +54,7 @@ public class StartTalkEvent : GameEvent {
 
                 //左右のキャラクター判定
                 if (isRight[talkIndex] == true) {
+                    toshiro.color = new Color(1, 1, 1, 0.3f);
                     nameRightText.gameObject.SetActive(true);
                     frameRight.gameObject.SetActive(true);
 
@@ -60,6 +62,7 @@ public class StartTalkEvent : GameEvent {
                     frameLeft.gameObject.SetActive(false);
 
                 } else {
+                    toshiro.color=new Color(1,1,1, 1);
                     nameLeftText.gameObject.SetActive(true);
                     frameLeft.gameObject.SetActive(true);
 

@@ -65,6 +65,8 @@ public class PlayerGuruguruAction : PlayerAction {
     }
 
     public override void Action() {
+       
+
         Guruguru();
         GuruguruCount();
         GuruguruAnimatioin();
@@ -221,6 +223,7 @@ public class PlayerGuruguruAction : PlayerAction {
         StageManager.instance.camera.GetAction<PointCameraAction>().SetPoint(target.gameObject.transform.position + Vector3.forward * -5);
 
         target.GetComponent<Enemy>().isSumaki = true;
+        rope.transform.rotation = target.transform.GetChild(0).gameObject.transform.rotation;
     }
 
     public GameObject GetTarget() {

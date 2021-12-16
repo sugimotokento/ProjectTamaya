@@ -42,12 +42,14 @@ public class PlayerTackleAction : PlayerMoveAction {
     }
     public override void TriggerEnter(Collider collider) {
         if (collider.CompareTag("Enemy")) {
-            player.ChangeAction<PlayerTackleAction, PlayerGuruguruAction>();
-            PlayerGuruguruAction guruguruAction = player.GetAction<PlayerGuruguruAction>();
-            guruguruAction.SetTartegt(collider.gameObject);
-            player.moveSpeed *= 0.1f;
+            if (collider.gameObject.GetComponent<Enemy>().isSumaki == false) {
+                player.ChangeAction<PlayerTackleAction, PlayerGuruguruAction>();
+                PlayerGuruguruAction guruguruAction = player.GetAction<PlayerGuruguruAction>();
+                guruguruAction.SetTartegt(collider.gameObject);
+                player.moveSpeed *= 0.1f;
 
-            player.sound.PlayShot(PlayerSound.SoundIndex.HIT_TACKLE);
+                player.sound.PlayShot(PlayerSound.SoundIndex.HIT_TACKLE);
+            }
         }
     }
 

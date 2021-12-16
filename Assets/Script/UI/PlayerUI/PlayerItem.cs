@@ -7,7 +7,7 @@ public class PlayerItem : MonoBehaviour {
 
     public enum PlayerItemIndex {
         ONIGIRI,
-        MESI1,
+        SIOYAKI,
         MESI2,
         MAX
     }
