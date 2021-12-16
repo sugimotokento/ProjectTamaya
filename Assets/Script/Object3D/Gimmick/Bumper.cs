@@ -5,6 +5,7 @@ using UnityEngine;
 public class Bumper : MonoBehaviour {
 
     [SerializeField] private GameObject visual;
+    [SerializeField] private AudioSource sound;
     [SerializeField] private float reflectionPower;
     private bool isAnimation = false;
     private float animationTimer = 0;
@@ -34,6 +35,8 @@ public class Bumper : MonoBehaviour {
             //”½ŽË
             player.moveSpeed = dist.normalized * moveSpeed * reflectionPower;
             isAnimation = true;
+
+            sound.Play();
         }
     }
 }

@@ -56,6 +56,8 @@ public class PlayerReflectionAction : PlayerAction {
 
         isReflection = true;
         player.animator.SetBool("isSpin", true);
+
+        player.sound.PlayShot(PlayerSound.SoundIndex.BOUND);
     }
 
 }

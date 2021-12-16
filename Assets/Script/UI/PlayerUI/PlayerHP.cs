@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class PlayerHP : MonoBehaviour {
+    [SerializeField] private Player player;
     [SerializeField] private Image hpGauge;
     [SerializeField] private Text number;
 
@@ -41,11 +42,17 @@ public class PlayerHP : MonoBehaviour {
 
     public int GetMaxHp() { return maxHp; }
     public int GetHp() { return hp; }
-    public void Damage(int damage) {
+    public void Damage(int damage, bool isHeatDamage = false) {
         if (damageIntervalTimer <= 0) {
             hp -= damage;
             damageIntervalTimer = damageInterval;//–³“GŽžŠÔ‚ÌÝ’è
             damageAnimetionTimer = 0.6f;
+
+            if (isHeatDamage == true) {
+                player.sound.PlayShot(PlayerSound.SoundIndex.HIT_PIPE);
+            } else {
+                player.sound.PlayShot(PlayerSound.SoundIndex.DAMAGE);
+            }
 
             if (hp > maxHp) {
                 hp = maxHp;

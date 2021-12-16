@@ -111,7 +111,7 @@ public class PlayerGuruguruAction : PlayerAction {
         Vector3 cross = Vector3.Cross(dist2, dist1);
         if (guruguruCrossBuffer.z < 0 && cross.z > 0 && isGuruguru == true) {
             count++;
-
+            player.sound.PlayShot(PlayerSound.SoundIndex.GURUGURU);
         }
 
         guruguruCrossBuffer = Vector3.Cross(dist2, dist1);
@@ -131,7 +131,7 @@ public class PlayerGuruguruAction : PlayerAction {
         //10‰ñ“]‚ÅI—¹
         if (count >= 10) {
             isEnd = true;
-        }
+        } 
 
         //UŒ‚‚ğó‚¯‚Ä‚à‰ğœ
 
@@ -144,12 +144,18 @@ public class PlayerGuruguruAction : PlayerAction {
 
             StageManager.instance.camera.SetAction<PlayerCameraAction>();
 
-            //Destroy(rope);
+            
             player.visual.transform.localPosition = Vector3.zero;
             player.visual.transform.rotation = Quaternion.AngleAxis(0, Vector3.forward);
             player.ChangeAction<PlayerGuruguruAction, PlayerMoveAction>();
             positionBuffer.z = 0;
             player.transform.position = positionBuffer;
+
+            //ƒOƒ‹ƒOƒ‹¸”s
+            if (count < 10) {
+                Destroy(rope);
+                target.GetComponent<Enemy>().isSumaki = false;
+            }
         }
     }
     private void GuruguruAnimatioin() {

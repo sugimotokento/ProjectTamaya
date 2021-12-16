@@ -12,7 +12,7 @@ public class SteamPort : MonoBehaviour {
             Vector3 dist = player.transform.position - this.transform.position;
             player.moveSpeed += this.transform.up * dist.magnitude * accelerationLate;
 
-            player.hP.Damage(8);
+            player.hP.Damage(8, true);
         }
     }
 }
