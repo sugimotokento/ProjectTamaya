@@ -43,7 +43,6 @@ public class PauseManager : MonoBehaviour
     private const int c_AnimFrameRatio = 5;
     // Buttonの音源用
     private AudioSource PushButtonSE;
-    private AudioSource EndPushButtonSE;
 
     void Start()
     {
@@ -57,7 +56,6 @@ public class PauseManager : MonoBehaviour
 
         AudioSource[] audioSources = GetComponents<AudioSource>();
         PushButtonSE = audioSources[0];
-        //EndPushButtonSE = audioSources[1];
     }
 
     void Update()
@@ -81,9 +79,6 @@ public class PauseManager : MonoBehaviour
 
         if (Time.timeScale != 0)
         {
-            // ここに音（ピッ）を入れてね
-            // EndPushButtonSE.PlayOneShot(EndPushButtonSE.clip);
-
             Debug.Log("Pause!!");
             Time.timeScale = 0;
             Filter.SetActive(true);
@@ -108,25 +103,17 @@ public class PauseManager : MonoBehaviour
 
     public void OnClicktoOptionButton()
     {
-        // ここに音（ピッ）を入れてね
-        // EndPushButtonSE.PlayOneShot(EndPushButtonSE.clip);
-
         nextPanel = toOptionMenuPanel;
     }
 
     public void OnClicktoTitleButton()
     {
-        // ここに音（ピッ）を入れてね
-        // EndPushButtonSE.PlayOneShot(EndPushButtonSE.clip);
         // タイトルに戻る処理を入れてね
         // SceneManager.LoadScene("Title");
     }
 
     public void OnClickGameEndButton()
     {
-        // ここに音（ピッ）を入れてね
-        // EndPushButtonSE.PlayOneShot(EndPushButtonSE.clip);
-
         nextPanel = GameEndMenuPanel;
     }
 
