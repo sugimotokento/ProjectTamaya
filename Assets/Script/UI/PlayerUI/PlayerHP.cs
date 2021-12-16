@@ -14,8 +14,11 @@ public class PlayerHP : MonoBehaviour {
     private int hp;
     private float damageIntervalTimer = 0;
     private float damageAnimetionTimer = 0;
+    private float alertIntervalTimer = 0;
+
 
     private bool isDie = false;
+
 
 
 
@@ -33,12 +36,20 @@ public class PlayerHP : MonoBehaviour {
         } else {
             number.color = Color.white;
         }
-
+        Alert();
         damageIntervalTimer -= Time.deltaTime;
         damageAnimetionTimer -= Time.deltaTime;
     }
 
-
+    private void Alert() {
+        if (hp <= 30) {
+            alertIntervalTimer += Time.deltaTime;
+            if (alertIntervalTimer > 1.0f) {
+                alertIntervalTimer = 0;
+                player.sound.PlayShot(PlayerSound.SoundIndex.PINCHI);
+            }
+        }
+    }
 
     public int GetMaxHp() { return maxHp; }
     public int GetHp() { return hp; }

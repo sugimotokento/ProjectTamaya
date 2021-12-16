@@ -44,6 +44,7 @@ public class PlayerItem : MonoBehaviour {
         if (itemList.Count > 0) {
             itemList.RemoveAt(0);
             player.hP.Heal();
+            player.sound.PlayShot(PlayerSound.SoundIndex.EAT_GOHAN);
         }
     }
 
@@ -57,6 +58,7 @@ public class PlayerItem : MonoBehaviour {
         key += add;
     }
     public void AddItem(PlayerItemIndex item) {
+        player.sound.PlayShot(PlayerSound.SoundIndex.GOHAN);
         itemList.Add(item);
     }
     public void UseKey(int num = 1) {

@@ -57,12 +57,16 @@ public class PlayerReflectionAction : PlayerAction {
         isReflection = true;
         player.animator.SetBool("isSpin", true);
 
-        string name = collision.gameObject.name.Substring(0, 7);
-        if (name == "Cushion") {
-            player.sound.PlayShot(PlayerSound.SoundIndex.HIT_MAT);
 
-        } else {
-            player.sound.PlayShot(PlayerSound.SoundIndex.BOUND);
+        string name = collision.gameObject.name;
+        if (name.Length >= 7) {
+            name = name.Substring(0, 7);
+            if (name == "Cushion") {
+                player.sound.PlayShot(PlayerSound.SoundIndex.HIT_MAT);
+
+            } else {
+                player.sound.PlayShot(PlayerSound.SoundIndex.BOUND);
+            }
         }
     }
 
