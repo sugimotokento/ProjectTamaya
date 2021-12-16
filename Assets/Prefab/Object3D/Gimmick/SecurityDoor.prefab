@@ -126,6 +126,7 @@ GameObject:
   - component: {fileID: 1949162741372077330}
   - component: {fileID: 1949162741372077341}
   - component: {fileID: 2238115947247231052}
+  - component: {fileID: 1256145806977085155}
   m_Layer: 0
   m_Name: SecurityDoor
   m_TagString: Untagged
@@ -292,6 +293,20 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1256145806977085155
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1949162741372077343}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9b23e324f5862d4aa66b6f956c89c04, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isBGM: 0
+  baseVolume: 1
 --- !u!1 &1949162742450039189
 GameObject:
   m_ObjectHideFlags: 0

@@ -42,6 +42,7 @@ GameObject:
   - component: {fileID: 1301829041172986345}
   - component: {fileID: 1301829041172986342}
   - component: {fileID: -9216722076176744926}
+  - component: {fileID: 8077115773041522033}
   m_Layer: 0
   m_Name: FusumaWood
   m_TagString: Untagged
@@ -207,6 +208,20 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &8077115773041522033
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1301829041172986343}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9b23e324f5862d4aa66b6f956c89c04, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isBGM: 0
+  baseVolume: 1
 --- !u!1 &1301829041884722417
 GameObject:
   m_ObjectHideFlags: 0

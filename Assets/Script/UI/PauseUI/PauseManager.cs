@@ -9,6 +9,7 @@ using UnityEngine.SceneManagement;
 
 public class PauseManager : MonoBehaviour
 {
+    [SerializeField] Slider[] slider=new Slider[2];
     // Paneläiî[óp
     [SerializeField] GameObject PauseMenuPanel;
     [SerializeField] GameObject toOptionMenuPanel;
@@ -229,4 +230,6 @@ public class PauseManager : MonoBehaviour
                 AnimationFrame--;
         }
     }
+
+    public Slider GetSlider(int index) { return slider[index]; }
 }

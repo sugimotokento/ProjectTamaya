@@ -1113,10 +1113,10 @@ MonoBehaviour:
   m_FillRect: {fileID: 4668317826133935519}
   m_HandleRect: {fileID: 4668317826723074110}
   m_Direction: 0
-  m_MinValue: 1
-  m_MaxValue: 5
+  m_MinValue: 0
+  m_MaxValue: 10
   m_WholeNumbers: 1
-  m_Value: 3
+  m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -2001,6 +2001,7 @@ GameObject:
   - component: {fileID: 4668317826045182790}
   - component: {fileID: 2199372686591245545}
   - component: {fileID: 8085469754029916492}
+  - component: {fileID: 1378296636515200209}
   m_Layer: 5
   m_Name: PauseCanvas
   m_TagString: Untagged
@@ -2107,6 +2108,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b01c1cf32f4ae04dbbacd3ffef89b36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  slider:
+  - {fileID: 4668317825741894504}
+  - {fileID: 4668317827140045347}
   PauseMenuPanel: {fileID: 4668317827132903962}
   toOptionMenuPanel: {fileID: 4668317827103169005}
   GameEndMenuPanel: {fileID: 4668317826093012168}
@@ -2307,6 +2311,21 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1378296636515200209
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4668317826045182791}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9b23e324f5862d4aa66b6f956c89c04, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isBGM: 0
+  audioSouce: {fileID: 2199372686591245545}
+  baseVolume: 1
 --- !u!1 &4668317826093012168
 GameObject:
   m_ObjectHideFlags: 0
@@ -4180,10 +4199,10 @@ MonoBehaviour:
   m_FillRect: {fileID: 4668317825842961385}
   m_HandleRect: {fileID: 4668317826816731016}
   m_Direction: 0
-  m_MinValue: 1
-  m_MaxValue: 5
+  m_MinValue: 0
+  m_MaxValue: 10
   m_WholeNumbers: 1
-  m_Value: 3
+  m_Value: 7.6
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []

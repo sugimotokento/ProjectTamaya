@@ -45,6 +45,7 @@ GameObject:
   - component: {fileID: 6431627722356994086}
   - component: {fileID: 6431627722356994081}
   - component: {fileID: 7485613661119393114}
+  - component: {fileID: 836022208612060368}
   m_Layer: 0
   m_Name: SteamPort
   m_TagString: Stage
@@ -223,6 +224,20 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &836022208612060368
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6431627722356994083}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9b23e324f5862d4aa66b6f956c89c04, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isBGM: 0
+  baseVolume: 1
 --- !u!1001 &2868155837720255171
 PrefabInstance:
   m_ObjectHideFlags: 0
