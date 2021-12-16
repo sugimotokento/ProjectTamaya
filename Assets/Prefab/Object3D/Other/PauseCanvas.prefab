@@ -3717,6 +3717,7 @@ GameObject:
   - component: {fileID: 4668317827103168993}
   - component: {fileID: 903995266274374627}
   - component: {fileID: 4668317827103169004}
+  - component: {fileID: 1164579941643737468}
   m_Layer: 5
   m_Name: toOptionMenuPanel
   m_TagString: Untagged
@@ -3805,6 +3806,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04cbc67c7375c8044a6613c239fb7fa4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1164579941643737468
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4668317827103169005}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52fb2867139dc80468f54dd340a73eee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  BGMSlider: {fileID: 4668317825741894504}
+  SESlider: {fileID: 4668317827140045347}
 --- !u!1 &4668317827112276762
 GameObject:
   m_ObjectHideFlags: 0
