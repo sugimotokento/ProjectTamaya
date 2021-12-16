@@ -26,7 +26,7 @@ public class PlayerSound : MonoBehaviour {
     }
 
     private void Start() {
-        for (int i = 0; i < transform.GetChildCount(); ++i) {
+        for (int i = 0; i < transform.childCount; ++i) {
             sounds.Add(transform.GetChild(i).gameObject.GetComponent<AudioSource>());
         }
     }

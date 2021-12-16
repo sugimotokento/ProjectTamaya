@@ -2000,10 +2000,6 @@ GameObject:
   - component: {fileID: 4668317826045182777}
   - component: {fileID: 4668317826045182790}
   - component: {fileID: 2199372686591245545}
-<<<<<<< HEAD
-  - component: {fileID: 6157633992226646001}
-=======
->>>>>>> 30969c863f1f376ea3d636167b89e0c021ebf8bf
   m_Layer: 5
   m_Name: PauseCanvas
   m_TagString: Untagged
@@ -2214,8 +2210,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-<<<<<<< HEAD
---- !u!82 &6157633992226646001
 AudioSource:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2311,8 +2305,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-=======
->>>>>>> 30969c863f1f376ea3d636167b89e0c021ebf8bf
 --- !u!1 &4668317826093012168
 GameObject:
   m_ObjectHideFlags: 0

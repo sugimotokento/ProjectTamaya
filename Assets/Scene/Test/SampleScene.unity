@@ -2827,9 +2827,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1534467293425995803, guid: fe995506998b09e4eac7033151b34141, type: 3}
   m_PrefabInstance: {fileID: 1560091930}
   m_PrefabAsset: {fileID: 0}
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
 --- !u!1001 &1857026010
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2983,9 +2980,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c6eff539a74c58f45af6066cfefa2e71, type: 3}
-=======
->>>>>>> caab4ae6e819403d40ba2e2c831f5814db724daf
->>>>>>> 30969c863f1f376ea3d636167b89e0c021ebf8bf
 --- !u!1001 &1892618135
 PrefabInstance:
   m_ObjectHideFlags: 0
