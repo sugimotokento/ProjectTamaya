@@ -266,8 +266,6 @@ public class Enemy : MonoBehaviour
     //============================================================================
     private void WarningStatus()
     {
-        isHelp = true;
-
         VigTime += Time.deltaTime;
 
         if (VigTime < 8.0f)
@@ -278,14 +276,7 @@ public class Enemy : MonoBehaviour
 
 
             //視線
-            if (dist.magnitude < 0.5f)
-            {
-                LostPlayerViewEnemy();
-            }
-            else
-            {
-                ViewEnemy();
-            }
+            ViewEnemy();
         }
         else
         {
@@ -301,6 +292,8 @@ public class Enemy : MonoBehaviour
     //============================================================================
     private void FightStatus()
     {
+        isHelp = true;
+
         DanTime += Time.deltaTime;
         
         if (DanTime < 5.0f)
@@ -346,19 +339,13 @@ public class Enemy : MonoBehaviour
                 this.transform.position += dist.normalized * Time.deltaTime * Espeed * 1.2f;
 
                 //視線
-                if (dist.magnitude < 0.5f)
-                {
-                    ViewEnemy();
-                }
-                else
-                {
-                    viewrad = VecRad(player.gameObject.transform.position, transform.position);
-                    viewrad = -1 * viewrad * Mathf.Rad2Deg;
+                viewrad = VecRad(player.gameObject.transform.position, transform.position);
+                viewrad = -1 * viewrad * Mathf.Rad2Deg;
 
-                    //視線の方向に向きを変える
-                    transform.GetChild(0).gameObject.transform.rotation = Quaternion.Euler(0.0f, 0.0f, -1 * viewrad);
-                    oldepos = transform.position;
-                }
+                //視線の方向に向きを変える
+                transform.GetChild(0).gameObject.transform.rotation = Quaternion.Euler(0.0f, 0.0f, -1 * viewrad);
+                oldepos = transform.position;
+
             }
         }
         else
@@ -499,16 +486,6 @@ public class Enemy : MonoBehaviour
     {
         viewrad = VecRad(transform.position, oldepos);
         viewrad = -1 * viewrad * Mathf.Rad2Deg;
-
-        //視線の方向に向きを変える
-        transform.GetChild(0).gameObject.transform.rotation = Quaternion.Euler(0.0f, 0.0f, -1 * viewrad);
-        oldepos = transform.position;
-    }
-
-    //プレイヤーを見失ったときの視線と身体の向き
-    private void LostPlayerViewEnemy()
-    {
-        viewrad += -1 * Time.deltaTime;
 
         //視線の方向に向きを変える
         transform.GetChild(0).gameObject.transform.rotation = Quaternion.Euler(0.0f, 0.0f, -1 * viewrad);
