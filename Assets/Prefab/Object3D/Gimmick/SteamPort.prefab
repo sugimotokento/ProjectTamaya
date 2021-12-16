@@ -4927,7 +4927,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21b0a6eadfbcf6541aa38123d4299f84, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sound: {fileID: 7485613661119393114}
+  particle: {fileID: 6431627721091900584}
   accelerationLate: 0.4
+  STEAM_TIME: 4
+  STEAM_INTERVAL_TIME: 4
 --- !u!82 &7485613661119393114
 AudioSource:
   m_ObjectHideFlags: 0
@@ -4935,14 +4939,14 @@ AudioSource:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6431627722356994083}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 58912a0e03a42c54da6e34101bbda5f5, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
-  Loop: 1
+  Loop: 0
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
