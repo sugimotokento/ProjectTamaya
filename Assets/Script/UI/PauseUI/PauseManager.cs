@@ -4,7 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 // EventTrigger-System使うためのやつ
 using UnityEngine.EventSystems;
-
+// Scene遷移用
+using UnityEngine.SceneManagement;
 
 public class PauseManager : MonoBehaviour
 {
@@ -13,6 +14,8 @@ public class PauseManager : MonoBehaviour
     [SerializeField] GameObject toOptionMenuPanel;
     [SerializeField] GameObject GameEndMenuPanel;
     [SerializeField] GameObject NonePanel;
+    // Filter用
+    [SerializeField] GameObject Filter;
     // PauseButton格納用
     [SerializeField] GameObject PauseButton;
     // EventSystem格納用（どのボタンが押されたかを判定するため）
@@ -21,9 +24,10 @@ public class PauseManager : MonoBehaviour
     private GameObject nowPanel;
     private GameObject nextPanel;
     // Slide用
-    private int SlideFrame;
     private bool SlideInFlg;
     private bool SlideOutFlg;
+    private int SlideFrame;
+    private float SlideMoveAmount;
     // SlideFlg取得用
     [HideInInspector] public bool isSlideActive = false;
     // ButtonAnimation用
@@ -37,15 +41,23 @@ public class PauseManager : MonoBehaviour
     // FrameRatio用
     private const int c_SlideFrameRatio = 10;
     private const int c_AnimFrameRatio = 5;
+    // Buttonの音源用
+    private AudioSource PushButtonSE;
+    private AudioSource EndPushButtonSE;
 
     void Start()
     {
-        // Panel, SlideIn-Out, ButtonAnimationの初期設定
+        // Panel, SlideIn-Out, Filter, ButtonAnimationの初期設定
         nowPanel = nextPanel = NonePanel;
-        SlideFrame = 0;
         SlideInFlg = SlideOutFlg = isSlideActive = false;
+        SlideFrame = 0;
+        Filter.SetActive(false);
         isPushFlg = endPushFlg = false;
         AnimationFrame = 0;
+
+        AudioSource[] audioSources = GetComponents<AudioSource>();
+        PushButtonSE = audioSources[0];
+        //EndPushButtonSE = audioSources[1];
     }
 
     void Update()
@@ -69,8 +81,12 @@ public class PauseManager : MonoBehaviour
 
         if (Time.timeScale != 0)
         {
+            // ここに音（ピッ）を入れてね
+            // EndPushButtonSE.PlayOneShot(EndPushButtonSE.clip);
+
             Debug.Log("Pause!!");
             Time.timeScale = 0;
+            Filter.SetActive(true);
             nextPanel = PauseMenuPanel;
         }
     }
@@ -92,11 +108,25 @@ public class PauseManager : MonoBehaviour
 
     public void OnClicktoOptionButton()
     {
+        // ここに音（ピッ）を入れてね
+        // EndPushButtonSE.PlayOneShot(EndPushButtonSE.clip);
+
         nextPanel = toOptionMenuPanel;
+    }
+
+    public void OnClicktoTitleButton()
+    {
+        // ここに音（ピッ）を入れてね
+        // EndPushButtonSE.PlayOneShot(EndPushButtonSE.clip);
+        // タイトルに戻る処理を入れてね
+        // SceneManager.LoadScene("Title");
     }
 
     public void OnClickGameEndButton()
     {
+        // ここに音（ピッ）を入れてね
+        // EndPushButtonSE.PlayOneShot(EndPushButtonSE.clip);
+
         nextPanel = GameEndMenuPanel;
     }
 
@@ -105,6 +135,9 @@ public class PauseManager : MonoBehaviour
         if (isPushFlg)
             return;
 
+        // ここに音（ポッ）を入れてね
+        PushButtonSE.PlayOneShot(PushButtonSE.clip);
+
         isPushFlg = true;
         AnimationFrame = 0;
         PushButton = eventSystem.currentSelectedGameObject;
@@ -112,11 +145,9 @@ public class PauseManager : MonoBehaviour
 
     public void OnPointerUp()
     {
-
         endPushFlg = true;
         AnimationFrame = c_AnimFrameRatio;
     }
-
 
     // 本幹 やってることはfadeと同じ
     private void ChangeMenu()
@@ -137,8 +168,11 @@ public class PauseManager : MonoBehaviour
                 SlideInFlg = true;
                 SlideFrame = 0;
                 nowPanel.SetActive(false);
-                if (nextPanel != NonePanel)
+                if (nextPanel != NonePanel){
                     nextPanel.SetActive(true);
+                    // Slideのフレーム変化量を座標から求める
+                    SlideMoveAmount = (Mathf.Abs(nextPanel.transform.position.x - this.transform.position.x) / (float)c_SlideFrameRatio);
+                }
                 return;
             }
             nowPanel.transform.position -= new Vector3(50.0f, 0.0f, 0.0f);
@@ -153,6 +187,7 @@ public class PauseManager : MonoBehaviour
                 Time.timeScale = 1.0f;
                 SlideInFlg = false;
                 isSlideActive = false;
+                Filter.SetActive(false);
                 nowPanel = nextPanel;
                 return;
             }
@@ -163,7 +198,7 @@ public class PauseManager : MonoBehaviour
                 nowPanel = nextPanel;
                 return;
             }
-            nextPanel.transform.position += new Vector3(50.0f, 0.0f, 0.0f);
+            nextPanel.transform.position += new Vector3(SlideMoveAmount, 0.0f, 0.0f);
             SlideFrame++;
         }
 
