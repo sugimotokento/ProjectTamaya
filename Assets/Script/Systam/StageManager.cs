@@ -13,8 +13,17 @@ public class StageManager : MonoBehaviour {
     public GameCamera camera;
     public PauseManager pause;
 
+    [SerializeField] private AudioClip startBGMClip;
+    [SerializeField] private AudioClip mainBGMClip;
+    [SerializeField] private AudioClip battleBGMClip;
+    [SerializeField] private AudioSource bgm;
+    [SerializeField] private AudioSource environment;
+
     [HideInInspector] public bool isClear = false;
+    [HideInInspector] public bool isGameStart = false;
     [HideInInspector] public bool isEventActive = false;
+
+    private bool canMainBGM = true;
 
     private List<GameEvent> gameEvents=new List<GameEvent>();
     private bool canSetPlayerAction = false;
@@ -31,10 +40,24 @@ public class StageManager : MonoBehaviour {
     void Start() {
         sceneName = SceneManager.GetActiveScene().name;
         player.SetDefaultAction();
+
+        bgm.clip = startBGMClip;
+        bgm.Play();
     }
 
     // Update is called once per frame
     void Update() {
+
+        if (isGameStart == true) {
+            if (canMainBGM == true) {
+                bgm.Stop();
+                bgm.clip = mainBGMClip;
+                bgm.Play();
+                canMainBGM = false;
+            }
+        } else {
+            canMainBGM = true;
+        }
 
         Event();
     }

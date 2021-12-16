@@ -718,6 +718,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 729428656429432025, guid: 9bbbdb22f65ecf048be15eb0303ce158, type: 3}
+      propertyPath: mainBGMClip
+      value: 
+      objectReference: {fileID: 8300000, guid: a063a2fcb539d554d96b8d432c667ced, type: 3}
+    - target: {fileID: 729428656429432025, guid: 9bbbdb22f65ecf048be15eb0303ce158, type: 3}
       propertyPath: gameEvent.Array.size
       value: 4
       objectReference: {fileID: 0}
@@ -1588,7 +1592,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8044357387131361133, guid: 5e3d8f89223fb3647bbd0231e01afa0a, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8044357387131361133, guid: 5e3d8f89223fb3647bbd0231e01afa0a, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1632,6 +1636,63 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5e3d8f89223fb3647bbd0231e01afa0a, type: 3}
+--- !u!1001 &1880533566
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 40796684}
+    m_Modifications:
+    - target: {fileID: 4800492093644492570, guid: 505f8910f7b038c4f9b553f2294c6d6c, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4800492093644492570, guid: 505f8910f7b038c4f9b553f2294c6d6c, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 6.6846857
+      objectReference: {fileID: 0}
+    - target: {fileID: 4800492093644492570, guid: 505f8910f7b038c4f9b553f2294c6d6c, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 8.073579
+      objectReference: {fileID: 0}
+    - target: {fileID: 4800492093644492570, guid: 505f8910f7b038c4f9b553f2294c6d6c, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 3.9435463
+      objectReference: {fileID: 0}
+    - target: {fileID: 4800492093644492570, guid: 505f8910f7b038c4f9b553f2294c6d6c, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4800492093644492570, guid: 505f8910f7b038c4f9b553f2294c6d6c, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4800492093644492570, guid: 505f8910f7b038c4f9b553f2294c6d6c, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4800492093644492570, guid: 505f8910f7b038c4f9b553f2294c6d6c, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4800492093644492570, guid: 505f8910f7b038c4f9b553f2294c6d6c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4800492093644492570, guid: 505f8910f7b038c4f9b553f2294c6d6c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4800492093644492570, guid: 505f8910f7b038c4f9b553f2294c6d6c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6349517344304648767, guid: 505f8910f7b038c4f9b553f2294c6d6c, type: 3}
+      propertyPath: m_Name
+      value: GameStartEvent
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 505f8910f7b038c4f9b553f2294c6d6c, type: 3}
 --- !u!1 &1993792516
 GameObject:
   m_ObjectHideFlags: 0
@@ -2038,7 +2099,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9180722997491563867, guid: 10718fab0b5364f41b86f4dbafab7c17, type: 3}
       propertyPath: m_RootOrder
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9180722997491563867, guid: 10718fab0b5364f41b86f4dbafab7c17, type: 3}
       propertyPath: m_LocalPosition.x

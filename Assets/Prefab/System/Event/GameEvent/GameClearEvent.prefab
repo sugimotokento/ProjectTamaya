@@ -227,6 +227,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1773a3bf0d3ae3a41819caa75b669578, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ropeUpper: {fileID: 3993278005188301154}
+  ropeRight: {fileID: 2944409164660049830}
+  logo: {fileID: 1916394368750450415}
+  clear: {fileID: 5709789780212816230}
+  air: {fileID: 161806772043302836}
+  score: {fileID: 7170445002443051947}
+  ranktxt: {fileID: 898833233669676104}
+  rankimg: {fileID: 5187540987484406214}
+  result: {fileID: 2780019742198716318}
+  click: {fileID: 2030416766368901440}
+  ropeMoveSpeed: 1500
+  logoRotateTime: 0.6
+  logoRotatePerSec: 2
+  rankAnimStartCount: 60
+  rankChangeSpeed: 1
+  clickMoveSpeed: 500
+  fadeFrame: 0000000000000000000000000000000000000000
 --- !u!1 &161806772043302836
 GameObject:
   m_ObjectHideFlags: 0
@@ -281,7 +298,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &5474186433696762729
 RectTransform:
   m_ObjectHideFlags: 0
@@ -881,7 +898,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &3223035899368616687
 RectTransform:
   m_ObjectHideFlags: 0
@@ -988,7 +1005,7 @@ GameObject:
   - component: {fileID: 641013862792464485}
   - component: {fileID: 7400834906556898045}
   m_Layer: 0
-  m_Name: AREACREAR
+  m_Name: AREACLEAR
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

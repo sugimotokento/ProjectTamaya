@@ -18,9 +18,11 @@ public class Goal : MonoBehaviour {
     float rotationSpeed = 0;
     float flashTimer = 0;
     float animationIntervalTimer = 0;
+    float ClearInterval = 0;
     private bool isGuruguru = false;
     private bool isFlash = false;
     private bool isAnimationEnd = false;
+    private bool canClear = false;
 
     // Start is called before the first frame update
     void Start() {
@@ -52,7 +54,7 @@ public class Goal : MonoBehaviour {
 
                 //‰‰oI—¹
                 if (rotationSpeed > 3.5f) {
-                    StageManager.instance.isClear = true;
+                    canClear = true;
                     isFlash = true;
                 }
             } else {
@@ -79,7 +81,12 @@ public class Goal : MonoBehaviour {
             }
         }
 
-        
+        if (canClear == true) {
+            ClearInterval += Time.deltaTime;
+            if (ClearInterval > 2.5f) {
+                StageManager.instance.isClear = true;
+            }
+        }
     }
 
     private void OnTriggerEnter(Collider other) {
