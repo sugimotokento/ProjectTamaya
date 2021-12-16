@@ -30,8 +30,7 @@ public class StartTalkEvent : GameEvent {
 
     // Update is called once per frame
     void Update() {
-        Debug.Log(talkIndex);
-        Debug.Log(isRight[talkIndex]);
+
         Talk();
 
     }

@@ -62,7 +62,12 @@ public class PlayerHP : MonoBehaviour {
             }
         }
     }
-
+    public void Heal(int heal=40) {
+        hp += heal;
+        if (hp > maxHp) {
+            hp = maxHp;
+        }
+    }
     public bool GetIsDamageAnimation() {
         return damageAnimetionTimer > 0;
     }
