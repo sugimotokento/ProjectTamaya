@@ -6,9 +6,13 @@ using UnityEngine.UI;
 public class StartTalkEvent : GameEvent {
     [SerializeField] GameObject visual;
     [SerializeField] Text text;
-    [SerializeField] Text nameText;
+    [SerializeField] Image frameRight;
+    [SerializeField] Image frameLeft;
+    [SerializeField] Text nameRightText;
+    [SerializeField] Text nameLeftText;
 
     [SerializeField] private string[] talkCharactorName = new string[13];
+    [SerializeField] private bool[] isRight = new bool[13];
     [SerializeField] private string[] talk = new string[13];
     private string endText;
     private string drawText;
@@ -26,7 +30,8 @@ public class StartTalkEvent : GameEvent {
 
     // Update is called once per frame
     void Update() {
-
+        Debug.Log(talkIndex);
+        Debug.Log(isRight[talkIndex]);
         Talk();
 
     }
@@ -41,6 +46,22 @@ public class StartTalkEvent : GameEvent {
                     StageManager.instance.camera.GetAction<PointCameraAction>().SetPoint(StageManager.instance.player.gameObject.transform.position - Vector3.forward * 6);
                 }
                 visual.SetActive(true);
+
+                //左右のキャラクター判定
+                if (isRight[talkIndex] == true) {
+                    nameRightText.gameObject.SetActive(true);
+                    frameRight.gameObject.SetActive(true);
+
+                    nameLeftText.gameObject.SetActive(false);
+                    frameLeft.gameObject.SetActive(false);
+
+                } else {
+                    nameLeftText.gameObject.SetActive(true);
+                    frameLeft.gameObject.SetActive(true);
+
+                    nameRightText.gameObject.SetActive(false);
+                    frameRight.gameObject.SetActive(false);
+                }
 
 
                 //1文字ずつ表示する
@@ -80,8 +101,11 @@ public class StartTalkEvent : GameEvent {
                     visual.SetActive(false);
                 }
 
-
-                nameText.text = talkCharactorName[talkIndex];
+                if (isRight[talkIndex] == true) {
+                    nameRightText.text = talkCharactorName[talkIndex];
+                } else {
+                    nameLeftText.text = talkCharactorName[talkIndex];
+                }
                 text.text = "「" + drawText + endText + "」";
             }
         }
