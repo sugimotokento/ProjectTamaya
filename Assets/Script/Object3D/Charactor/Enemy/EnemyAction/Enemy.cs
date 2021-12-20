@@ -67,6 +67,9 @@ public class Enemy : MonoBehaviour
 
     private int SCENE_NUM;
 
+    //アニメーション
+    public Animator EnemyAnime;
+
     //
     //
     //メイン関数
@@ -93,6 +96,14 @@ public class Enemy : MonoBehaviour
 
         AfterRangeDanger = RangeDanger;
         SCENE_NUM = 1;
+
+        EnemyAnime.SetBool("isSumaki", false);
+        EnemyAnime.SetBool("isMove", true);
+        EnemyAnime.SetBool("isBattle", false);
+        EnemyAnime.SetBool("isWarning", false);
+        EnemyAnime.SetBool("isNormal", true);
+        EnemyAnime.SetBool("isCall", false);
+        EnemyAnime.SetFloat("BattleBlend", 0.0f);
     }
 
 
@@ -104,6 +115,7 @@ public class Enemy : MonoBehaviour
         {
             if (alert < 1 && isHelp == true)
             {
+                EnemyAnime.SetBool("isCall", true);
                 HelpEnemy();
                 SCENE_NUM = 0;
             }
@@ -115,24 +127,37 @@ public class Enemy : MonoBehaviour
 
             if (alert <= 0 && SCENE_NUM != 0)
             {
+                EnemyAnime.SetBool("isBattle", false);
+                EnemyAnime.SetBool("isWarning", false);
+                EnemyAnime.SetBool("isCall", false);
+                EnemyAnime.SetBool("isNormal", true);
                 SearchStatus();
             }
             else if (alert > 0 && alert < 100)
             {
+                EnemyAnime.SetBool("isWarning", true);
                 WarningStatus();
                 SCENE_NUM = 2;
             }
             else if (alert >= 100)
             {
+                EnemyAnime.SetBool("isBattle", true);
                 FightStatus();
                 SCENE_NUM = 3;
             }
         }
         else
         {
+            EnemyAnime.SetBool("isBattle", false);
+            EnemyAnime.SetBool("isWarning", false);
+            EnemyAnime.SetBool("isCall", false);
+            EnemyAnime.SetBool("isNormal", false);
+            EnemyAnime.SetBool("isSumaki", true);
             //簀巻き成功時
             DieEnemy();
         }
+
+        Debug.Log(SCENE_NUM);
     }
 
 
@@ -266,8 +291,6 @@ public class Enemy : MonoBehaviour
     //============================================================================
     private void WarningStatus()
     {
-        isHelp = true;
-
         VigTime += Time.deltaTime;
 
         if (VigTime < 8.0f)
@@ -276,16 +299,13 @@ public class Enemy : MonoBehaviour
             Vector3 dist = oldppos - transform.position;
             this.transform.position += dist.normalized * Time.deltaTime * Espeed * 0.3f;
 
+            if(dist.magnitude < 0.5f)
+            {
+                transform.position = oldepos;
+            }
 
             //視線
-            if (dist.magnitude < 0.5f)
-            {
-                LostPlayerViewEnemy();
-            }
-            else
-            {
-                ViewEnemy();
-            }
+            ViewEnemy();
         }
         else
         {
@@ -301,6 +321,8 @@ public class Enemy : MonoBehaviour
     //============================================================================
     private void FightStatus()
     {
+        isHelp = true;
+
         DanTime += Time.deltaTime;
         
         if (DanTime < 5.0f)
@@ -316,13 +338,15 @@ public class Enemy : MonoBehaviour
                 //弾の設定
                 {
                     //発射間隔用カウント
-                    B_cnt += Time.fixedDeltaTime;
+                    B_cnt += Time.deltaTime;
 
                     //弾の発射位置
                     Bpos = transform.position;
                     Bpos.x = Bpos.x + r * Mathf.Cos(B_rad);
                     Bpos.y = Bpos.y + r * Mathf.Sin(B_rad);
                 }
+
+                EnemyAnime.SetFloat("BattleBlend", B_cnt);
 
                 //弾の発射
                 if (B_cnt > B_interval)
@@ -346,19 +370,13 @@ public class Enemy : MonoBehaviour
                 this.transform.position += dist.normalized * Time.deltaTime * Espeed * 1.2f;
 
                 //視線
-                if (dist.magnitude < 0.5f)
-                {
-                    ViewEnemy();
-                }
-                else
-                {
-                    viewrad = VecRad(player.gameObject.transform.position, transform.position);
-                    viewrad = -1 * viewrad * Mathf.Rad2Deg;
+                viewrad = VecRad(player.gameObject.transform.position, transform.position);
+                viewrad = -1 * viewrad * Mathf.Rad2Deg;
 
-                    //視線の方向に向きを変える
-                    transform.GetChild(0).gameObject.transform.rotation = Quaternion.Euler(0.0f, 0.0f, -1 * viewrad);
-                    oldepos = transform.position;
-                }
+                //視線の方向に向きを変える
+                transform.GetChild(0).gameObject.transform.rotation = Quaternion.Euler(0.0f, 0.0f, -1 * viewrad);
+                oldepos = transform.position;
+
             }
         }
         else
@@ -433,6 +451,7 @@ public class Enemy : MonoBehaviour
             {
                 if (Gindex == IndexGoal)
                 {
+                    transform.position = oldepos;
                     isHelp = false;
                 }
                 else Gindex--;
@@ -441,6 +460,7 @@ public class Enemy : MonoBehaviour
             {
                 if (Gindex == IndexGoal)
                 {
+                    transform.position = oldepos;
                     isHelp = false;
                 }
                 else Gindex++;
@@ -497,22 +517,15 @@ public class Enemy : MonoBehaviour
     //エネミーの視線と身体の向き
     private void ViewEnemy()
     {
-        viewrad = VecRad(transform.position, oldepos);
-        viewrad = -1 * viewrad * Mathf.Rad2Deg;
+        if (transform.position != oldepos)
+        {
+            viewrad = VecRad(transform.position, oldepos);
+            viewrad = -1 * viewrad * Mathf.Rad2Deg;
 
-        //視線の方向に向きを変える
-        transform.GetChild(0).gameObject.transform.rotation = Quaternion.Euler(0.0f, 0.0f, -1 * viewrad);
-        oldepos = transform.position;
-    }
-
-    //プレイヤーを見失ったときの視線と身体の向き
-    private void LostPlayerViewEnemy()
-    {
-        viewrad += -1 * Time.deltaTime;
-
-        //視線の方向に向きを変える
-        transform.GetChild(0).gameObject.transform.rotation = Quaternion.Euler(0.0f, 0.0f, -1 * viewrad);
-        oldepos = transform.position;
+            //視線の方向に向きを変える
+            transform.GetChild(0).gameObject.transform.rotation = Quaternion.Euler(0.0f, 0.0f, -1 * viewrad);
+            oldepos = transform.position;
+        }
     }
 
 
