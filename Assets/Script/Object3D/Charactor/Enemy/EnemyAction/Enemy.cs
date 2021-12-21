@@ -113,6 +113,8 @@ public class Enemy : MonoBehaviour
         
         if (isSumaki == false)
         {
+            EnemyAnime.SetBool("isSumaki", false);
+
             if (alert < 1 && isHelp == true)
             {
                 EnemyAnime.SetBool("isCall", true);
@@ -156,8 +158,6 @@ public class Enemy : MonoBehaviour
             //âÅŠª‚«¬Œ÷Žž
             DieEnemy();
         }
-
-        Debug.Log(SCENE_NUM);
     }
 
 
@@ -480,6 +480,15 @@ public class Enemy : MonoBehaviour
     {
         if (!isDie && ItemNum == 0)
             player.item.AddKey(1);
+
+        if (!isDie && ItemNum == 1)
+            player.item.AddItem((PlayerItem.PlayerItemIndex)0);
+
+        if (!isDie && ItemNum == 2)
+            player.item.AddItem((PlayerItem.PlayerItemIndex)1);
+
+        if (!isDie && ItemNum == 3)
+            player.item.AddItem((PlayerItem.PlayerItemIndex)2);
 
         isDie = true;
     }

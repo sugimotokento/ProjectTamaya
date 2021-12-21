@@ -79,7 +79,7 @@ MonoBehaviour:
   viewrange: 15
   LocalPoints: {fileID: 0}
   GlobalPoints: {fileID: 0}
-  EnemyAnime: {fileID: 0}
+  EnemyAnime: {fileID: 2973276391665467537}
 --- !u!65 &319160524473677133
 BoxCollider:
   m_ObjectHideFlags: 0
