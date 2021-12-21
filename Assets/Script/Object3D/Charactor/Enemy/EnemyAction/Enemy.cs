@@ -65,7 +65,7 @@ public class Enemy : MonoBehaviour
     //UI関連
     private float AddAlert = 5.0f;//UI加算値
 
-    private int SCENE_NUM;
+    public int SCENE_NUM;
 
     //アニメーション
     public Animator EnemyAnime;
@@ -143,6 +143,9 @@ public class Enemy : MonoBehaviour
             }
             else if (alert >= 100)
             {
+                if (SCENE_NUM != 3)
+                    ScoreManager.findNum++;
+
                 EnemyAnime.SetBool("isBattle", true);
                 FightStatus();
                 SCENE_NUM = 3;
