@@ -16,6 +16,7 @@ public class GameClearEvent : GameEvent {
     public GameObject result; 
     public GameObject click;
 
+    [SerializeField] Sprite[] rankSprite;
     [SerializeField] ImageNumber scoreNum;
     [SerializeField] ImageTimer airScore;
     [SerializeField] float ropeMoveSpeed;
@@ -95,7 +96,7 @@ public class GameClearEvent : GameEvent {
         {
             scoreNum.SetNumber(ScoreManager.GetScore());
             airScore.SetTime(ScoreManager.GetAir());
-            ScoreManager.RankIndex rank = ScoreManager.GetRank();
+            rankimg.GetComponent<Image>().sprite = rankSprite[(int)ScoreManager.GetRank()];
             //Ç±Ç±Ç…èëÇ≠
             transform.GetChild(0).gameObject.SetActive(true);
 

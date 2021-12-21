@@ -237,6 +237,13 @@ MonoBehaviour:
   rankimg: {fileID: 5187540987484406214}
   result: {fileID: 2780019742198716318}
   click: {fileID: 2030416766368901440}
+  rankSprite:
+  - {fileID: 21300000, guid: 2f30bcc0cf41f3c48b8740e3edbf38d4, type: 3}
+  - {fileID: 21300000, guid: acae24ee28cfc374cb76d530fbe28918, type: 3}
+  - {fileID: 21300000, guid: f8ff789db5ca5b64bb65c0924337e2eb, type: 3}
+  - {fileID: 21300000, guid: 166e275bdfd23364a909faeb32cf09fe, type: 3}
+  - {fileID: 21300000, guid: b8d08946a30f8e6498148e7e4e54eb8c, type: 3}
+  - {fileID: 21300000, guid: 74ab7f5947643cd4b86d858cceb575c3, type: 3}
   scoreNum: {fileID: 4910075376544565229}
   airScore: {fileID: 8441204317071121021}
   ropeMoveSpeed: 1500
