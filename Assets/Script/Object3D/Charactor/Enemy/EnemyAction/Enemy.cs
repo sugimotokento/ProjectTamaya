@@ -12,6 +12,8 @@ public class Enemy : MonoBehaviour
 
     private EnemyUI UIscript;                   //UIオブジェクトについてるスクリプト
 
+    public EnemySound sound;
+
 
     //エネミーのパラメータ関連
     [SerializeField] private float Espeed = 3.5f;//エネミーの速さ
@@ -144,7 +146,10 @@ public class Enemy : MonoBehaviour
             else if (alert >= 100)
             {
                 if (SCENE_NUM != 3)
+                {
                     ScoreManager.findNum++;
+                    sound.EnemyPlayShot(EnemySound.EnemySoundIndex.Contact);
+                }
 
                 EnemyAnime.SetBool("isBattle", true);
                 FightStatus();
@@ -354,6 +359,7 @@ public class Enemy : MonoBehaviour
                 //弾の発射
                 if (B_cnt > B_interval)
                 {
+                    sound.EnemyPlayShot(EnemySound.EnemySoundIndex.PopBallet);
                     Instantiate(bullet, Bpos, Quaternion.Euler(Bvec));
                     B_cnt = 0;
                 }
