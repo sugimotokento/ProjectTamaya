@@ -44,6 +44,36 @@ public class PlayerReflectionAction : PlayerAction {
         }
     }
 
+    public override void CollisionStay(Collision collisioin) {
+        Ray rayUp = new Ray(player.transform.position, Vector3.up);
+        Ray rayDown = new Ray(player.transform.position, Vector3.down);
+        Ray rayLeft = new Ray(player.transform.position, Vector3.left);
+        Ray rayRight = new Ray(player.transform.position, Vector3.right);
+
+        RaycastHit hit;
+
+        if (Physics.Raycast(rayUp, out hit, 0.6f)) {
+            if (player.moveSpeed.y > 0) {
+                player.moveSpeed.y = 0;
+            }
+        }
+        if (Physics.Raycast(rayDown, out hit, 0.6f)) {
+            if (player.moveSpeed.y<0) {
+                player.moveSpeed.y = 0;
+            }
+        }
+        if (Physics.Raycast(rayLeft, out hit, 0.6f)) {
+            if (player.moveSpeed.x < 0) {
+                player.moveSpeed.x = 0;
+            }
+        }
+        if (Physics.Raycast(rayRight, out hit, 0.6f)) {
+            if (player.moveSpeed.x > 0) {
+                player.moveSpeed.x = 0;
+            }
+        }
+    }
+
     private void Reflection(Vector3 normal, Collision collision) {
         PlayerMoveAction moveAction = player.GetAction<PlayerMoveAction>();
 

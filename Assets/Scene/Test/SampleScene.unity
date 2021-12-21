@@ -2154,6 +2154,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7c9649598212ff04995a2e66ca19cd80, type: 3}
+--- !u!114 &1150146454 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3116734692297407556, guid: 77728f726d7285a49a6c9a60705641ba, type: 3}
+  m_PrefabInstance: {fileID: 8276665339474032696}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0821c2ce0038bc44cb52f137061eb22f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1166732540
 GameObject:
   m_ObjectHideFlags: 0
@@ -3513,6 +3524,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 729428656429432025, guid: 9bbbdb22f65ecf048be15eb0303ce158, type: 3}
+      propertyPath: fade
+      value: 
+      objectReference: {fileID: 1150146454}
+    - target: {fileID: 729428656429432025, guid: 9bbbdb22f65ecf048be15eb0303ce158, type: 3}
       propertyPath: enemy
       value: 
       objectReference: {fileID: 0}
@@ -3532,6 +3547,10 @@ PrefabInstance:
       propertyPath: startEvent
       value: 
       objectReference: {fileID: 381033880}
+    - target: {fileID: 729428656429432025, guid: 9bbbdb22f65ecf048be15eb0303ce158, type: 3}
+      propertyPath: nextSceneName
+      value: Stage1
+      objectReference: {fileID: 0}
     - target: {fileID: 729428656429432025, guid: 9bbbdb22f65ecf048be15eb0303ce158, type: 3}
       propertyPath: gameEvent.Array.size
       value: 4
