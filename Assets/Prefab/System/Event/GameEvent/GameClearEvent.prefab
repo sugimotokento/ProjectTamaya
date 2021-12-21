@@ -237,6 +237,8 @@ MonoBehaviour:
   rankimg: {fileID: 5187540987484406214}
   result: {fileID: 2780019742198716318}
   click: {fileID: 2030416766368901440}
+  scoreNum: {fileID: 4910075376544565229}
+  airScore: {fileID: 8441204317071121021}
   ropeMoveSpeed: 1500
   logoRotateTime: 0.6
   logoRotatePerSec: 2
@@ -1264,6 +1266,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 6245249536693317055, guid: e419750cb0e972746a03ea35caed3cec, type: 3}
   m_PrefabInstance: {fileID: 1337431474937522771}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &4910075376544565229 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6245249536693317054, guid: e419750cb0e972746a03ea35caed3cec, type: 3}
+  m_PrefabInstance: {fileID: 1337431474937522771}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 324fce6eceae3254abe32028343569ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &5544051321964623932
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1374,3 +1387,14 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 4167311624752390734, guid: 01dd08382e09bfa47a7bc2f141ded9c9, type: 3}
   m_PrefabInstance: {fileID: 5544051321964623932}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &8441204317071121021 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4167311624752390721, guid: 01dd08382e09bfa47a7bc2f141ded9c9, type: 3}
+  m_PrefabInstance: {fileID: 5544051321964623932}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ea730bdb1764814ab7b1dc36ec0cdeb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

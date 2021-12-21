@@ -20,12 +20,12 @@ public class ScoreManager : MonoBehaviour {
 
     }
 
-    static private float air = -1;
-    static private int findNum = 0;
-    static private int damageNum = 0;
-    static private int healNum = 0;
-    static private int sumakiNum = 0;
-    static private int retryNum = 0;
+    [HideInInspector] static public float air = -1;
+    [HideInInspector] static public int findNum = 0;
+    [HideInInspector] static public int damageNum = 0;
+    [HideInInspector] static public int healNum = 0;
+    [HideInInspector] static public int sumakiNum = 0;
+    [HideInInspector] static public int retryNum = 0;
 
 
     // Start is called before the first frame update
@@ -52,6 +52,13 @@ public class ScoreManager : MonoBehaviour {
         int sumakiScore = 0 + sumakiNum * 750;
         int noReTryScore = 10000 - retryNum * 10000;
         int airScore = (int)air * 10;
+
+        findScore    = Mathf.Max(0, findScore);
+        damageScore  = Mathf.Max(0, damageScore);
+        healScore    = Mathf.Max(0, healScore);
+        sumakiScore  = Mathf.Max(0, sumakiScore);
+        noReTryScore = Mathf.Max(0, noReTryScore);
+        airScore     = Mathf.Max(0, airScore);
 
         return findScore + damageScore + healScore + sumakiScore + noReTryScore + airScore;
     }

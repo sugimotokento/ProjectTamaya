@@ -42,6 +42,7 @@ public class PlayerItem : MonoBehaviour {
 
     public void UseItem() {
         if (itemList.Count > 0) {
+            ScoreManager.healNum++;
             itemList.RemoveAt(0);
             player.hP.Heal();
             player.sound.PlayShot(PlayerSound.SoundIndex.EAT_GOHAN);

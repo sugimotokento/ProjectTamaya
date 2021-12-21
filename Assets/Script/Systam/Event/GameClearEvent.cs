@@ -16,7 +16,8 @@ public class GameClearEvent : GameEvent {
     public GameObject result; 
     public GameObject click;
 
-
+    [SerializeField] ImageNumber scoreNum;
+    [SerializeField] ImageTimer airScore;
     [SerializeField] float ropeMoveSpeed;
     [SerializeField] float logoRotateTime;
     [SerializeField] int logoRotatePerSec;
@@ -92,8 +93,8 @@ public class GameClearEvent : GameEvent {
         if (Input.GetKeyDown(KeyCode.K)) { isEvent = true; phase[0].ready = true; }
         if (canEvent == true)
         {
-            int socre = ScoreManager.GetScore();
-            float time = ScoreManager.GetAir();
+            scoreNum.SetNumber(ScoreManager.GetScore());
+            airScore.SetTime(ScoreManager.GetAir());
             ScoreManager.RankIndex rank = ScoreManager.GetRank();
             //Ç±Ç±Ç…èëÇ≠
             transform.GetChild(0).gameObject.SetActive(true);

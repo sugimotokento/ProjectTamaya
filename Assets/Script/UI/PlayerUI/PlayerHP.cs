@@ -56,6 +56,7 @@ public class PlayerHP : MonoBehaviour {
     public void Damage(int damage, bool isHeatDamage = false) {
         if (damageIntervalTimer <= 0) {
             hp -= damage;
+            ScoreManager.damageNum++;
             damageIntervalTimer = damageInterval;//–³“GŽžŠÔ‚ÌÝ’è
             damageAnimetionTimer = 0.6f;
 

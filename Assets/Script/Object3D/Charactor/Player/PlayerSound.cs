@@ -22,6 +22,7 @@ public class PlayerSound : MonoBehaviour {
         GURUGURU,
         HIT_PIPE,
         HIT_MAT,
+        SUMAKI_END,
         MAX
     }
 

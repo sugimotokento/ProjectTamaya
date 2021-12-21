@@ -133,6 +133,8 @@ public class PlayerGuruguruAction : PlayerAction {
         //10‰ñ“]‚ÅI—¹
         if (count >= 10) {
             isEnd = true;
+            player.sound.PlayShot(PlayerSound.SoundIndex.SUMAKI_END);
+            ScoreManager.sumakiNum++;
         } 
 
         //UŒ‚‚ğó‚¯‚Ä‚à‰ğœ
