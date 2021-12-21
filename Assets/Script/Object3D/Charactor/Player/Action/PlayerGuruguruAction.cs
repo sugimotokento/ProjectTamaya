@@ -212,7 +212,7 @@ public class PlayerGuruguruAction : PlayerAction {
     public void SetTartegt(GameObject obj) {
         target = obj;
         initTargetDist = target.transform.position - GetWorldMousePos();
-        rope = Instantiate(player.rope, target.transform.position, Quaternion.identity);
+        rope = Instantiate(player.rope, target.transform.position - target.transform.GetChild(0).transform.up*0.5f, Quaternion.identity);
 
 
         positionBuffer = target.transform.position - player.moveSpeed.normalized;

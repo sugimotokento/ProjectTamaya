@@ -81,6 +81,11 @@ public class Player : MonoBehaviour {
         }
 
     }
+    private void OnCollisionStay(Collision collision) {
+        for (int i = 0; i < action.Count; ++i) {
+            action[i].CollisionStay(collision);
+        }
+    }
     private void OnTriggerEnter(Collider other) {
         for (int i = 0; i < action.Count; ++i) {
             action[i].TriggerEnter(other);

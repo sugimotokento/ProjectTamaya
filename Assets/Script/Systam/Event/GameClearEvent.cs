@@ -161,8 +161,11 @@ public class GameClearEvent : GameEvent {
                 }
                 else
                 {
-                   // èIóπèàóù
-                   //  moveNextPhase((int)phaseName.FADEIN_CLICKNEXT);
+                    // èIóπèàóù
+                    //  moveNextPhase((int)phaseName.FADEIN_CLICKNEXT);
+                    if (Input.GetMouseButton(0)) {
+                        StageManager.instance.SetNextScene();
+                    }
                 }
             }
         }

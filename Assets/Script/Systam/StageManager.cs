@@ -7,6 +7,7 @@ public class StageManager : MonoBehaviour {
 
     public static StageManager instance = null;
     public static string sceneName;
+    
 
     public GameObject eventObj;
     public Player player;
@@ -18,6 +19,9 @@ public class StageManager : MonoBehaviour {
     [SerializeField] private AudioClip battleBGMClip;
     [SerializeField] private AudioSource bgm;
     [SerializeField] private AudioSource environment;
+    [SerializeField] private FadeOut2 fade;
+
+    [SerializeField] private string nextSceneName;
 
     [HideInInspector] public bool isClear = false;
     [HideInInspector] public bool isGameStart = false;
@@ -81,6 +85,14 @@ public class StageManager : MonoBehaviour {
                 player.SetDefaultAction();
                 canSetPlayerAction = false;
             }
+        }
+    }
+
+
+    public void SetNextScene() {
+        fade.gameObject.SetActive(true);
+        if (fade.GetIsFadeEnd() == true) {
+            SceneManager.LoadScene(nextSceneName);
         }
     }
 }
