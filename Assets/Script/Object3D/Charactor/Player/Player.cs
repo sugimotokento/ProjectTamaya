@@ -24,6 +24,7 @@ public class Player : MonoBehaviour {
     [HideInInspector] public Vector3 positionBuffer;
     [HideInInspector] public Vector3 moveSpeed;
 
+    private bool canDieSound = true;
 
     public void SetDefaultAction() {        
         AddAction<PlayerReflectionAction>();
@@ -40,6 +41,10 @@ public class Player : MonoBehaviour {
     }
     private void Die() {
         if (hP != null && hP.GetHp() <= 0) {
+            if (canDieSound == true) {
+                sound.Play(PlayerSound.SoundIndex.MISS);
+                canDieSound = false;
+            }
             ReMoveActionAll();
             visual.SetActive(true);
             AddAction<PlayerDieAction>();

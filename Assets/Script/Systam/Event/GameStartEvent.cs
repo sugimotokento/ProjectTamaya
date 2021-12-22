@@ -14,7 +14,7 @@ public class GameStartEvent : GameEvent
     void Update()
     {
         if (canEvent == true) {
-            StageManager.instance.isGameStart = true;
+            StageManager.instance.canMainBGM = true;
             isEvent = false;
             canEvent = false;
         }

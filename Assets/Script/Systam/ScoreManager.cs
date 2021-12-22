@@ -27,10 +27,16 @@ public class ScoreManager : MonoBehaviour {
     [HideInInspector] static public int sumakiNum = 0;
     [HideInInspector] static public int retryNum = 0;
 
+    [SerializeField] static private float legendBorder=0;
 
     // Start is called before the first frame update
     void Start() {
-
+        air = -1;
+        findNum = 0;
+        damageNum = 0;
+        healNum = 0;
+        sumakiNum = 0;
+        retryNum = 0;
     }
 
     // Update is called once per frame
@@ -69,6 +75,10 @@ public class ScoreManager : MonoBehaviour {
 
         if (score >= 100000) {
             rank = RankIndex.RANK_SS;
+
+            if (air >=legendBorder) {
+                rank = RankIndex.RANK_LEGEND;
+            }
 
         } else if (score >= 70000) {
             rank = RankIndex.RANK_S;

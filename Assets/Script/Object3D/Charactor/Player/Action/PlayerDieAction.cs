@@ -3,6 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 public class PlayerDieAction : PlayerAction {
+    public override void Init(Player p) {
+        base.Init(p);
+
+       
+    }
+
     public override void Action() {
         player.animator.SetBool("isMove", false);
         player.animator.SetBool("isCharge", false);
