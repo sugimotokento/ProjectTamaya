@@ -20,11 +20,12 @@ public class PlayerItem : MonoBehaviour {
 
     private List<PlayerItemIndex> itemList = new List<PlayerItemIndex>();
 
-    private int key = 100;
+    private int key = 0;
 
     // Start is called before the first frame update
     void Start() {
-        itemList.Add(PlayerItemIndex.ONIGIRI);
+       // itemList.Add(PlayerItemIndex.ONIGIRI);
+        //itemList.Add(PlayerItemIndex.SIOYAKI);
     }
 
     // Update is called once per frame
