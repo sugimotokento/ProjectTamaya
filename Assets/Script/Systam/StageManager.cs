@@ -44,7 +44,7 @@ public class StageManager : MonoBehaviour {
         }
 
         enemyManagerObj = GameObject.Find("EnemyManager");
-        for (int i = 0; i < enemyManagerObj.transform.GetChildCount(); ++i) {
+        for (int i = 0; i < enemyManagerObj.transform.childCount; ++i) {
             enemyScript.Add(enemyManagerObj.transform.GetChild(i).gameObject.GetComponent<Enemy>());
         }
     }
@@ -89,7 +89,7 @@ public class StageManager : MonoBehaviour {
     private void ChangeBGM() {
 
 
-        //ƒoƒgƒ‹”»’è
+        //ï¿½oï¿½gï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         bool isBattleMode = false;
         for (int i = 0; i < enemyScript.Count; ++i) {
             if (enemyScript[i].isSumaki==true) {
@@ -104,7 +104,7 @@ public class StageManager : MonoBehaviour {
         }
 
 
-        //ƒXƒ^[ƒgBGM‚©‚çƒƒCƒ“BGM
+        //ï¿½Xï¿½^ï¿½[ï¿½gBGMï¿½ï¿½ï¿½çƒï¿½Cï¿½ï¿½BGM
         if ( isBattleMode==false) {
             if (canMainBGM == true) {
                 bgm.Stop();
@@ -117,7 +117,7 @@ public class StageManager : MonoBehaviour {
         }
 
 
-        //ƒoƒgƒ‹BGMÄ¶
+        //ï¿½oï¿½gï¿½ï¿½BGMï¿½Äï¿½
         if (isBattleMode == true && canBattleBGM == true) {
             bgm.Stop();
             bgm.clip = battleBGMClip;
