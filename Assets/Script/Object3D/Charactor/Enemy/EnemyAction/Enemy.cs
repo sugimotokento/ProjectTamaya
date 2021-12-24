@@ -157,11 +157,11 @@ public class Enemy : MonoBehaviour
         }
         else
         {
+            EnemyAnime.SetBool("isSumaki", true);
             EnemyAnime.SetBool("isBattle", false);
             EnemyAnime.SetBool("isWarning", false);
             EnemyAnime.SetBool("isCall", false);
             EnemyAnime.SetBool("isNormal", false);
-            EnemyAnime.SetBool("isSumaki", true);
 
             //âÅŠª‚«¬Œ÷
             DieEnemy();
