@@ -18,8 +18,7 @@ public class Enemy : MonoBehaviour
     //エネミーのパラメータ関連
     [SerializeField] private float Espeed = 3.5f;//エネミーの速さ
     public bool isSumaki = false;　　　　　　　　//簀巻きにされているか
-    private bool isDie = false;
-    [SerializeField] private int ItemNum;　　　　//持っているアイテムナンバー
+    public int ItemNum;　　　　//持っているアイテムナンバー
     private float VigTime;                       //警戒時継続時間
     private float DanTime;                       //戦闘時継続時間
     public bool isHelp;                          //お呼ばれされたか
@@ -163,6 +162,7 @@ public class Enemy : MonoBehaviour
             EnemyAnime.SetBool("isCall", false);
             EnemyAnime.SetBool("isNormal", false);
             EnemyAnime.SetBool("isSumaki", true);
+
             //簀巻き成功時
             DieEnemy();
         }
@@ -487,19 +487,6 @@ public class Enemy : MonoBehaviour
     //============================================================================
     private void DieEnemy()
     {
-        if (!isDie && ItemNum == 0)
-            player.item.AddKey(1);
-
-        if (!isDie && ItemNum == 1)
-            player.item.AddItem((PlayerItem.PlayerItemIndex)0);
-
-        if (!isDie && ItemNum == 2)
-            player.item.AddItem((PlayerItem.PlayerItemIndex)1);
-
-        if (!isDie && ItemNum == 3)
-            player.item.AddItem((PlayerItem.PlayerItemIndex)2);
-
-        isDie = true;
     }
 
 
