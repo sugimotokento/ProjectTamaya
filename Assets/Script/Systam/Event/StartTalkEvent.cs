@@ -26,6 +26,8 @@ public class StartTalkEvent : GameEvent {
     private int textIndex = 0;
     private float addTextIntervalTimer = 0;
     private bool isSetCameraAction = true;
+    private bool canPlayBGM = true;
+
     // Start is called before the first frame update
     void Start() {
         isEvent = true;
@@ -45,6 +47,12 @@ public class StartTalkEvent : GameEvent {
     protected void Talk() {
         if (canEvent == true) {
             if (isEvent == true) {
+                if (canPlayBGM == true) {
+                    canPlayBGM = false;
+                    StageManager.instance.bgm.Stop();
+                    StageManager.instance.bgm.clip = StageManager.instance.eventBGMClip;
+                    StageManager.instance.bgm.Play();
+                }
                 if (isSetCameraAction == true) {
                     isSetCameraAction = false;
                     //   StageManager.instance.camera.transform.position = new Vector3(0, 0, -15);
@@ -111,6 +119,10 @@ public class StartTalkEvent : GameEvent {
                     canEvent = false;
                     StageManager.instance.camera.SetAction<PlayerCameraAction>();
                     visual.SetActive(false);
+                    StageManager.instance.bgm.Stop();
+                    StageManager.instance.bgm.clip = StageManager.instance.mainBGMClip;
+                    StageManager.instance.bgm.Play();
+
                 }
 
                 if (isRight[talkIndex] == true) {

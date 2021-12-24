@@ -14,13 +14,14 @@ public class StageManager : MonoBehaviour {
     public GameCamera camera;
     public PauseManager pause;
 
-    [SerializeField] private AudioClip startBGMClip;
-    [SerializeField] private AudioClip mainBGMClip;
-    [SerializeField] private AudioClip battleBGMClip;
-    [SerializeField] private AudioSource bgm;
-    [SerializeField] private AudioSource environment;
-    [SerializeField] private FadeOut2 fade;
+    public AudioClip startBGMClip;
+    public AudioClip mainBGMClip;
+    public AudioClip battleBGMClip;
+    public AudioClip eventBGMClip;
+    public AudioSource bgm;
+    public AudioSource environment;
 
+    [SerializeField] private FadeOut2 fade;
     [SerializeField] private string nextSceneName;
 
     [HideInInspector] public bool isClear = false;

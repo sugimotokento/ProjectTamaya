@@ -198,6 +198,7 @@ MonoBehaviour:
   startBGMClip: {fileID: 8300000, guid: 3e2667194efa6c942b8e972dde340555, type: 3}
   mainBGMClip: {fileID: 8300000, guid: f4f42dc8370d5094bb752606f5df8737, type: 3}
   battleBGMClip: {fileID: 8300000, guid: 68c6fc787c33807438e0771c2f7d3bbf, type: 3}
+  eventBGMClip: {fileID: 8300000, guid: 9073197b34905a044b941b8fe70070f5, type: 3}
   bgm: {fileID: 8767845709496335980}
   environment: {fileID: 8853863983670233495}
   fade: {fileID: 0}
