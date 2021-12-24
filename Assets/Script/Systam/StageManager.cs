@@ -22,7 +22,6 @@ public class StageManager : MonoBehaviour {
     public AudioSource environment;
 
     [SerializeField] private FadeOut2 fade;
-    [SerializeField] private string nextSceneName;
 
     [HideInInspector] public bool isClear = false;
     [HideInInspector] public bool isEventActive = false;
@@ -138,7 +137,22 @@ public class StageManager : MonoBehaviour {
     public void SetNextScene() {
         fade.gameObject.SetActive(true);
         if (fade.GetIsFadeEnd() == true) {
-            SceneManager.LoadScene(nextSceneName);
+            string name = SceneManager.GetActiveScene().name;
+            if (name == "Stage1") {
+                SceneManager.LoadScene("Srage2");
+            }
+            if (name == "Stage2") {
+                SceneManager.LoadScene("Srage3");
+            }
+            if (name == "Stage3") {
+                SceneManager.LoadScene("Srage4");
+            }
+            if (name == "Stage4") {
+                SceneManager.LoadScene("Srage5");
+            }
+            if (name == "Stage5") {
+                SceneManager.LoadScene("BossTest");
+            }
         }
     }
 }

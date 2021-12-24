@@ -31,7 +31,7 @@ public class GameClearEvent : GameEvent {
     bool canPlaySE = true;
     bool canPlaySE2 = true;
     bool canPlayBGM = true;
-
+    bool isNextScene = false;
 
     // logoRotateTime����
     // ��~�^�C�~���O��scale��1.0�𒴂����^�C�~���O�ŉ�]�E�g�傪�~�܂�̂�
@@ -188,9 +188,11 @@ public class GameClearEvent : GameEvent {
                 {
                     // �I������
                     //  moveNextPhase((int)phaseName.FADEIN_CLICKNEXT);
-                    if (Input.GetMouseButton(0)) {
-                        StageManager.instance.SetNextScene();
+                    if (Input.GetMouseButtonDown(0)) {
+                        isNextScene = true;
+                        
                     }
+                    if (isNextScene == true) { StageManager.instance.SetNextScene(); }
                 }
             }
         }
