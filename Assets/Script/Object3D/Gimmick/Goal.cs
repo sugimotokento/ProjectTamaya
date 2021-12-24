@@ -3,15 +3,26 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Goal : MonoBehaviour {
+
+    private enum SoundIndex {
+        HIT,
+        ROTATE,
+        SORT,
+        MAX,
+    }
+
     [HideInInspector] public bool isGoal = false;
     [SerializeField] private Renderer renderer;
     [SerializeField] private GameObject bloomObject;
     [SerializeField] private GameObject steam;
     [SerializeField] private GameObject playerPosObj;
+    [SerializeField] private GameObject soundObj;
 
     [SerializeField] private ParticleSystem thunder;
     [SerializeField] private ParticleSystem spark;
 
+
+    private List<AudioSource> sound=new List<AudioSource>();
     private Color baseColor;
     private Vector3 mousePosBuffer;
     private Vector3 baseScele;
@@ -19,10 +30,12 @@ public class Goal : MonoBehaviour {
     float flashTimer = 0;
     float animationIntervalTimer = 0;
     float ClearInterval = 0;
+    float hitSoundIntervalTimer = 0;
     private bool isGuruguru = false;
     private bool isFlash = false;
     private bool isAnimationEnd = false;
     private bool canClear = false;
+    private bool canPlayRotationSound = true;
 
     // Start is called before the first frame update
     void Start() {
@@ -33,12 +46,28 @@ public class Goal : MonoBehaviour {
         var sparkEmission = thunder.emission;
         thunderEmission.rateOverTime = rotationSpeed * 100 + 40;
         sparkEmission.rateOverTime = Mathf.Max(0, rotationSpeed * 100 - 50);
+
+        //ï¿½Iï¿½[ï¿½fï¿½Bï¿½Iï¿½æ“¾
+        for(int i=0; i<soundObj.transform.childCount; ++i) {
+            sound.Add(soundObj.transform.GetChild(i).gameObject.GetComponent<AudioSource>());
+        }
     }
 
     private void Update() {
         animationIntervalTimer += Time.deltaTime;
         if (animationIntervalTimer < 2) return;
         bloomObject.transform.Rotate(Vector3.up * 100 * rotationSpeed * Time.deltaTime);
+
+        //å›è»¢éŸ³
+        if (rotationSpeed > 0 && canPlayRotationSound==true) {
+            sound[(int)SoundIndex.ROTATE].Play();
+            canPlayRotationSound = false;
+        }
+        if (rotationSpeed <= 0) {
+            canPlayRotationSound = true;
+            sound[(int)SoundIndex.ROTATE].Stop();
+        }
+        sound[(int)SoundIndex.ROTATE].pitch = Mathf.Min(rotationSpeed, 3);
 
         if (isGoal == true && isAnimationEnd == false) {
             Gruguru();
@@ -52,10 +81,11 @@ public class Goal : MonoBehaviour {
                 thunderEmission.rateOverTime = rotationSpeed* 100 + 40;
                 sparkEmission.rateOverTime =Mathf.Max(0, rotationSpeed* 100 - 50);
 
-                //‰‰oI—¹
+                //ï¿½ï¿½ï¿½oï¿½Iï¿½ï¿½
                 if (rotationSpeed > 3.5f) {
                     canClear = true;
                     isFlash = true;
+                    sound[(int)SoundIndex.SORT].Play();
                 }
             } else {
                 rotationSpeed -= Time.deltaTime;
@@ -65,7 +95,7 @@ public class Goal : MonoBehaviour {
             }
 
 
-            //Œ³‚Ìó‘Ô‚É–ß‚·
+            //ï¿½ï¿½ï¿½Ìï¿½Ô‚É–ß‚ï¿½
             if (isFlash == true) {
                 flashTimer += Time.deltaTime*0.5f;
                 steam.SetActive(true);
@@ -93,22 +123,31 @@ public class Goal : MonoBehaviour {
         if (other.gameObject.CompareTag("Player")) {
             Player player = other.gameObject.GetComponent<Player>();
 
-            //ƒXƒRƒAİ’è
+            //ï¿½Xï¿½Rï¿½Aï¿½İ’ï¿½
             ScoreManager.SetAir(player.air.GetTimer());
+
+            
         }
     }
     private void OnTriggerStay(Collider other) {
         if (other.gameObject.CompareTag("Player") && isFlash == false) {
             Player player = other.gameObject.GetComponent<Player>();
 
-            //ƒvƒŒƒCƒ„[‚Ì“®‚«‚ğ~‚ß‚é
+            //ï¿½vï¿½ï¿½ï¿½Cï¿½ï¿½ï¿½[ï¿½Ì“ï¿½ï¿½ï¿½ï¿½ï¿½~ï¿½ß‚ï¿½
             player.gameObject.transform.position = playerPosObj.transform.position;
 
-            //’‹ƒJƒƒ‰‚É•ÏX
+            //ï¿½ï¿½ï¿½ï¿½ï¿½Jï¿½ï¿½ï¿½ï¿½ï¿½É•ÏX
             StageManager.instance.camera.SetAction<PointCameraAction>();
             StageManager.instance.camera.GetAction<PointCameraAction>().SetPoint(this.transform.position - Vector3.forward * 7);//7
 
             isGoal = true;
+
+
+            hitSoundIntervalTimer += Time.fixedDeltaTime;
+            if (hitSoundIntervalTimer > 0.4f && hitSoundIntervalTimer<100) {
+                sound[(int)SoundIndex.HIT].Play();
+                hitSoundIntervalTimer = 100;
+            }
         }
     }
 
@@ -116,16 +155,16 @@ public class Goal : MonoBehaviour {
         Vector3 mousePos = GetWorldMousePos();
 
 
-        //–Ú•W‚Æƒ}ƒEƒXÀ•W‚ğ‹——£
+        //ï¿½Ú•Wï¿½Æƒ}ï¿½Eï¿½Xï¿½ï¿½ï¿½Wï¿½ï¿½ï¿½ï¿½ï¿½
         Vector3 dist1 = this.transform.position - mousePos;
 
-        //1ƒtƒŒ[ƒ€‘O‚Ìƒ}ƒEƒXÀ•W‚Æ¡‚Ìƒ}ƒEƒXÀ•W‚Ì‹——£
+        //1ï¿½tï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½Oï¿½Ìƒ}ï¿½Eï¿½Xï¿½ï¿½ï¿½Wï¿½Æï¿½ï¿½Ìƒ}ï¿½Eï¿½Xï¿½ï¿½ï¿½Wï¿½Ì‹ï¿½ï¿½ï¿½
         Vector3 dist2 = mousePosBuffer - mousePos;
 
-        //’l‚ª+‚¾‚Á‚½‚çŒv‰ñ‚è
+        //ï¿½lï¿½ï¿½+ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½çï¿½vï¿½ï¿½ï¿½
         Vector3 cross = Vector3.Cross(dist2, dist1);
         if (cross.z > 0) {
-            //—Ç‚¢Š´‚¶
+            //ï¿½Ç‚ï¿½ï¿½ï¿½ï¿½ï¿½
             isGuruguru = true;
 
         } else {

@@ -135,9 +135,18 @@ public class PlayerGuruguruAction : PlayerAction {
             isEnd = true;
             player.sound.PlayShot(PlayerSound.SoundIndex.SUMAKI_END);
             ScoreManager.sumakiNum++;
+
+            //アイテムの追加
+            PlayerItem.PlayerItemIndex itemIndex;
+            int enemyItem = target.GetComponent<Enemy>().ItemNum;
+            if (enemyItem == 0) {
+                player.item.AddKey();
+            } else {
+                itemIndex = (PlayerItem.PlayerItemIndex)(enemyItem-1);
+                player.item.AddItem(itemIndex);
+            }
         } 
 
-        //攻撃を受けても解除
 
 
         //グルグル終了
