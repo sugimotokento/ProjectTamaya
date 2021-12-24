@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ScoreManager : MonoBehaviour {
     //ゴールでスコアを設定、ゴールイベントでスコアを表示
@@ -27,7 +28,6 @@ public class ScoreManager : MonoBehaviour {
     [HideInInspector] static public int sumakiNum = 0;
     [HideInInspector] static public int retryNum = 0;
 
-    [SerializeField] static private float legendBorder=0;
 
     // Start is called before the first frame update
     void Start() {
@@ -76,7 +76,7 @@ public class ScoreManager : MonoBehaviour {
         if (score >= 100000) {
             rank = RankIndex.RANK_SS;
 
-            if (air >=legendBorder) {
+            if (air >= LegendAirBorder()) {
                 rank = RankIndex.RANK_LEGEND;
             }
 
@@ -94,5 +94,27 @@ public class ScoreManager : MonoBehaviour {
         }
 
         return rank;
+    }
+
+
+    static float LegendAirBorder() {
+        string name = SceneManager.GetActiveScene().name;
+        if (name == "Stage1") {
+            return 255;
+        }
+        if (name == "Stage2") {
+            return 300;
+        }
+        if (name == "Stage3") {
+            return 200;
+        }
+        if (name == "Stage4") {
+            return 250;
+        }
+        if (name == "Stage5") {
+            return 330;
+        }
+
+        return 0;
     }
 }
