@@ -16,10 +16,12 @@ public class GameCamera : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
-        action.Action();
+        
     }
 
-
+    private void FixedUpdate() {
+        action.Action();
+    }
 
 
     public void SetAction<T>() where T : CameraAction, new() {

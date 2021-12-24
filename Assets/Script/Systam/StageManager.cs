@@ -7,7 +7,7 @@ public class StageManager : MonoBehaviour {
 
     public static StageManager instance = null;
     public static string sceneName;
-    
+
 
     public GameObject eventObj;
     public Player player;
@@ -24,19 +24,28 @@ public class StageManager : MonoBehaviour {
     [SerializeField] private string nextSceneName;
 
     [HideInInspector] public bool isClear = false;
-    [HideInInspector] public bool isGameStart = false;
     [HideInInspector] public bool isEventActive = false;
 
-    private bool canMainBGM = true;
 
-    private List<GameEvent> gameEvents=new List<GameEvent>();
+    private GameObject enemyManagerObj;
+    private List<Enemy> enemyScript = new List<Enemy>();
+
+    public bool canMainBGM = false;
+    private bool canBattleBGM = true;
+
+    private List<GameEvent> gameEvents = new List<GameEvent>();
     private bool canSetPlayerAction = false;
 
     private void Awake() {
         instance = this;
 
-        for(int i=0; i < eventObj.transform.childCount; ++i) {
+        for (int i = 0; i < eventObj.transform.childCount; ++i) {
             gameEvents.Add(eventObj.transform.GetChild(i).gameObject.GetComponent<GameEvent>());
+        }
+
+        enemyManagerObj = GameObject.Find("EnemyManager");
+        for (int i = 0; i < enemyManagerObj.transform.childCount; ++i) {
+            enemyScript.Add(enemyManagerObj.transform.GetChild(i).gameObject.GetComponent<Enemy>());
         }
     }
 
@@ -52,21 +61,11 @@ public class StageManager : MonoBehaviour {
     // Update is called once per frame
     void Update() {
 
-        if (isGameStart == true) {
-            if (canMainBGM == true) {
-                bgm.Stop();
-                bgm.clip = mainBGMClip;
-                bgm.Play();
-                canMainBGM = false;
-            }
-        } else {
-            canMainBGM = true;
-        }
-
+        ChangeBGM();
         Event();
     }
 
-    private void Event(){
+    private void Event() {
         isEventActive = false;
         for (int i = 0; i < gameEvents.Count; ++i) {
             if (gameEvents[i].GetIsEvent() == true) {
@@ -87,7 +86,49 @@ public class StageManager : MonoBehaviour {
             }
         }
     }
+    private void ChangeBGM() {
 
+
+        //�o�g������
+        bool isBattleMode = false;
+        for (int i = 0; i < enemyScript.Count; ++i) {
+            if (enemyScript[i].isSumaki==true) {
+                enemyScript[i].SCENE_NUM = 1;
+            }
+        }
+        for (int i = 0; i < enemyScript.Count; ++i) {
+            if (enemyScript[i].SCENE_NUM == 3) {
+                isBattleMode = true;
+                break;
+            }
+        }
+
+
+        //�X�^�[�gBGM���烁�C��BGM
+        if ( isBattleMode==false) {
+            if (canMainBGM == true) {
+                bgm.Stop();
+                bgm.clip = mainBGMClip;
+                bgm.Play();
+                canMainBGM = false;
+            }
+        } else {
+            canMainBGM = true;
+        }
+
+
+        //�o�g��BGM�Đ�
+        if (isBattleMode == true && canBattleBGM == true) {
+            bgm.Stop();
+            bgm.clip = battleBGMClip;
+            bgm.Play();
+            canBattleBGM = false;
+        }
+        if (isBattleMode == false) {
+            canBattleBGM = true;
+        }
+
+    }
 
     public void SetNextScene() {
         fade.gameObject.SetActive(true);

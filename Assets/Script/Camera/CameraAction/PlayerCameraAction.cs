@@ -11,7 +11,7 @@ public class PlayerCameraAction : CameraAction {
         mousePos = Camera.main.ScreenToWorldPoint(mousePos);
         mousePos.z = 0;
 
-        float late = 0.1f;
+        float late = 0.5f;
 
         Vector3 cameraPos = camera.transform.position + Vector3.back * -12;
         Vector3 followPos = -StageManager.instance.player.transform.position + (mousePos * 0.5f * (1 - late) + StageManager.instance.player.moveSpeed * late);

@@ -10,6 +10,7 @@ public class StartTalkEvent : GameEvent {
     [SerializeField] Image frameRight;
     [SerializeField] Image frameLeft;
     [SerializeField] Image toshiro;
+    [SerializeField] Image rebecca;
     [SerializeField] Text nameRightText;
     [SerializeField] Text nameLeftText;
 
@@ -55,6 +56,7 @@ public class StartTalkEvent : GameEvent {
                 //左右のキャラクター判定
                 if (isRight[talkIndex] == true) {
                     toshiro.color = new Color(1, 1, 1, 0.3f);
+                    rebecca.color = new Color(1, 1, 1, 1);
                     nameRightText.gameObject.SetActive(true);
                     frameRight.gameObject.SetActive(true);
 
@@ -63,6 +65,7 @@ public class StartTalkEvent : GameEvent {
 
                 } else {
                     toshiro.color=new Color(1,1,1, 1);
+                    rebecca.color=new Color(1,1,1, 0.3f);
                     nameLeftText.gameObject.SetActive(true);
                     frameLeft.gameObject.SetActive(true);
 
