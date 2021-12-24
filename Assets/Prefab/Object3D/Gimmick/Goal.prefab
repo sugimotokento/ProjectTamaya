@@ -4961,6 +4961,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1177612748884534372}
   - component: {fileID: 5923453259136903745}
+  - component: {fileID: 4978826441454888325}
   m_Layer: 0
   m_Name: Hit
   m_TagString: Untagged
@@ -5078,6 +5079,20 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &4978826441454888325
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1893703930061574463}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9b23e324f5862d4aa66b6f956c89c04, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isBGM: 0
+  baseVolume: 1
 --- !u!1 &2254661695071898900
 GameObject:
   m_ObjectHideFlags: 0
@@ -5088,6 +5103,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2437988601183703854}
   - component: {fileID: 5330789341187252836}
+  - component: {fileID: 5682298522668240785}
   m_Layer: 0
   m_Name: Short
   m_TagString: Untagged
@@ -5205,6 +5221,20 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &5682298522668240785
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2254661695071898900}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9b23e324f5862d4aa66b6f956c89c04, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isBGM: 0
+  baseVolume: 1
 --- !u!1 &3180272935931016179
 GameObject:
   m_ObjectHideFlags: 0
@@ -10084,6 +10114,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8981400227377556396}
   - component: {fileID: 5535116639231425951}
+  - component: {fileID: 6466177424790269515}
   m_Layer: 0
   m_Name: Rotation
   m_TagString: Untagged
@@ -10201,6 +10232,20 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &6466177424790269515
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7620304718662143901}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9b23e324f5862d4aa66b6f956c89c04, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isBGM: 0
+  baseVolume: 1
 --- !u!1001 &5899539362449325984
 PrefabInstance:
   m_ObjectHideFlags: 0

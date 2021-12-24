@@ -16,6 +16,7 @@ public class GameClearEvent : GameEvent {
     public GameObject result; 
     public GameObject click;
 
+    [SerializeField] GameObject soundObj;
     [SerializeField] Sprite[] rankSprite;
     [SerializeField] ImageNumber scoreNum;
     [SerializeField] ImageTimer airScore;
@@ -26,11 +27,16 @@ public class GameClearEvent : GameEvent {
     [SerializeField] float rankChangeSpeed;
     [SerializeField] float clickMoveSpeed;
 
+    List<AudioSource> sound = new List<AudioSource>();
+    bool canPlaySE = true;
+    bool canPlaySE2 = true;
+    bool canPlayBGM = true;
 
-    // logoRotateTimeƒƒ‚
-    // ’â~ƒ^ƒCƒ~ƒ“ƒO‚Íscale‚ª1.0‚ğ’´‚¦‚½ƒ^ƒCƒ~ƒ“ƒO‚Å‰ñ“]EŠg‘å‚ª~‚Ü‚é‚Ì‚Å
-    // ’†“r”¼’[‚È•b”‚¾‚ÆŠp“x‚ªƒYƒŒ‚Ü‚·B ‚¨ƒXƒXƒ‚Í0.6‚©1B
-    // ’PˆÊ‚Í"•b"B‚â‚â‚±‚µ‚¢‚ËB
+
+    // logoRotateTimeï¿½ï¿½ï¿½ï¿½
+    // ï¿½ï¿½~ï¿½^ï¿½Cï¿½~ï¿½ï¿½ï¿½Oï¿½ï¿½scaleï¿½ï¿½1.0ï¿½ğ’´‚ï¿½ï¿½ï¿½ï¿½^ï¿½Cï¿½~ï¿½ï¿½ï¿½Oï¿½Å‰ï¿½]ï¿½Eï¿½gï¿½å‚ªï¿½~ï¿½Ü‚ï¿½Ì‚ï¿½
+    // ï¿½ï¿½ï¿½rï¿½ï¿½ï¿½[ï¿½È•bï¿½ï¿½ï¿½ï¿½ï¿½ÆŠpï¿½xï¿½ï¿½ï¿½Yï¿½ï¿½ï¿½Ü‚ï¿½ï¿½B ï¿½ï¿½ï¿½Xï¿½Xï¿½ï¿½ï¿½ï¿½0.6ï¿½ï¿½1ï¿½B
+    // ï¿½Pï¿½Ê‚ï¿½"ï¿½b"ï¿½Bï¿½ï¿½â‚±ï¿½ï¿½ï¿½ï¿½ï¿½ËB
 
     struct phaseMode
     {
@@ -53,7 +59,7 @@ public class GameClearEvent : GameEvent {
     void Start()
     {
         //Application.targetFrameRate = 60;
-        // ŠeƒIƒuƒWƒFƒNƒg‚ğƒtƒŒ[ƒ€ŠO‚ÉˆÚ“®‚³‚¹‚é
+        // ï¿½eï¿½Iï¿½uï¿½Wï¿½Fï¿½Nï¿½gï¿½ï¿½tï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½Oï¿½ÉˆÚ“ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         Vector3 defaultPos = ropeUpper.transform.localPosition;
         defaultPos.x -= 2000.0f;
         ropeUpper.transform.localPosition = defaultPos;
@@ -85,6 +91,10 @@ public class GameClearEvent : GameEvent {
         defaultPos = click.transform.localPosition;
         defaultPos.y -= 100f;
         click.transform.localPosition = defaultPos;
+
+        for(int i=0; i < soundObj.transform.childCount; ++i) {
+            sound.Add(soundObj.transform.GetChild(i).GetComponent<AudioSource>());
+        }
     }
 
     // Update is called once per frame
@@ -94,13 +104,17 @@ public class GameClearEvent : GameEvent {
         if (Input.GetKeyDown(KeyCode.K)) { isEvent = true; phase[0].ready = true; }
         if (canEvent == true)
         {
+            if (canPlayBGM == true) {
+                canPlayBGM = false;
+                sound[0].Play();
+            }
             scoreNum.SetNumber(ScoreManager.GetScore());
             airScore.SetTime(ScoreManager.GetAir());
             rankimg.GetComponent<Image>().sprite = rankSprite[(int)ScoreManager.GetRank()];
-            //‚±‚±‚É‘‚­
+            //ï¿½ï¿½ï¿½ï¿½ï¿½Éï¿½ï¿½ï¿½
             transform.GetChild(0).gameObject.SetActive(true);
 
-            // ‚±‚±‚©‚çŠeˆ—
+            // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½eï¿½ï¿½ï¿½ï¿½
             if (phase[0].ready && !phase[0].isEnd)
             {
                 if (ropeUpper.transform.localPosition.x >= 0.0f) moveNextPhase(0);
@@ -123,7 +137,7 @@ public class GameClearEvent : GameEvent {
                 }
                 else
                 {
-                    // ‚±‚±‚É‚¢‚¢Š´‚¶‚Ìˆ—‚©‚¯‚ê‚Î‚à‚Á‚ÆãY—í‚É‚È‚é
+                    // ï¿½ï¿½ï¿½ï¿½ï¿½É‚ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ìï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î‚ï¿½ï¿½ï¿½ï¿½ï¿½Yï¿½ï¿½É‚È‚ï¿½
                         moveNextPhase((int)phaseName.ROTATE_LOGO);
                 }
             }
@@ -136,11 +150,16 @@ public class GameClearEvent : GameEvent {
                     result.transform.position += new Vector3(ropeMoveSpeed * Time.deltaTime, 0f, 0f);
                     air.transform.position += new Vector3(ropeMoveSpeed * Time.deltaTime, 0f, 0f);
                     score.transform.position += new Vector3(ropeMoveSpeed * Time.deltaTime, 0f, 0f);
+                  
                 }
             }
 
             if (phase[(int)phaseName.FADEIN_RANK].ready && !phase[(int)phaseName.FADEIN_RANK].isEnd)
             {
+                if (canPlaySE == true) {
+                    sound[1].Play();
+                    canPlaySE = false;
+                }
                 if (rankAnimStartCount != 0) rankAnimStartCount--;
                 else
                 {
@@ -150,20 +169,24 @@ public class GameClearEvent : GameEvent {
                     else
                     {
                         rankimg.transform.localScale -= new Vector3(rankChangeSpeed * Time.deltaTime, rankChangeSpeed * Time.deltaTime, 0.0f);
+                        
                     }
                 }
             }
             
             if (phase[(int)phaseName.FADEIN_CLICKNEXT].ready && !phase[(int)phaseName.FADEIN_CLICKNEXT].isEnd)
             {
-
+                if (canPlaySE2 == true) {
+                    sound[1].Play();
+                    canPlaySE2 = false;
+                }
                 if (click.transform.localPosition.y <= -480.0f)
                 {
                     click.transform.position += new Vector3(0f, clickMoveSpeed * Time.deltaTime, 0f);
                 }
                 else
                 {
-                    // I—¹ˆ—
+                    // ï¿½Iï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
                     //  moveNextPhase((int)phaseName.FADEIN_CLICKNEXT);
                     if (Input.GetMouseButton(0)) {
                         StageManager.instance.SetNextScene();

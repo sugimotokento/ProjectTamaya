@@ -128,6 +128,10 @@ public class StageManager : MonoBehaviour {
             canBattleBGM = true;
         }
 
+
+        if (isClear == true) {
+            bgm.Stop();
+        }
     }
 
     public void SetNextScene() {

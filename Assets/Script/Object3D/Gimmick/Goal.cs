@@ -115,6 +115,7 @@ public class Goal : MonoBehaviour {
             ClearInterval += Time.deltaTime;
             if (ClearInterval > 2.5f) {
                 StageManager.instance.isClear = true;
+                sound[(int)SoundIndex.ROTATE].Stop();
             }
         }
     }
