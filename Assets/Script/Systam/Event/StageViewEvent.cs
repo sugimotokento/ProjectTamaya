@@ -7,6 +7,7 @@ public class StageViewEvent : GameEvent {
     public Vector3[] start = new Vector3[2];
     public Vector3[] end = new Vector3[2];
     public float[] late = new float[2];
+    public float[] moveSpeedLate = new float[2];
 
     LerpCameraAction cameraAction;
     private Vector3 startCameraPos;
@@ -35,7 +36,7 @@ public class StageViewEvent : GameEvent {
                 cameraAction.start = start[index];
                 cameraAction.end = end[index];
                 cameraAction.SetLate(late[index]);
-                late[index] += 0.2f * Time.deltaTime;
+                late[index] += 0.2f * Time.deltaTime*moveSpeedLate[index];
                 if (late[index] > 1) {
                     index++;
                 }
