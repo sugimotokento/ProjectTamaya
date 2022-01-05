@@ -18,7 +18,7 @@ public class FadeIn : MonoBehaviour {
 
         image.color = new Color(0, 0, 0, alpha);
         if (isFadeEnd == false) {
-            alpha -= Time.deltaTime;
+            alpha -= Time.unscaledDeltaTime;
         }
 
 

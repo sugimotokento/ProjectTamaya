@@ -21,12 +21,17 @@ public class PauseManager : MonoBehaviour
     [SerializeField] GameObject PauseButton;
     // EventSystem格納用（どのボタンが押されたかを判定するため）
     [SerializeField] private EventSystem eventSystem;
+
+    //フェード用
+    [SerializeField] private FadeOut2 fade;
+
     // Panel退避用
     private GameObject nowPanel;
     private GameObject nextPanel;
     // Slide用
     private bool SlideInFlg;
     private bool SlideOutFlg;
+    private bool isChangeScene = false;
     private int SlideFrame;
     private float SlideMoveAmount;
     // SlideFlg取得用
@@ -72,15 +77,20 @@ public class PauseManager : MonoBehaviour
             PauseButton.SetActive(false);
         if (!StageManager.instance.isEventActive)
             PauseButton.SetActive(true);
+
+        if (isChangeScene == true) {
+            if (fade.GetIsFadeEnd() == true) {
+                Time.timeScale = 1;
+                SceneManager.LoadScene("Title");
+            }
+        }
     }
 
     public void OnClickPauseButton()
     {
-        Debug.Log("PauseButton is Click!!");
 
         if (Time.timeScale != 0)
         {
-            Debug.Log("Pause!!");
             Time.timeScale = 0;
             Filter.SetActive(true);
             nextPanel = PauseMenuPanel;
@@ -94,6 +104,7 @@ public class PauseManager : MonoBehaviour
             if (nowPanel != PauseMenuPanel)
             {
                 nextPanel = PauseMenuPanel;
+                PushButtonSE.Play();
             }
             else
             {
@@ -110,12 +121,21 @@ public class PauseManager : MonoBehaviour
     public void OnClicktoTitleButton()
     {
         // タイトルに戻る処理を入れてね
-        // SceneManager.LoadScene("Title");
+        fade.gameObject.SetActive(true);
+        isChangeScene = true;
     }
 
     public void OnClickGameEndButton()
     {
         nextPanel = GameEndMenuPanel;
+        
+    }
+    public void OnClickQuiteGame() {
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#elif UNITY_STANDALONE
+      UnityEngine.Application.Quit();
+#endif
     }
 
     public void OnPushButton()
@@ -171,12 +191,12 @@ public class PauseManager : MonoBehaviour
         {
             if (nextPanel == NonePanel)
             {
-                Debug.Log("UnPause!!");
                 Time.timeScale = 1.0f;
                 SlideInFlg = false;
                 isSlideActive = false;
                 Filter.SetActive(false);
                 nowPanel = nextPanel;
+                PushButtonSE.Play();
                 return;
             }
             if (SlideFrame >= c_SlideFrameRatio)

@@ -5720,6 +5720,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3116734692297407556, guid: 77728f726d7285a49a6c9a60705641ba, type: 3}
+      propertyPath: image
+      value: 
+      objectReference: {fileID: 1019274439}
     - target: {fileID: 7572948224141510995, guid: 77728f726d7285a49a6c9a60705641ba, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -5834,6 +5838,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 77728f726d7285a49a6c9a60705641ba, type: 3}
+--- !u!114 &343598454 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3116734692297407556, guid: 77728f726d7285a49a6c9a60705641ba, type: 3}
+  m_PrefabInstance: {fileID: 343598453}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0821c2ce0038bc44cb52f137061eb22f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &350095894
 GameObject:
   m_ObjectHideFlags: 0
@@ -15126,6 +15141,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1065dd40c9263f3428fb8cdd566c9624, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1019274439 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8473210127951226675, guid: 77728f726d7285a49a6c9a60705641ba, type: 3}
+  m_PrefabInstance: {fileID: 343598453}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1019978064 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 178799386188159464, guid: 7f7f20aa99f0cff42af5221f14a505b4, type: 3}
@@ -19185,6 +19211,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 161806771394676805, guid: a2c5030b3d375b545884a613cb7864ce, type: 3}
+      propertyPath: fade
+      value: 
+      objectReference: {fileID: 343598454}
     - target: {fileID: 161806771394676806, guid: a2c5030b3d375b545884a613cb7864ce, type: 3}
       propertyPath: m_Name
       value: GameClearEvent

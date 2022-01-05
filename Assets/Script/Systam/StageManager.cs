@@ -139,16 +139,16 @@ public class StageManager : MonoBehaviour {
         if (fade.GetIsFadeEnd() == true) {
             string name = SceneManager.GetActiveScene().name;
             if (name == "Stage1") {
-                SceneManager.LoadScene("Srage2");
+                SceneManager.LoadScene("Stage2");
             }
             if (name == "Stage2") {
-                SceneManager.LoadScene("Srage3");
+                SceneManager.LoadScene("Stage3");
             }
             if (name == "Stage3") {
-                SceneManager.LoadScene("Srage4");
+                SceneManager.LoadScene("Stage4");
             }
             if (name == "Stage4") {
-                SceneManager.LoadScene("Srage5");
+                SceneManager.LoadScene("Stage5");
             }
             if (name == "Stage5") {
                 SceneManager.LoadScene("BossTest");

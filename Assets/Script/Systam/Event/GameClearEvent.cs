@@ -26,6 +26,7 @@ public class GameClearEvent : GameEvent {
     [SerializeField] int rankAnimStartCount;
     [SerializeField] float rankChangeSpeed;
     [SerializeField] float clickMoveSpeed;
+    [SerializeField] FadeOut2 fade;
 
     List<AudioSource> sound = new List<AudioSource>();
     bool canPlaySE = true;
@@ -190,9 +191,13 @@ public class GameClearEvent : GameEvent {
                     //  moveNextPhase((int)phaseName.FADEIN_CLICKNEXT);
                     if (Input.GetMouseButtonDown(0)) {
                         isNextScene = true;
-                        
+                        fade.gameObject.SetActive(true);
                     }
-                    if (isNextScene == true) { StageManager.instance.SetNextScene(); }
+                    if (fade.GetIsFadeEnd() == true) {
+
+                        StageManager.instance.SetNextScene();
+
+                    }
                 }
             }
         }

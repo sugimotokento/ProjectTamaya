@@ -21,7 +21,7 @@ public class FadeOut : MonoBehaviour {
 
         image.material.SetFloat("_Timer", alpha*2);
         if (isFadeEnd == false) {
-            alpha += Time.deltaTime*addLate;
+            alpha += Time.unscaledDeltaTime * addLate;
         }
 
         if (alpha > 1) {
