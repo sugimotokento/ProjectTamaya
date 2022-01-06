@@ -7705,6 +7705,30 @@ PrefabInstance:
       propertyPath: m_Name
       value: SecurityDoor
       objectReference: {fileID: 0}
+    - target: {fileID: 4487137330770438643, guid: 1b5bb183dd90d1b4fa35a3598651a20e, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.7662647
+      objectReference: {fileID: 0}
+    - target: {fileID: 4487137330770438643, guid: 1b5bb183dd90d1b4fa35a3598651a20e, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.47493
+      objectReference: {fileID: 0}
+    - target: {fileID: 4487137330770438643, guid: 1b5bb183dd90d1b4fa35a3598651a20e, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.47493
+      objectReference: {fileID: 0}
+    - target: {fileID: 4487137330770438643, guid: 1b5bb183dd90d1b4fa35a3598651a20e, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.14
+      objectReference: {fileID: 0}
+    - target: {fileID: 4487137330770438643, guid: 1b5bb183dd90d1b4fa35a3598651a20e, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.282
+      objectReference: {fileID: 0}
+    - target: {fileID: 4487137330770438643, guid: 1b5bb183dd90d1b4fa35a3598651a20e, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.484
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1b5bb183dd90d1b4fa35a3598651a20e, type: 3}
 --- !u!4 &797503668 stripped
