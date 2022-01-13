@@ -6,6 +6,7 @@ public class SetSoundVolume : MonoBehaviour {
     [SerializeField] private bool isBGM = false;
     private AudioSource audioSouce;
     [SerializeField] private float baseVolume = 1;
+    [SerializeField] private float volumeRange = 15;
     // Start is called before the first frame update
     void Start() {
         audioSouce = GetComponent<AudioSource>();
@@ -16,7 +17,15 @@ public class SetSoundVolume : MonoBehaviour {
         if (isBGM == true) {
             audioSouce.volume = baseVolume * SoundManager.instance.GetVolumeBGM();
         } else {
-            audioSouce.volume = baseVolume * SoundManager.instance.GetVolumeSE();
+            float distVolume = 1;
+            Vector3 dist = this.transform.position - StageManager.instance.player.gameObject.transform.position;
+            dist.z = 0;
+            distVolume = volumeRange - dist.magnitude;
+            distVolume /= volumeRange;
+            if (distVolume < 0) distVolume = 0;
+
+            audioSouce.volume = baseVolume * SoundManager.instance.GetVolumeSE()*distVolume;
+            Debug.Log(distVolume);
         }
     }
 }
