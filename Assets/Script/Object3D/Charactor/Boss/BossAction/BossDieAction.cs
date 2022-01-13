@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class BossDieAction : BossAction {
+
+    public bool isDieAnimationEnd = false;
+    private float dieAnimationTimer = 0;
     public override void Action() {
         boss.animator.SetBool("isDie", true);
         boss.animator.SetBool("isIdle", false);
@@ -11,6 +14,9 @@ public class BossDieAction : BossAction {
         boss.animator.SetBool("isAnger", false);
 
 
-     
+        dieAnimationTimer += Time.fixedDeltaTime;
+        if (dieAnimationTimer > 4) {
+            isDieAnimationEnd = true;
+        }
     }
 }

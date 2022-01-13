@@ -14,11 +14,11 @@ public class Boss : MonoBehaviour {
 
     [HideInInspector] public int hp = 5;
     [HideInInspector] public bool isDamage = false;
-    
 
+    private bool isSetDieAction = false;
     // Start is called before the first frame update
     void Start() {
-        SetAction<BossIdleAction>();
+     //   SetDefaultAction();
     }
 
     // Update is called once per frame
@@ -29,16 +29,22 @@ public class Boss : MonoBehaviour {
     private void FixedUpdate() {
         action.Action();
 
-        if (hp <= 0) {
+        if (hp <= 0&&isSetDieAction==false) {
             SetAction<BossDieAction>();
+            isSetDieAction = true;
         }
     }
 
     public void Damage() {
-        hp -= 1;
+        hp -= 5;
         isDamage = true;
     }
-
+    public void SetDefaultAction() {
+        SetAction<BossIdleAction>();
+    }
+    public void SetActionNone() {
+        SetAction<BossAction>();
+    }
     public T GetAction<T>() where T : BossAction {
         return (T)(object)action;
     }

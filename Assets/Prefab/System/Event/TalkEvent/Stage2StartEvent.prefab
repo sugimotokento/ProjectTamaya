@@ -50,6 +50,7 @@ MonoBehaviour:
   frameLeft: {fileID: 4903747613293074095}
   toshiro: {fileID: 6427174726234139312}
   rebecca: {fileID: 1329387225271616046}
+  okami: {fileID: 8968654195434289783}
   nameRightText: {fileID: 7054608462104986614}
   nameLeftText: {fileID: 4903747614803550364}
   sound: {fileID: 6517026312348860476}
@@ -65,7 +66,6 @@ MonoBehaviour:
   - "\u30EC\u30D9\u30C3\u30AB"
   - "\u30C8\u30B7\u30ED\u30FC"
   - "\u30EC\u30D9\u30C3\u30AB"
-  isRight: 0100010001000100010001
   talk:
   - "\u3084\u3063\u3071\u30C8\u30B7\u30ED\u30FC\u3055\u3093\u3059\u3054\u3044\u3067\u3059\uFF01
     \u307E\u3060\u307E\u3060\u73FE\u5F79\u3067\u901A\u308A\u307E\u3059\u306D\u3063"
@@ -262,6 +262,17 @@ Transform:
 --- !u!114 &6427174726234139312 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2382784607028933875, guid: 9a28e8f7cb296bc428601756a1267ebe, type: 3}
+  m_PrefabInstance: {fileID: 8656112710225206851}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &8968654195434289783 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 312929654306169908, guid: 9a28e8f7cb296bc428601756a1267ebe, type: 3}
   m_PrefabInstance: {fileID: 8656112710225206851}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}

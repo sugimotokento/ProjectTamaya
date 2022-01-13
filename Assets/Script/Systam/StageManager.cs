@@ -11,6 +11,7 @@ public class StageManager : MonoBehaviour {
 
     public GameObject eventObj;
     public Player player;
+    public Boss boss;
     public GameCamera camera;
     public PauseManager pause;
 
@@ -53,7 +54,7 @@ public class StageManager : MonoBehaviour {
     void Start() {
         sceneName = SceneManager.GetActiveScene().name;
         player.SetDefaultAction();
-
+        if (boss != null) boss.SetDefaultAction();
         bgm.clip = startBGMClip;
         bgm.Play();
     }
@@ -73,6 +74,7 @@ public class StageManager : MonoBehaviour {
                 canSetPlayerAction = true;
                 player.SetActiveUI(false);
                 player.ReMoveActionAll();
+                if (boss != null) boss.SetActionNone();
                 isEventActive = true;
                 break;
             }
@@ -82,6 +84,7 @@ public class StageManager : MonoBehaviour {
             if (canSetPlayerAction == true) {
                 player.SetActiveUI(true);
                 player.SetDefaultAction();
+                if (boss != null) boss.SetDefaultAction();
                 canSetPlayerAction = false;
             }
         }

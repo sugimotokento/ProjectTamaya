@@ -11,14 +11,17 @@ public class StartTalkEvent : GameEvent {
     [SerializeField] Image frameLeft;
     [SerializeField] Image toshiro;
     [SerializeField] Image rebecca;
+    [SerializeField] Image okami;
     [SerializeField] Text nameRightText;
     [SerializeField] Text nameLeftText;
 
     [SerializeField] AudioSource sound;
 
     [SerializeField] private string[] talkCharactorName = new string[13];
-    [SerializeField] private bool[] isRight = new bool[13];
     [SerializeField] private string[] talk = new string[13];
+
+    [SerializeField] private bool isEndEvent = false;
+
     private string endText;
     private string drawText;
 
@@ -27,10 +30,13 @@ public class StartTalkEvent : GameEvent {
     private float addTextIntervalTimer = 0;
     private bool isSetCameraAction = true;
     private bool canPlayBGM = true;
+    private bool isEventOnce = false;
 
     // Start is called before the first frame update
     void Start() {
-        isEvent = true;
+        if (isEndEvent == false) {
+            isEvent = true;
+        }
         drawText = "";
         endText = "_";
 
@@ -39,7 +45,13 @@ public class StartTalkEvent : GameEvent {
 
     // Update is called once per frame
     void Update() {
-
+        if (StageManager.instance.boss != null && isEventOnce == false) {
+            Boss boss = StageManager.instance.boss;
+            if (boss.CheckAction<BossDieAction>() == true && boss.GetAction<BossDieAction>().isDieAnimationEnd == true) {
+                isEvent = true;
+                isEventOnce = true;
+            }
+        }
         Talk();
 
     }
@@ -47,6 +59,7 @@ public class StartTalkEvent : GameEvent {
     protected void Talk() {
         if (canEvent == true) {
             if (isEvent == true) {
+                isEventOnce = true;
                 if (canPlayBGM == true) {
                     canPlayBGM = false;
                     StageManager.instance.bgm.Stop();
@@ -60,25 +73,46 @@ public class StartTalkEvent : GameEvent {
                     StageManager.instance.camera.GetAction<PointCameraAction>().SetPoint(StageManager.instance.player.gameObject.transform.position - Vector3.forward * 6);
                 }
                 visual.SetActive(true);
-
+              
                 //左右のキャラクター判定
-                if (isRight[talkIndex] == true) {
-                    toshiro.color = new Color(1, 1, 1, 0.3f);
-                    rebecca.color = new Color(1, 1, 1, 1);
-                    nameRightText.gameObject.SetActive(true);
-                    frameRight.gameObject.SetActive(true);
-
-                    nameLeftText.gameObject.SetActive(false);
-                    frameLeft.gameObject.SetActive(false);
-
-                } else {
-                    toshiro.color=new Color(1,1,1, 1);
-                    rebecca.color=new Color(1,1,1, 0.3f);
+                if (talkCharactorName[talkIndex] == "トシロー") {
+                    toshiro.color = new Color(1, 1, 1, 1);
+                    rebecca.color = new Color(1, 1, 1, 0.3f);
+                    okami.color = new Color(1, 1, 1, 0);
                     nameLeftText.gameObject.SetActive(true);
                     frameLeft.gameObject.SetActive(true);
 
                     nameRightText.gameObject.SetActive(false);
                     frameRight.gameObject.SetActive(false);
+
+
+                } else {
+
+                    nameRightText.gameObject.SetActive(true);
+                    frameRight.gameObject.SetActive(true);
+
+                    nameLeftText.gameObject.SetActive(false);
+                    frameLeft.gameObject.SetActive(false);
+                }
+
+
+                if (talkCharactorName[talkIndex] == "レベッカ") {
+                    toshiro.color = new Color(1, 1, 1, 0.3f);
+                    rebecca.color = new Color(1, 1, 1, 1);
+                    okami.color = new Color(1, 1, 1, 0);
+
+                } else if (talkCharactorName[talkIndex] == "トシロー") {
+
+                } else if (talkCharactorName[talkIndex] == "オカミ") {
+                    toshiro.color = new Color(1, 1, 1, 0.3f);
+                    rebecca.color = new Color(1, 1, 1, 0);
+                    okami.color = new Color(1, 1, 1, 1);
+
+                } else {
+                    toshiro.color = new Color(1, 1, 1, 0.3f);
+                    rebecca.color = new Color(1, 1, 1, 0.3f);
+                    okami.color = new Color(1, 1, 1, 0);
+
                 }
 
 
@@ -125,10 +159,10 @@ public class StartTalkEvent : GameEvent {
 
                 }
 
-                if (isRight[talkIndex] == true) {
-                    nameRightText.text = talkCharactorName[talkIndex];
-                } else {
+                if (talkCharactorName[talkIndex] == "トシロー") {
                     nameLeftText.text = talkCharactorName[talkIndex];
+                } else {
+                    nameRightText.text = talkCharactorName[talkIndex];
                 }
                 text.text = "「" + drawText + endText + "」";
             }
