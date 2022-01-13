@@ -86,7 +86,7 @@ MonoBehaviour:
   visual: {fileID: 6393501759908750452}
   sound: {fileID: 3285538793625881505}
   animator: {fileID: 2589692561912508048}
-  reflectionPower: 1.5
+  reflectionPower: 8
 --- !u!135 &6393501759159493389
 SphereCollider:
   m_ObjectHideFlags: 0

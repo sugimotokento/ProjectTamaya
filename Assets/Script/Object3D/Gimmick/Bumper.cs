@@ -33,7 +33,7 @@ public class Bumper : MonoBehaviour {
             float moveSpeed = player.moveSpeed.magnitude;
 
             //”½ŽË
-            player.moveSpeed = dist.normalized * moveSpeed * reflectionPower;
+            player.moveSpeed = dist.normalized * reflectionPower;
             isAnimation = true;
 
             animator.SetBool("isReflection", true);
