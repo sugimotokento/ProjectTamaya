@@ -49,6 +49,8 @@ public class Enemy : MonoBehaviour
     [SerializeField] private float viewrange = 15; //エネミーの視野の広さ
     private Vector3 oldepos;                       //エネミーの前位置
     private Vector3 oldppos;                       //プレイヤーの最終目撃位置 enemyの移動場所
+    private float KeepAlert;
+    private int Sumaki;
 
 
     //探索関連
@@ -94,6 +96,8 @@ public class Enemy : MonoBehaviour
         KeepLenS = 100.0f;
         KeepLenG = 100.0f;
         Lindex = 0;
+        KeepAlert = 0;
+        Sumaki = 0;
 
         AfterRangeDanger = RangeDanger;
         SCENE_NUM = 1;
@@ -110,13 +114,17 @@ public class Enemy : MonoBehaviour
 
     void Update()
     {
-        float alert = UIscript.GetAlertness();
-        
         if (isSumaki == false)
         {
+            if (Sumaki == 0)
+            {
+                UIscript.SetAlertness(KeepAlert);
+            }
+            KeepAlert = UIscript.GetAlertness();
+
             EnemyAnime.SetBool("isSumaki", false);
 
-            if (alert < 1 && isHelp == true)
+            if (KeepAlert < 1 && isHelp == true)
             {
                 EnemyAnime.SetBool("isCall", true);
                 HelpEnemy();
@@ -128,7 +136,7 @@ public class Enemy : MonoBehaviour
                 isStart = true;
             }
 
-            if (alert <= 0 && SCENE_NUM != 0)
+            if (KeepAlert <= 0 && SCENE_NUM != 0)
             {
                 EnemyAnime.SetBool("isBattle", false);
                 EnemyAnime.SetBool("isWarning", false);
@@ -136,13 +144,13 @@ public class Enemy : MonoBehaviour
                 EnemyAnime.SetBool("isNormal", true);
                 SearchStatus();
             }
-            else if (alert > 0 && alert < 100)
+            else if (KeepAlert > 0 && KeepAlert < 100)
             {
                 EnemyAnime.SetBool("isWarning", true);
                 WarningStatus();
                 SCENE_NUM = 2;
             }
-            else if (alert >= 100)
+            else if (KeepAlert >= 100)
             {
                 if (SCENE_NUM != 3)
                 {
@@ -154,24 +162,30 @@ public class Enemy : MonoBehaviour
                 FightStatus();
                 SCENE_NUM = 3;
             }
+
+            Sumaki += 1;
         }
         else
         {
+            Sumaki = 0;
+            UIscript.SetAlertness(0);
+            isHelp = false;
+
             EnemyAnime.SetBool("isSumaki", true);
             EnemyAnime.SetBool("isBattle", false);
             EnemyAnime.SetBool("isWarning", false);
             EnemyAnime.SetBool("isCall", false);
             EnemyAnime.SetBool("isNormal", false);
-
-            //簀巻き成功時
-            DieEnemy();
         }
     }
 
 
     void FixedUpdate()
     {
-        AllStatus();
+        if (isSumaki == false)
+        {
+            AllStatus();
+        }
     }
 
 
