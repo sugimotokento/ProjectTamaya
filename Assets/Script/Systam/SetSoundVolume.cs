@@ -25,7 +25,7 @@ public class SetSoundVolume : MonoBehaviour {
             if (distVolume < 0) distVolume = 0;
 
             audioSouce.volume = baseVolume * SoundManager.instance.GetVolumeSE()*distVolume;
-            Debug.Log(distVolume);
+
         }
     }
 }

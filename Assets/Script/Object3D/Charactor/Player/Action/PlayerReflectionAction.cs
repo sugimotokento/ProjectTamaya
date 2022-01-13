@@ -97,6 +97,8 @@ public class PlayerReflectionAction : PlayerAction {
             } else {
                 player.sound.PlayShot(PlayerSound.SoundIndex.BOUND);
             }
+        } else {
+            player.sound.PlayShot(PlayerSound.SoundIndex.BOUND);
         }
     }
 
