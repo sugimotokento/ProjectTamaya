@@ -5,7 +5,6 @@ using UnityEngine;
 public class GameCamera : MonoBehaviour {
     private CameraAction action;
 
-
     private void Awake() {
         SetAction<PlayerCameraAction>();
     }

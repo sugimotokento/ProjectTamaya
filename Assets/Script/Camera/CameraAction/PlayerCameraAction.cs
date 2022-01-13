@@ -4,8 +4,28 @@ using UnityEngine;
 
 public class PlayerCameraAction : CameraAction {
     float range = 2;
+    float iaiTimer = 0;
+
+    public override void Init(GameCamera cam) {
+        base.Init(cam);
+    }
 
     public override void Action() {
+        //‹‡’†‚ÉƒJƒƒ‰‚ğˆø‚­
+        if(StageManager.instance.player.CheckAction<PlayerIaiAction>() == true) {
+            if (StageManager.instance.player.GetAction<PlayerIaiAction>().isCharge == true) {
+                iaiTimer += 20 * Time.fixedDeltaTime;
+            } else {
+                iaiTimer = 0;
+            }
+        } else {
+            iaiTimer = 0;
+        }
+        if (iaiTimer > 10) {
+            iaiTimer = 10;
+        }
+
+
         Vector3 mousePos = Input.mousePosition;
         mousePos.z = camera.transform.position.z;
         mousePos = Camera.main.ScreenToWorldPoint(mousePos);
@@ -13,7 +33,7 @@ public class PlayerCameraAction : CameraAction {
 
         float late = 0.5f;
 
-        Vector3 cameraPos = camera.transform.position + Vector3.back * -12;
+        Vector3 cameraPos = camera.transform.position + Vector3.back * (-12 - iaiTimer);
         Vector3 followPos = -StageManager.instance.player.transform.position + (mousePos * 0.5f * (1 - late) + StageManager.instance.player.moveSpeed * late);
 
         //ƒJƒƒ‰‚Ì‹——£‚Ì§ŒÀ
