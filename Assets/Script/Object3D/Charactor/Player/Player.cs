@@ -9,6 +9,7 @@ public class Player : MonoBehaviour {
     public PlayerItem item;
     public PlayerAir air;
     public PlayerSound sound;
+   
 
     public GameObject visual;
    [SerializeField] public GameObject rope;
@@ -16,6 +17,7 @@ public class Player : MonoBehaviour {
     public GameObject iaiEffect;
     public GameObject noise;
     public GameObject afterimage;
+    public GameObject getItemAnimation;
 
     public Renderer[] rendere;
 

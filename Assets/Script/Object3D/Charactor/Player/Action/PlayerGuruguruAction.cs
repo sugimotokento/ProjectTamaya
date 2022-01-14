@@ -141,8 +141,12 @@ public class PlayerGuruguruAction : PlayerAction {
             int enemyItem = target.GetComponent<Enemy>().ItemNum;
             if (enemyItem == 0) {
                 player.item.AddKey();
+                GameObject getItemAnimation = Instantiate(player.getItemAnimation);
+                getItemAnimation.GetComponent<GetItemAnimation>().Init(player.gameObject, (3));
             } else {
                 itemIndex = (PlayerItem.PlayerItemIndex)(enemyItem-1);
+                GameObject getItemAnimation = Instantiate(player.getItemAnimation);
+                getItemAnimation.GetComponent<GetItemAnimation>().Init(player.gameObject, (enemyItem - 1));
                 player.item.AddItem(itemIndex);
             }
         } 
