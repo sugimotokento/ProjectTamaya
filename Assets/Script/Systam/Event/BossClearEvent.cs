@@ -1,8 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class BossClearEvent : GameEvent {
+    [SerializeField] private FadeOut2 fade;
     // Start is called before the first frame update
     void Start() {
 
@@ -19,7 +21,11 @@ public class BossClearEvent : GameEvent {
 
         if (canEvent == true) {
             if (isEvent == true) {
-                
+                fade.gameObject.SetActive(true);
+
+                if (fade.GetIsFadeEnd() == true) {
+                    SceneManager.LoadScene("Title");
+                }
             }
         }
     }
