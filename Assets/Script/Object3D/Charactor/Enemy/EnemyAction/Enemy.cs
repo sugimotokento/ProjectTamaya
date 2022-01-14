@@ -22,7 +22,9 @@ public class Enemy : MonoBehaviour
     private float VigTime;                       //警戒時継続時間
     private float DanTime;                       //戦闘時継続時間
     public bool isHelp;                          //お呼ばれされたか
+    private bool isNoise;
 
+    private Vector3 NoisePos;
 
     //弾関連
     private Vector3 Bvec = new Vector3(0, 90, 0);//発射時のベクトル
@@ -88,6 +90,7 @@ public class Enemy : MonoBehaviour
         SeeRay = false;
         SeePlayer = false;
         isHelp = false;
+        isNoise = false;
         VigTime = 0.0f;
         DanTime = 0.0f;
         isStart = true;
@@ -136,7 +139,7 @@ public class Enemy : MonoBehaviour
                 isStart = true;
             }
 
-            if (KeepAlert <= 0 && SCENE_NUM != 0)
+            if (KeepAlert <= 0 && SCENE_NUM != 0 && isNoise == false)
             {
                 EnemyAnime.SetBool("isBattle", false);
                 EnemyAnime.SetBool("isWarning", false);
@@ -161,6 +164,11 @@ public class Enemy : MonoBehaviour
                 EnemyAnime.SetBool("isBattle", true);
                 FightStatus();
                 SCENE_NUM = 3;
+            }
+            else if (isNoise == true)
+            {
+                WarningNoiseStatus();
+                SCENE_NUM = 5;
             }
 
             Sumaki += 1;
@@ -339,6 +347,32 @@ public class Enemy : MonoBehaviour
 
 
     //============================================================================
+    //音コリジョン警戒状態
+    //============================================================================
+    private void WarningNoiseStatus()
+    {
+        //移動
+        Vector3 dist = NoisePos - transform.position;
+        this.transform.position += dist.normalized * Time.deltaTime * Espeed;
+
+        //視線
+        ViewEnemy();
+
+        if (dist.magnitude < 2.5f)
+        {
+            transform.position = oldepos;
+            isNoise = false;
+        }
+        else
+        {
+            isHelp = false;
+            isStart = true;
+            VigPlayer = false;
+        }
+    }
+
+
+    //============================================================================
     //戦闘状態
     //============================================================================
     private void FightStatus()
@@ -496,14 +530,6 @@ public class Enemy : MonoBehaviour
     }
 
 
-    //============================================================================
-    //戦闘不能状態
-    //============================================================================
-    private void DieEnemy()
-    {
-    }
-
-
     //
     //
     //その他関数
@@ -658,4 +684,14 @@ public class Enemy : MonoBehaviour
         }
     }
 
+
+    //音コリジョンとの当たり判定
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "Noise")
+        {
+            isNoise = true;
+            NoisePos =other.gameObject.transform.position;
+        }
+    }
 }
