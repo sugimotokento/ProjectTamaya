@@ -14452,6 +14452,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 724548876}
     - target: {fileID: 729428656429432025, guid: 9bbbdb22f65ecf048be15eb0303ce158, type: 3}
+      propertyPath: mainBGMClip
+      value: 
+      objectReference: {fileID: 8300000, guid: c80fcadd39dd1fd4487bb6c8ed4a3404, type: 3}
+    - target: {fileID: 729428656429432025, guid: 9bbbdb22f65ecf048be15eb0303ce158, type: 3}
       propertyPath: gameEvent.Array.size
       value: 4
       objectReference: {fileID: 0}

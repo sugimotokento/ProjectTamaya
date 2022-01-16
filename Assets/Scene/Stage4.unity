@@ -11120,6 +11120,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1046317974}
     - target: {fileID: 729428656429432025, guid: 9bbbdb22f65ecf048be15eb0303ce158, type: 3}
+      propertyPath: mainBGMClip
+      value: 
+      objectReference: {fileID: 8300000, guid: e84041b77dfb7164bb491a9cd7c91e44, type: 3}
+    - target: {fileID: 729428656429432025, guid: 9bbbdb22f65ecf048be15eb0303ce158, type: 3}
       propertyPath: gameEvent.Array.size
       value: 4
       objectReference: {fileID: 0}
@@ -11203,6 +11207,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8853863983670233495, guid: 9bbbdb22f65ecf048be15eb0303ce158, type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 99a138c45c11ea349876ba0ae55a8e89, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9bbbdb22f65ecf048be15eb0303ce158, type: 3}
 --- !u!1 &1271409360 stripped
