@@ -9,6 +9,7 @@ public class BossSound : MonoBehaviour {
         DAMAGE,
         KILL,
         NO_DAMAGE,
+        SHOT,
         MAX
     }
 
@@ -19,7 +20,7 @@ public class BossSound : MonoBehaviour {
     }
 
     public void Play(SoundIndex i) {
-        sounds[(int)i].Play();
+        sounds[(int)i].PlayOneShot(sounds[(int)i].clip);
     }
     public void Stop(SoundIndex i) {
         sounds[(int)i].Stop();

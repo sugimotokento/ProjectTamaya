@@ -62,7 +62,8 @@ public class BossRotateShotAction : BossAction {
                 boss.transform.Rotate(Vector3.forward * -200 * Time.fixedDeltaTime);
             }
             //プレイヤーとの距離とボスの視線の角度が一定以内
-            if (angle > 170) {
+            if (angle > 165) {
+              
                 canShot = true;
                 boss.line.gameObject.SetActive(false);
             }
@@ -79,7 +80,7 @@ public class BossRotateShotAction : BossAction {
 
             if (shotIntervalTimer > SHOT_INTERVAL) {
                 shotIntervalTimer = 0;
-
+                boss.sound.Play(BossSound.SoundIndex.SHOT);
                 //ボスの向いている角度を求める
                 float angle = Mathf.Atan2(boss.gameObject.transform.right.y, boss.gameObject.transform.right.x);
                 angle = angle / 3.14f * 180;

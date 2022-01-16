@@ -64,8 +64,8 @@ public class BossShotGunAction : BossAction {
                 } else {
                     boss.transform.Rotate(Vector3.forward * -150 * Time.fixedDeltaTime);
                 }
-            }
-            if (angle > 170) {
+            } 
+            if (angle > 165) {
                 canShot = true;
             } else {
                 canShot = false;
@@ -87,6 +87,7 @@ public class BossShotGunAction : BossAction {
             if (shotIntervalTimer > SHOT_INTERVAL) {
                 shotIntervalTimer = 0;
                 isShot = true;
+                boss.sound.Play(BossSound.SoundIndex.SHOT);
                 //íeê∂ê¨
                 for (int i = 0; i < LOOP_MAX; ++i) {
                     //É{ÉXÇÃå¸Ç¢ÇƒÇ¢ÇÈäpìxÇãÅÇﬂÇÈ

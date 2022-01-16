@@ -51,6 +51,7 @@ public class BossLandmineAction : BossAction {
 
         if (shotIntervalTimer > SHOT_INTERVAL_BASE - late* SHOT_INTERVAL_LATE) {
             float range = 14;
+            boss.sound.Play(BossSound.SoundIndex.SHOT);
             GameObject obj = Instantiate(boss.bullet);
             BossBullet script = obj.GetComponent<BossBullet>();
             script.SetMoveSpeed(0);
