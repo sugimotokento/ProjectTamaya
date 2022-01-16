@@ -62,7 +62,7 @@ public class BossRotateShotAction : BossAction {
                 boss.transform.Rotate(Vector3.forward * -200 * Time.fixedDeltaTime);
             }
             //プレイヤーとの距離とボスの視線の角度が一定以内
-            if (angle > 175) {
+            if (angle > 170) {
                 canShot = true;
                 boss.line.gameObject.SetActive(false);
             }

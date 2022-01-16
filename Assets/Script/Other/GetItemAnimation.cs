@@ -26,7 +26,7 @@ public class GetItemAnimation : MonoBehaviour {
         target = obj;
 
         //設定したアイテムを表示する
-        for(int i = 0; i < transform.childCount-1; ++i) {
+        for(int i = 0; i < transform.childCount; ++i) {
             if (i == itemIndex) {
                 transform.GetChild(i).gameObject.SetActive(true);
             } else {

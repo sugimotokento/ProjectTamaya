@@ -36,11 +36,11 @@ public class Boss : MonoBehaviour {
     }
 
     public void Damage() {
-        hp -= 5;
+        hp -= 1;
         isDamage = true;
     }
     public void SetDefaultAction() {
-        SetAction<BossIdleAction>();
+        SetAction<BossStartIdleAction>();
     }
     public void SetActionNone() {
         SetAction<BossAction>();

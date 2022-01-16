@@ -70,6 +70,14 @@ MonoBehaviour:
   bullet: {fileID: 1390262012941802524, guid: 8c5f14e25858e264d970ada3d6ee492e, type: 3}
   player: {fileID: 7378424357854251995, guid: 9a3b8670629e8a6488b984f311c98f1b, type: 3}
   enemyUI: {fileID: 3484791724432482238}
+  chengeMaterialParts:
+  - {fileID: 663654502378868727}
+  - {fileID: 3103407628916167010}
+  - {fileID: 3438386997412516018}
+  material:
+  - {fileID: 2100000, guid: b3cc52802ce64744abc00f31d59f247d, type: 2}
+  - {fileID: 2100000, guid: ca980d72e54f4ad468fdc1d6f87e75d9, type: 2}
+  - {fileID: 2100000, guid: d9c2a9b6eb94ebe499cbcfc8f2eeb261, type: 2}
   sound: {fileID: 4418118315200902046}
   Espeed: 3.5
   isSumaki: 0
@@ -194,6 +202,21 @@ Transform:
 --- !u!1 &2042231439675270216 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3862725203518114096, guid: 59e52a0d67651c84b9856f23aa50c1b9, type: 3}
+  m_PrefabInstance: {fileID: 3011886394942418296}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &663654502378868727 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2376098465068245647, guid: 59e52a0d67651c84b9856f23aa50c1b9, type: 3}
+  m_PrefabInstance: {fileID: 3011886394942418296}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &3103407628916167010 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 206561384854912026, guid: 59e52a0d67651c84b9856f23aa50c1b9, type: 3}
+  m_PrefabInstance: {fileID: 3011886394942418296}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &3438386997412516018 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 467182998778265034, guid: 59e52a0d67651c84b9856f23aa50c1b9, type: 3}
   m_PrefabInstance: {fileID: 3011886394942418296}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &3428284879190512353

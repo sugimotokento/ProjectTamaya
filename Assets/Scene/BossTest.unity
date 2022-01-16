@@ -1494,6 +1494,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: BossStartEvent
       objectReference: {fileID: 0}
+    - target: {fileID: 5828876829477334061, guid: c48493f84485718499d1b4cc85645cea, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c48493f84485718499d1b4cc85645cea, type: 3}
 --- !u!114 &1343523409 stripped
@@ -2539,31 +2543,31 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2578308863038493192, guid: 16bfbdb58b29bd7488070ea1530b86e3, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.67065674
       objectReference: {fileID: 0}
     - target: {fileID: 2578308863038493192, guid: 16bfbdb58b29bd7488070ea1530b86e3, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0.049806528
       objectReference: {fileID: 0}
     - target: {fileID: 2578308863038493192, guid: 16bfbdb58b29bd7488070ea1530b86e3, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0.09937986
       objectReference: {fileID: 0}
     - target: {fileID: 2578308863038493192, guid: 16bfbdb58b29bd7488070ea1530b86e3, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0.73339117
       objectReference: {fileID: 0}
     - target: {fileID: 2578308863038493192, guid: 16bfbdb58b29bd7488070ea1530b86e3, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
+      value: -12.273
       objectReference: {fileID: 0}
     - target: {fileID: 2578308863038493192, guid: 16bfbdb58b29bd7488070ea1530b86e3, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: -3.535
       objectReference: {fileID: 0}
     - target: {fileID: 2578308863038493192, guid: 16bfbdb58b29bd7488070ea1530b86e3, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
+      value: -94.737
       objectReference: {fileID: 0}
     - target: {fileID: 2578308863038493193, guid: 16bfbdb58b29bd7488070ea1530b86e3, type: 3}
       propertyPath: hp

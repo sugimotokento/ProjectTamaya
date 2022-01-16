@@ -65,7 +65,7 @@ public class BossShotGunAction : BossAction {
                     boss.transform.Rotate(Vector3.forward * -150 * Time.fixedDeltaTime);
                 }
             }
-            if (angle > 177) {
+            if (angle > 170) {
                 canShot = true;
             } else {
                 canShot = false;

@@ -10,6 +10,10 @@ public class Enemy : MonoBehaviour
     [SerializeField] private Player player;     //プレイヤークラス
     [SerializeField] private GameObject enemyUI;//エネミーのUIオブジェクト
 
+    //カギを持っているエネミーのマテリアルを変えるためのやつ
+    [SerializeField] private GameObject[] chengeMaterialParts=new GameObject[3];
+    [SerializeField] private Material[] material = new Material[3];
+
     private EnemyUI UIscript;                   //UIオブジェクトについてるスクリプト
 
     public EnemySound sound;
@@ -112,6 +116,13 @@ public class Enemy : MonoBehaviour
         EnemyAnime.SetBool("isNormal", true);
         EnemyAnime.SetBool("isCall", false);
         EnemyAnime.SetFloat("BattleBlend", 0.0f);
+
+        //カギを持っていたらマテリアルを変える
+        if (ItemNum == 0) {
+            for(int i=0; i<3; ++i) {
+                chengeMaterialParts[i].GetComponent<Renderer>().material = material[i];
+            }
+        }
     }
 
 
