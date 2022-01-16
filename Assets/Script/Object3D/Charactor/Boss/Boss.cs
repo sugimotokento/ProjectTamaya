@@ -8,9 +8,10 @@ public class Boss : MonoBehaviour {
     public GameObject bullet;
     public GameObject mazzle;
     public GameObject line;
-    public GameObject[] unchi = new GameObject[3];
 
     public Animator animator;
+    public Renderer[] renderer = new Renderer[4];
+    public BossSound sound;
 
     [HideInInspector] public int hp = 5;
     [HideInInspector] public bool isDamage = false;
@@ -36,8 +37,10 @@ public class Boss : MonoBehaviour {
     }
 
     public void Damage() {
-        hp -= 1;
-        isDamage = true;
+        if (CheckAction<BossDamageAction>() == false) {
+            hp -= 1;
+            isDamage = true;
+        }
     }
     public void SetDefaultAction() {
         SetAction<BossStartIdleAction>();

@@ -6,6 +6,12 @@ public class BossDieAction : BossAction {
 
     public bool isDieAnimationEnd = false;
     private float dieAnimationTimer = 0;
+
+
+    public override void Init(Boss b) {
+        base.Init(b);
+        boss.sound.Play(BossSound.SoundIndex.KILL);
+    }
     public override void Action() {
         boss.animator.SetBool("isDie", true);
         boss.animator.SetBool("isIdle", false);
