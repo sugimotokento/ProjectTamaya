@@ -2715,7 +2715,7 @@ PrefabInstance:
     - target: {fileID: 3166293528573000452, guid: 5e3d8f89223fb3647bbd0231e01afa0a, type: 3}
       propertyPath: fade
       value: 
-      objectReference: {fileID: 430623818}
+      objectReference: {fileID: 1271409362}
     - target: {fileID: 4745121969039852855, guid: 5e3d8f89223fb3647bbd0231e01afa0a, type: 3}
       propertyPath: m_Name
       value: PlayerDieEvent
@@ -3890,17 +3890,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 77728f726d7285a49a6c9a60705641ba, type: 3}
---- !u!114 &430623818 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6737179768497016228, guid: 77728f726d7285a49a6c9a60705641ba, type: 3}
-  m_PrefabInstance: {fileID: 430623817}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 273a51e36713f564a8e176f6b3a353bd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &430623819 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3116734692297407556, guid: 77728f726d7285a49a6c9a60705641ba, type: 3}
@@ -11226,6 +11215,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6744898626119616928, guid: 9bbbdb22f65ecf048be15eb0303ce158, type: 3}
   m_PrefabInstance: {fileID: 1271409359}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1271409362 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2652152504977052071, guid: 9bbbdb22f65ecf048be15eb0303ce158, type: 3}
+  m_PrefabInstance: {fileID: 1271409359}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 273a51e36713f564a8e176f6b3a353bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1274766041
 GameObject:
   m_ObjectHideFlags: 0

@@ -4186,6 +4186,17 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 175755751}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &176369321 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2652152504977052071, guid: 9bbbdb22f65ecf048be15eb0303ce158, type: 3}
+  m_PrefabInstance: {fileID: 654418969}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 273a51e36713f564a8e176f6b3a353bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &178817470
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -30283,7 +30294,7 @@ PrefabInstance:
     - target: {fileID: 3166293528573000452, guid: 5e3d8f89223fb3647bbd0231e01afa0a, type: 3}
       propertyPath: fade
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 176369321}
     - target: {fileID: 4745121969039852855, guid: 5e3d8f89223fb3647bbd0231e01afa0a, type: 3}
       propertyPath: m_Name
       value: PlayerDieEvent
