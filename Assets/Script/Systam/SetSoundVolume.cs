@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class SetSoundVolume : MonoBehaviour {
     [SerializeField] private bool isBGM = false;
+    [SerializeField] private bool isUI = false;
     private AudioSource audioSouce;
     [SerializeField] private float baseVolume = 1;
     [SerializeField] private float volumeRange = 15;
@@ -23,6 +24,7 @@ public class SetSoundVolume : MonoBehaviour {
             distVolume = volumeRange - dist.magnitude;
             distVolume /= volumeRange;
             if (distVolume < 0) distVolume = 0;
+            if (isUI == true) distVolume = 1;
 
             audioSouce.volume = baseVolume * SoundManager.instance.GetVolumeSE()*distVolume;
 

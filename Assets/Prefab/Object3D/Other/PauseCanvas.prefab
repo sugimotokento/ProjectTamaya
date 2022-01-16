@@ -2325,7 +2325,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isBGM: 0
+  isUI: 1
   baseVolume: 1
+  volumeRange: 15
 --- !u!1 &4668317826093012168
 GameObject:
   m_ObjectHideFlags: 0

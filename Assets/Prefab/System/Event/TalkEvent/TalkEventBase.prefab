@@ -216,6 +216,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isBGM: 0
+  isUI: 1
   baseVolume: 1
   volumeRange: 15
 --- !u!1 &4029237607754198541

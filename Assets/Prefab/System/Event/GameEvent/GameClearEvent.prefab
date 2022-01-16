@@ -254,6 +254,7 @@ MonoBehaviour:
   rankAnimStartCount: 60
   rankChangeSpeed: 1
   clickMoveSpeed: 500
+  fade: {fileID: 0}
   fadeFrame: 0000000000000000000000000000000000000000
 --- !u!1 &161806772043302836
 GameObject:
@@ -958,7 +959,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isBGM: 1
+  isUI: 1
   baseVolume: 1
+  volumeRange: 15
 --- !u!1 &3993278005188301154
 GameObject:
   m_ObjectHideFlags: 0
@@ -1287,7 +1290,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isBGM: 0
+  isUI: 1
   baseVolume: 1
+  volumeRange: 15
 --- !u!1 &5709789780212816230
 GameObject:
   m_ObjectHideFlags: 0
