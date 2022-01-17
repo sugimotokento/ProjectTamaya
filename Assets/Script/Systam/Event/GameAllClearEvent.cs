@@ -1,25 +1,30 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
-public class GameClearEvent : GameEvent {
+public class GameAllClearEvent : GameEvent
+{
 
     public GameObject ropeUpper;
     public GameObject ropeRight;
     public GameObject logo;
     public GameObject clear;
-    public GameObject air;
-    public GameObject score;
+ 
+    public GameObject stageScore;
+
+    
     public GameObject ranktxt;
     public GameObject rankimg;
-    public GameObject result; 
+    public GameObject result;
     public GameObject click;
 
     [SerializeField] GameObject soundObj;
     [SerializeField] Sprite[] rankSprite;
-    [SerializeField] ImageNumber scoreNum;
-    [SerializeField] ImageTimer airScore;
+    [SerializeField] ImageNumber[] stageScoreNum=new ImageNumber[5];
+    [SerializeField] ImageNumber allScore;
+
     [SerializeField] float ropeMoveSpeed;
     [SerializeField] float logoRotateTime;
     [SerializeField] int logoRotatePerSec;
@@ -39,14 +44,13 @@ public class GameClearEvent : GameEvent {
     // ���r���[�ȕb�����Ɗp�x���Y���܂��B ���X�X����0.6��1�B
     // �P�ʂ�"�b"�B��₱�����ˁB
 
-    struct phaseMode
-    {
+    struct phaseMode {
         public bool ready;
         public bool isPlay;
         public bool isEnd;
     };
 
-    enum phaseName{
+    enum phaseName {
         FADEIN_ROPE,
         ROTATE_LOGO,
         FADEIN_RESULT,
@@ -57,8 +61,7 @@ public class GameClearEvent : GameEvent {
 
     phaseMode[] phase = new phaseMode[(int)phaseName.MAX];
     [SerializeField] int[] fadeFrame = new int[(int)phaseName.MAX];
-    void Start()
-    {
+    void Start() {
         //Application.targetFrameRate = 60;
         // �e�I�u�W�F�N�g��t���[���O�Ɉړ�������
         Vector3 defaultPos = ropeUpper.transform.localPosition;
@@ -79,13 +82,10 @@ public class GameClearEvent : GameEvent {
         defaultPos.x -= 2000f;
         result.transform.localPosition = defaultPos;
 
-        defaultPos = air.transform.localPosition;
+        defaultPos = stageScore.transform.localPosition;
         defaultPos.x -= 2000f;
-        air.transform.localPosition = defaultPos;
+        stageScore.transform.localPosition = defaultPos;
 
-        defaultPos = score.transform.localPosition;
-        defaultPos.x -= 2000f;
-        score.transform.localPosition = defaultPos;
 
         rankimg.transform.localScale = new Vector3(2.5f, 2.5f, 0.0f);
 
@@ -93,99 +93,89 @@ public class GameClearEvent : GameEvent {
         defaultPos.y -= 100f;
         click.transform.localPosition = defaultPos;
 
-        for(int i=0; i < soundObj.transform.childCount; ++i) {
+        for (int i = 0; i < soundObj.transform.childCount; ++i) {
             sound.Add(soundObj.transform.GetChild(i).GetComponent<AudioSource>());
         }
     }
 
     // Update is called once per frame
-    void Update()
-    {
-        if (StageManager.instance.isClear == true) { isEvent = true; phase[0].ready = true; }
-        if (canEvent == true)
-        {
+    void Update() {
+        if (StageManager.instance.boss.hp<=0) {
+            Boss boss = StageManager.instance.boss;
+            if (boss.CheckAction<BossDieAction>() == true && boss.GetAction<BossDieAction>().isDieAnimationEnd == true) {
+                isEvent = true;
+                phase[0].ready = true;
+            }
+        }
+        if (canEvent == true) {
             if (canPlayBGM == true) {
                 canPlayBGM = false;
                 sound[0].Play();
             }
-            scoreNum.SetNumber(ScoreManager.GetScore());
-            airScore.SetTime(ScoreManager.GetAir());
-            rankimg.GetComponent<Image>().sprite = rankSprite[(int)ScoreManager.GetRank()];
+            for(int i=0; i<5; i++) {
+                stageScoreNum[i].SetNumber(ScoreManager.stageScore[i]);
+            }
+            allScore.SetNumber(ScoreManager.GetAllScore());
+            rankimg.GetComponent<Image>().sprite = rankSprite[(int)ScoreManager.GetAllRank()];
             //�����ɏ���
             transform.GetChild(0).gameObject.SetActive(true);
 
             // ��������e����
-            if (phase[0].ready && !phase[0].isEnd)
-            {
+            if (phase[0].ready && !phase[0].isEnd) {
                 if (ropeUpper.transform.localPosition.x >= 0.0f) moveNextPhase(0);
-                else
-                {
+                else {
                     ropeUpper.transform.position += new Vector3(ropeMoveSpeed * Time.deltaTime, 0f, 0f);
                     ropeRight.transform.position += new Vector3(-ropeMoveSpeed * Time.deltaTime, 0f, 0f);
                     clear.transform.position += new Vector3(ropeMoveSpeed * Time.deltaTime, 0f, 0f);
                 }
             }
 
-            if (phase[(int)phaseName.ROTATE_LOGO].ready && !phase[(int)phaseName.ROTATE_LOGO].isEnd)
-            {
-                
-                if (logo.transform.localScale.x <= 1.0f)
-                {
+            if (phase[(int)phaseName.ROTATE_LOGO].ready && !phase[(int)phaseName.ROTATE_LOGO].isEnd) {
+
+                if (logo.transform.localScale.x <= 1.0f) {
                     float rotateTime = 0.2f / ((float)logoRotateTime);
                     logo.transform.Rotate(0f, 0f, -360.0f * logoRotatePerSec * Time.deltaTime);
                     logo.transform.localScale += new Vector3(rotateTime * Time.deltaTime, rotateTime * Time.deltaTime, 0.0f);
-                }
-                else
-                {
+                } else {
                     // �����ɂ��������̏���������΂�����Y��ɂȂ�
-                        moveNextPhase((int)phaseName.ROTATE_LOGO);
+                    moveNextPhase((int)phaseName.ROTATE_LOGO);
                 }
             }
 
-            if (phase[(int)phaseName.FADEIN_RESULT].ready && !phase[(int)phaseName.FADEIN_RESULT].isEnd)
-            {
+            if (phase[(int)phaseName.FADEIN_RESULT].ready && !phase[(int)phaseName.FADEIN_RESULT].isEnd) {
                 if (result.transform.localPosition.x >= -598.0f) moveNextPhase((int)phaseName.FADEIN_RESULT);
-                else
-                {
+                else {
                     result.transform.position += new Vector3(ropeMoveSpeed * Time.deltaTime, 0f, 0f);
-                    air.transform.position += new Vector3(ropeMoveSpeed * Time.deltaTime, 0f, 0f);
-                    score.transform.position += new Vector3(ropeMoveSpeed * Time.deltaTime, 0f, 0f);
-                  
+                    stageScore.transform.position += new Vector3(ropeMoveSpeed * Time.deltaTime, 0f, 0f);
+
                 }
             }
 
-            if (phase[(int)phaseName.FADEIN_RANK].ready && !phase[(int)phaseName.FADEIN_RANK].isEnd)
-            {
+            if (phase[(int)phaseName.FADEIN_RANK].ready && !phase[(int)phaseName.FADEIN_RANK].isEnd) {
                 if (canPlaySE == true) {
                     sound[1].Play();
                     canPlaySE = false;
                 }
                 if (rankAnimStartCount != 0) rankAnimStartCount--;
-                else
-                {
+                else {
                     rankimg.SetActive(true);
                     ranktxt.SetActive(true);
                     if (rankimg.transform.localScale.x <= 1.0f) moveNextPhase((int)phaseName.FADEIN_RANK);
-                    else
-                    {
+                    else {
                         rankimg.transform.localScale -= new Vector3(rankChangeSpeed * Time.deltaTime, rankChangeSpeed * Time.deltaTime, 0.0f);
-                        
+
                     }
                 }
             }
-            
-            if (phase[(int)phaseName.FADEIN_CLICKNEXT].ready && !phase[(int)phaseName.FADEIN_CLICKNEXT].isEnd)
-            {
+
+            if (phase[(int)phaseName.FADEIN_CLICKNEXT].ready && !phase[(int)phaseName.FADEIN_CLICKNEXT].isEnd) {
                 if (canPlaySE2 == true) {
                     sound[1].Play();
                     canPlaySE2 = false;
                 }
-                if (click.transform.localPosition.y <= -480.0f)
-                {
+                if (click.transform.localPosition.y <= -480.0f) {
                     click.transform.position += new Vector3(0f, clickMoveSpeed * Time.deltaTime, 0f);
-                }
-                else
-                {
+                } else {
                     // �I������
                     //  moveNextPhase((int)phaseName.FADEIN_CLICKNEXT);
                     if (Input.GetMouseButtonDown(0)) {
@@ -194,24 +184,19 @@ public class GameClearEvent : GameEvent {
                     }
                     if (fade.GetIsFadeEnd() == true) {
 
-                        StageManager.instance.SetNextScene();
-
+                        SceneManager.LoadScene("Clear");
                     }
                 }
             }
         }
     }
 
-    void moveNextPhase(int index)
-    {
-        if (index < (int)phaseName.MAX - 1)
-        {
+    void moveNextPhase(int index) {
+        if (index < (int)phaseName.MAX - 1) {
             phase[index].isEnd = true;
             phase[index + 1].ready = true;
-           
-        }
-        else
-        {
+
+        } else {
             phase[index].isEnd = true;
         }
         return;

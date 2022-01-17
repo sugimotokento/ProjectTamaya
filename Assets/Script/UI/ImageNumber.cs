@@ -32,7 +32,9 @@ public class ImageNumber : MonoBehaviour {
         images.Add(numImage);
         for (int i = 0; i < zeroCount-1; ++i) {
             Image im = Instantiate(numImage, this.transform.position + Vector3.right * count * space, Quaternion.identity);
+            
             im.transform.parent = this.gameObject.transform;
+            im.transform.localScale = Vector3.one;
             im.sprite = numberSprite[0];
             images.Add(im);
             count++;
@@ -42,6 +44,7 @@ public class ImageNumber : MonoBehaviour {
         for (int i = 0; i < nums.Count; ++i) {
             Image im = Instantiate(numImage, this.transform.position + Vector3.right * count * space, Quaternion.identity);
             im.transform.parent = this.gameObject.transform;
+            im.transform.localScale = Vector3.one;
             im.sprite = numberSprite[nums[nums.Count-i-1]];
             images.Add(im);
             count++;

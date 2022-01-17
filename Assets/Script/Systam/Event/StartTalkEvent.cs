@@ -151,8 +151,8 @@ public class StartTalkEvent : GameEvent {
                     talkIndex = talk.Length - 1;
                     isEvent = false;
                     canEvent = false;
-                    StageManager.instance.camera.SetAction<PlayerCameraAction>();
                     visual.SetActive(false);
+                    StageManager.instance.camera.SetAction<PlayerCameraAction>();
                     StageManager.instance.bgm.Stop();
                     StageManager.instance.bgm.clip = StageManager.instance.mainBGMClip;
                     StageManager.instance.bgm.Play();

@@ -27,6 +27,8 @@ public class ScoreManager : MonoBehaviour {
     [HideInInspector] static public int healNum = 0;
     [HideInInspector] static public int sumakiNum = 0;
     [HideInInspector] static public int retryNum = 0;
+    [HideInInspector] static public int[] stageScore = new int[5];
+    [HideInInspector] static public RankIndex[] stageRank = new RankIndex[5];
 
 
     // Start is called before the first frame update
@@ -66,7 +68,26 @@ public class ScoreManager : MonoBehaviour {
         noReTryScore = Mathf.Max(0, noReTryScore);
         airScore     = Mathf.Max(0, airScore);
 
-        return findScore + damageScore + healScore + sumakiScore + noReTryScore + airScore;
+        int score=findScore +damageScore + healScore + sumakiScore + noReTryScore + airScore;
+
+        string name = SceneManager.GetActiveScene().name;
+        if (name == "Stage1") {
+            stageScore[0] = score;
+        }
+        if (name == "Stage2") {
+            stageScore[1] = score;
+        }
+        if (name == "Stage3") {
+            stageScore[2] = score;
+        }
+        if (name == "Stage4") {
+            stageScore[3] = score;
+        }
+        if (name == "Stage5") {
+            stageScore[4] = score;
+        }
+
+        return score;
     }
 
     static public RankIndex GetRank() {
@@ -93,9 +114,76 @@ public class ScoreManager : MonoBehaviour {
             rank = RankIndex.RANK_C;
         }
 
+
+        string name = SceneManager.GetActiveScene().name;
+        if (name == "Stage1") {
+            stageRank[0] = rank;
+        }
+        if (name == "Stage2") {
+            stageRank[1] = rank;
+        }
+        if (name == "Stage3") {
+            stageRank[2] = rank;
+        }
+        if (name == "Stage4") {
+            stageRank[3] = rank;
+        }
+        if (name == "Stage5") {
+            stageRank[4] = rank;
+        }
+
+
         return rank;
     }
+    static public RankIndex GetAllRank() {
+        RankIndex rank = RankIndex.RANK_C;
+        int score=0;
 
+        score = GetAllScore();
+        bool isLegend = true;
+        for (int i = 0; i < 5; ++i) {
+            if (stageRank[i] != RankIndex.RANK_LEGEND) {
+                isLegend = false;
+                break;
+            }
+        }
+
+
+        //ランクを決定する
+        if (score >= 100000*5) {
+            rank = RankIndex.RANK_SS;
+
+            if (isLegend ==true) {
+                rank = RankIndex.RANK_LEGEND;
+            }
+
+        } else if (score >= 70000 * 5) {
+            rank = RankIndex.RANK_S;
+
+        } else if (score >= 40000 * 5) {
+            rank = RankIndex.RANK_A;
+
+        } else if (score >= 10000 * 5) {
+            rank = RankIndex.RANK_B;
+
+        } else if (score >= 0) {
+            rank = RankIndex.RANK_C;
+        }
+
+
+
+        return rank;
+    }
+    static public int GetAllScore() {
+        int score = 0;
+
+        //今までのスコアの合計
+        for (int i = 0; i < 5; ++i) {
+            score += stageScore[i];
+        }
+
+        return score;
+    }
 
     static float LegendAirBorder() {
         string name = SceneManager.GetActiveScene().name;
