@@ -12,6 +12,7 @@ public class Boss : MonoBehaviour {
     public Animator animator;
     public Renderer[] renderer = new Renderer[4];
     public BossSound sound;
+    public BossHp hpUI;
 
     [HideInInspector] public int hp = 5;
     [HideInInspector] public bool isDamage = false;

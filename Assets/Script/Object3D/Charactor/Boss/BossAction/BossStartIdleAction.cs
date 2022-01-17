@@ -25,11 +25,12 @@ public class BossStartIdleAction : BossAction {
 
 
 
-
+        boss.hpUI.SetFillAmount(timer / 1.5f);
 
         timer += Time.deltaTime;
 
         if (timer > 2) {
+            boss.hpUI.isBattle = true;
             boss.SetAction<BossIdleAction>();
         }
     }
