@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BossLandmineAction : BossAction {
     private const float SHOT_INTERVAL_BASE = 0.4f;
-    private const float SHOT_INTERVAL_LATE = 0.3f;//‚±‚±‚Å’e‚Ìo‚é—Ê‚ğ’²®
+    private const float SHOT_INTERVAL_LATE = 0.1f;//‚±‚±‚Å’e‚Ìo‚é—Ê‚ğ’²®
     private const float ACTION_TIME = 5;
     private const float ROTATE_SPEED_MAX = 700;
     private float shotIntervalTimer = 0;

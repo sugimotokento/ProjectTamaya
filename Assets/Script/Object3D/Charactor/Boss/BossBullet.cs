@@ -40,7 +40,7 @@ public class BossBullet : MonoBehaviour {
 
         if (other.gameObject.CompareTag("Player")) {
             isHit = true;
-            other.gameObject.GetComponent<Player>().hP.Damage(15);
+            other.gameObject.GetComponent<Player>().hP.Damage(35);
             if (isObjectMode == false) {
                 Destroy(this.gameObject);
             }

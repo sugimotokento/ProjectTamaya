@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class BossShotGunAction : BossAction {
-    private const float SHOT_INTERVAL = 0.1f;
+    private const float SHOT_INTERVAL = 0.2f;
     private const float SHOT_TIME = 1.5f;
 
     private LineRenderer line;
@@ -77,7 +77,7 @@ public class BossShotGunAction : BossAction {
 
     }
     private void Shot() {
-        const float SHOT_RANGE = 45;
+        const float SHOT_RANGE = 35;
         const float LOOP_MAX = 5;
 
         shotIntervalTimer += Time.fixedDeltaTime;

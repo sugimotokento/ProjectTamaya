@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class BossRotateShotAction : BossAction {
     private const float SHOT_TIME = 20;
-    private const float SHOT_INTERVAL = 0.15f;
-    private const float ROTATE_SPEED = 40;
+    private const float SHOT_INTERVAL = 0.3f;
+    private const float ROTATE_SPEED = 20;
     private LineRenderer line;
 
     private float shotTimer = 0;
