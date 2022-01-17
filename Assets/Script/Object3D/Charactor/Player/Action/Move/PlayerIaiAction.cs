@@ -41,7 +41,22 @@ public class PlayerIaiAction : PlayerMoveAction {
                 isEnemyHit = true;
             }
         }
+
+        if (collider.gameObject.CompareTag("Boss")) {
+            //à⁄ìÆë¨ìxÇñﬂÇ∑
+            player.moveSpeed *= 0.1f;
+
+            //ê¸Çè¡Ç∑
+            player.line[0].SetActive(false);
+            Destroy(effect);
+
+            player.animator.SetBool("isMove", true);
+            player.animator.SetBool("isIai", false);
+
+            player.ChangeAction<PlayerIaiAction, PlayerMoveAction>();
+        }
     }
+
 
     public override void Action() {
         Iai();
@@ -68,7 +83,7 @@ public class PlayerIaiAction : PlayerMoveAction {
                 attackPos = GetWorldMousePos();
                 moveSpeedBuffer = player.moveSpeed;
 
-                player.moveSpeed = (attackPos - player.transform.position).normalized * accelerationBaseSpeed*5;
+                player.moveSpeed = (attackPos - player.transform.position).normalized * accelerationBaseSpeed * 5;
 
                 player.animator.SetBool("isCharge", false);
                 player.animator.SetBool("isIai", true);

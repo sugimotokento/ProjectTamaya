@@ -8,6 +8,7 @@ TagManager:
   - Noise
   - Stage
   - StageEX
+  - Boss
   layers:
   - Default
   - TransparentFX

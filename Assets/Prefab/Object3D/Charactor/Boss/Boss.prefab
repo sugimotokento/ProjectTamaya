@@ -231,6 +231,7 @@ MonoBehaviour:
   - {fileID: 5325086334953397476}
   - {fileID: 763066284495137633}
   sound: {fileID: 3500784141998218793}
+  hpUI: {fileID: 0}
   hp: 100
   isDamage: 0
 --- !u!1 &2578308863590838177
@@ -1114,6 +1115,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: bf733c02c82fdb1488d0049e3e674446, type: 2}
+    - target: {fileID: 6305008878335121113, guid: 28f2badd655ff8f478504ef344c882b8, type: 3}
+      propertyPath: m_TagString
+      value: Boss
+      objectReference: {fileID: 0}
     - target: {fileID: 6580595767814871317, guid: 28f2badd655ff8f478504ef344c882b8, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
