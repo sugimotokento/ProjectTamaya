@@ -21,13 +21,10 @@ public class EnemySound : MonoBehaviour
         }
     }
 
-    public void EnemyPlayShot(EnemySoundIndex i)
-    {
-        EnemySounds[(int)i].PlayOneShot(EnemySounds[(int)i].clip);
-    }
     public void EnemyPlay(EnemySoundIndex i)
     {
-        EnemySounds[(int)i].Play();
+        EnemySounds[(int)i].PlayOneShot(EnemySounds[(int)i].clip);
+        Debug.Log("aaaaaaaaaaaaaaaaaaaaa");
     }
     public void EnemyStop(EnemySoundIndex i)
     {
