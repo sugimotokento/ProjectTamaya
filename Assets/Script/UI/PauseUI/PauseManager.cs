@@ -62,10 +62,23 @@ public class PauseManager : MonoBehaviour
 
         AudioSource[] audioSources = GetComponents<AudioSource>();
         PushButtonSE = audioSources[0];
+
+        //èâãNìÆ
+        if (PlayerPrefs.GetInt("isBootUp") == 0) {
+            slider[0].value = 8.0f;
+            slider[1].value = 8.0f;
+            PlayerPrefs.SetInt("isBootUp", 1);
+
+        } else {
+            slider[0].value = PlayerPrefs.GetFloat("BGM");
+            slider[1].value = PlayerPrefs.GetFloat("SE");
+        }
     }
 
     void Update()
     {
+        PlayerPrefs.SetFloat("BGM", slider[0].value);
+        PlayerPrefs.SetFloat("SE", slider[1].value);
         // PanelSlideIn-Out
         if (nowPanel != nextPanel)
             ChangeMenu();
