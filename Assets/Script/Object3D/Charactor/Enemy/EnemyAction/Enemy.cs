@@ -170,7 +170,7 @@ public class Enemy : MonoBehaviour
                 if (SCENE_NUM != 3)
                 {
                     ScoreManager.findNum++;
-                    sound.EnemyPlayShot(EnemySound.EnemySoundIndex.Contact);
+                    sound.EnemyPlay(EnemySound.EnemySoundIndex.Contact);
                 }
 
                 EnemyAnime.SetBool("isBattle", true);
@@ -179,8 +179,14 @@ public class Enemy : MonoBehaviour
             }
             else if (isNoise == true)
             {
+                EnemyAnime.SetBool("isMove", false);
                 WarningNoiseStatus();
                 SCENE_NUM = 5;
+            }
+
+            if (SCENE_NUM != 5)
+            {
+                EnemyAnime.SetBool("isMove", true);
             }
 
             Sumaki += 1;
@@ -420,7 +426,7 @@ public class Enemy : MonoBehaviour
                 //’e‚Ì”­ŽË
                 if (B_cnt > B_interval)
                 {
-                    sound.EnemyPlayShot(EnemySound.EnemySoundIndex.PopBallet);
+                    sound.EnemyPlay(EnemySound.EnemySoundIndex.PopBallet);
                     Instantiate(bullet, Bpos, Quaternion.Euler(Bvec));
                     B_cnt = 0;
                 }
@@ -708,7 +714,7 @@ public class Enemy : MonoBehaviour
         if (other.gameObject.tag == "Noise")
         {
             isNoise = true;
-            NoisePos =other.gameObject.transform.position;
+            NoisePos = transform.position;
         }
     }
 }
