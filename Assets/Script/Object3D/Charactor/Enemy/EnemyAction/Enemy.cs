@@ -357,6 +357,7 @@ public class Enemy : MonoBehaviour
         }
         else
         {
+            isNoise = false;
             isHelp = false;
             isStart = true;
             VigPlayer = false;
@@ -457,6 +458,7 @@ public class Enemy : MonoBehaviour
         }
         else
         {
+            isNoise = false;
             isHelp = false;
             isStart = true;
             VigPlayer = false;
