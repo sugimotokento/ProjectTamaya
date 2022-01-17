@@ -812,10 +812,10 @@ MonoBehaviour:
   - {fileID: 1728524235358322642}
   allScore: {fileID: 1835348691710557833}
   ropeMoveSpeed: 1500
-  logoRotateTime: 0.6
+  logoRotateTime: 0.2
   logoRotatePerSec: 2
-  rankAnimStartCount: 60
-  rankChangeSpeed: 1
+  rankAnimStartCount: 20
+  rankChangeSpeed: 3
   clickMoveSpeed: 500
   fade: {fileID: 0}
   fadeFrame: 0000000000000000000000000000000000000000

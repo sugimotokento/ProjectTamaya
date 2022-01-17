@@ -249,10 +249,10 @@ MonoBehaviour:
   scoreNum: {fileID: 4910075376544565229}
   airScore: {fileID: 8441204317071121021}
   ropeMoveSpeed: 1500
-  logoRotateTime: 0.6
+  logoRotateTime: 0.2
   logoRotatePerSec: 2
-  rankAnimStartCount: 60
-  rankChangeSpeed: 1
+  rankAnimStartCount: 20
+  rankChangeSpeed: 3
   clickMoveSpeed: 500
   fade: {fileID: 0}
   fadeFrame: 0000000000000000000000000000000000000000
