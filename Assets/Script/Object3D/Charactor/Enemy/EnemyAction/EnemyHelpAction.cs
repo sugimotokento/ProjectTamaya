@@ -40,6 +40,12 @@ public class EnemyHelpAction : MonoBehaviour
             {
                 if (help == false)
                 {
+                    for (int j = 0; j < EnemyCnt; j++)
+                    {
+                        transform.GetChild(j).gameObject.GetComponent<Enemy>().isHelp = false;
+                    }
+                    AllFalse = true;
+
                     FalseCnt++;
                     if (FalseCnt == EnemyCnt)
                     {

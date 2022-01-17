@@ -29,6 +29,7 @@ public class Enemy : MonoBehaviour
     private bool isNoise;
 
     private Vector3 NoisePos;
+    private float NoiseTime;
 
     //弾関連
     private Vector3 Bvec = new Vector3(0, 90, 0);//発射時のベクトル
@@ -362,16 +363,17 @@ public class Enemy : MonoBehaviour
     //============================================================================
     private void WarningNoiseStatus()
     {
-        //移動
-        Vector3 dist = NoisePos - transform.position;
-        this.transform.position += dist.normalized * Time.deltaTime * Espeed;
+        NoiseTime += Time.deltaTime;
 
         //視線
-        ViewEnemy();
+        viewrad = VecRad(NoisePos ,transform.position);
+        viewrad = -1 * viewrad * Mathf.Rad2Deg;
 
-        if (dist.magnitude < 2.5f)
+        //視線の方向に向きを変える
+        transform.GetChild(0).gameObject.transform.rotation = Quaternion.Euler(0.0f, 0.0f, -1 * viewrad);
+
+        if (NoiseTime > 2.0f)
         {
-            transform.position = oldepos;
             isNoise = false;
         }
         else
@@ -581,6 +583,10 @@ public class Enemy : MonoBehaviour
             //視線の方向に向きを変える
             transform.GetChild(0).gameObject.transform.rotation = Quaternion.Euler(0.0f, 0.0f, -1 * viewrad);
             oldepos = transform.position;
+        }
+        else
+        {
+            transform.GetChild(0).gameObject.transform.rotation = Quaternion.Euler(0.0f, 0.0f, -1 * viewrad);
         }
     }
 
