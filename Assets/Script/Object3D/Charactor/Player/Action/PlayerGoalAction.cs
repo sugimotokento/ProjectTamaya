@@ -17,6 +17,8 @@ public class PlayerGoalAction : PlayerAction
             player.animator.SetBool("isSpin", false);
             player.animator.SetBool("isIai", false);
             player.animator.SetBool("isGoal", true);
+
+            
         }
 
 
@@ -28,6 +30,10 @@ public class PlayerGoalAction : PlayerAction
             player.AddAction<PlayerGoalAction>();
             player.GetAction<PlayerGoalAction>().SetIsGoal(true);
 
+
+            for(int i=0; i<player.line.Length; ++i) {
+                player.line[i].gameObject.SetActive(false);
+            }
         }
     }
 
