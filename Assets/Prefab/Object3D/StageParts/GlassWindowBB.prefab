@@ -14,7 +14,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 18
   m_IsActive: 1
 --- !u!4 &6498188318744575957
 Transform:
@@ -89,6 +89,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 2fa3f113acec4f9428094ade2fcf26ce, type: 3}
       propertyPath: m_Name
       value: GlassWindowB
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 2fa3f113acec4f9428094ade2fcf26ce, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 18
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2fa3f113acec4f9428094ade2fcf26ce, type: 3}

@@ -14,7 +14,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 18
   m_IsActive: 1
 --- !u!4 &841661098827837721
 Transform:
@@ -46,7 +46,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 18
   m_IsActive: 1
 --- !u!4 &9142139096146910957
 Transform:
@@ -187,10 +187,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: test2.fbx_Metal_fence_low
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 7da3a2d920ce0d44a9885d7ef2539279, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 18
+      objectReference: {fileID: 0}
     - target: {fileID: 1610059590923909515, guid: 7da3a2d920ce0d44a9885d7ef2539279, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 9f55b622f9a875142a1878a5bcddf23a, type: 2}
+    - target: {fileID: 3654934372253022927, guid: 7da3a2d920ce0d44a9885d7ef2539279, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 5989153168033856251, guid: 7da3a2d920ce0d44a9885d7ef2539279, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 8096274819133374799, guid: 7da3a2d920ce0d44a9885d7ef2539279, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 18
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7da3a2d920ce0d44a9885d7ef2539279, type: 3}
 --- !u!4 &874990469510290561 stripped

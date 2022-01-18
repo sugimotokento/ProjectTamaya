@@ -12,11 +12,11 @@ GameObject:
   - component: {fileID: 9057562941262728232}
   - component: {fileID: 6509419759428565218}
   m_Layer: 0
-  m_Name: Steam
+  m_Name: SteamPipe
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 18
   m_IsActive: 1
 --- !u!4 &5340484196059710349
 Transform:

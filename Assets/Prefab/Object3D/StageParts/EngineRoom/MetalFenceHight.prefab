@@ -14,7 +14,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 18
   m_IsActive: 1
 --- !u!4 &2074003688028102192
 Transform:
@@ -82,6 +82,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -5095562947832840689, guid: 3ef087a858308f74eb2548242dd4494c, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: -3133498875991405556, guid: 3ef087a858308f74eb2548242dd4494c, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 18
+      objectReference: {fileID: 0}
     - target: {fileID: -2859109400176981367, guid: 3ef087a858308f74eb2548242dd4494c, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -93,6 +101,14 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 3ef087a858308f74eb2548242dd4494c, type: 3}
       propertyPath: m_Name
       value: test2.fbx_Metal_fence_high
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 3ef087a858308f74eb2548242dd4494c, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 2101483407643220840, guid: 3ef087a858308f74eb2548242dd4494c, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 18
       objectReference: {fileID: 0}
     - target: {fileID: 9209990198213543319, guid: 3ef087a858308f74eb2548242dd4494c, type: 3}
       propertyPath: m_Materials.Array.data[0]
