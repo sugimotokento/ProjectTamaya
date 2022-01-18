@@ -21,6 +21,7 @@ public class EnemyHelpAction : MonoBehaviour
     {
         bool help;
         FalseCnt = 0;
+        EnemyCnt = transform.childCount;
         for (int i = 0; i < EnemyCnt; i++)
         {
             help = transform.GetChild(i).gameObject.GetComponent<Enemy>().isHelp;

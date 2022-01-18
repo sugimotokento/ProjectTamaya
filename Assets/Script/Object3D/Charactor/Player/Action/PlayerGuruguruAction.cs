@@ -136,6 +136,8 @@ public class PlayerGuruguruAction : PlayerAction {
             player.sound.PlayShot(PlayerSound.SoundIndex.SUMAKI_END);
             ScoreManager.sumakiNum++;
 
+            target.transform.parent = null;
+
             //ƒAƒCƒeƒ€‚Ì’Ç‰Á
             PlayerItem.PlayerItemIndex itemIndex;
             int enemyItem = target.GetComponent<Enemy>().ItemNum;
