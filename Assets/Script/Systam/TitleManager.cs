@@ -8,6 +8,7 @@ public class TitleManager : MonoBehaviour {
     [SerializeField] private Image clickImage;
     [SerializeField] private FadeOut2 fadeOut;
     private float clickImageAcpha=1;
+    private bool canPlaySE = true;
     // Start is called before the first frame update
     void Start() {
 
@@ -23,6 +24,11 @@ public class TitleManager : MonoBehaviour {
         if (Input.GetMouseButtonDown(0)) {
             fadeOut.gameObject.SetActive(true);
             clickImage.gameObject.SetActive(false);
+
+            if (canPlaySE == true) {
+                GetComponent<AudioSource>().Play();
+                canPlaySE = false;
+            }
         }
 
         if (fadeOut.GetIsFadeEnd() == true) {

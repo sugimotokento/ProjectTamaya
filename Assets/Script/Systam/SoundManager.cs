@@ -13,6 +13,18 @@ public class SoundManager : MonoBehaviour {
         }
     }
 
-    public float GetVolumeBGM() { return pause.GetSlider(0).value*0.1f; }
-    public float GetVolumeSE() { return pause.GetSlider(1).value*0.1f; }
+    public float GetVolumeBGM() {
+        if (PlayerPrefs.GetInt("isBootUp") == 0) {
+            return 0.8f;
+        } else {
+            return PlayerPrefs.GetFloat("BGM")*0.1f;
+        }
+    }
+    public float GetVolumeSE() {
+        if (PlayerPrefs.GetInt("isBootUp") == 0) {
+            return 0.8f;
+        } else {
+            return PlayerPrefs.GetFloat("SE")*0.1f;
+        }
+    }
 }

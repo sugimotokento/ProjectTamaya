@@ -19,12 +19,13 @@ public class SetSoundVolume : MonoBehaviour {
             audioSouce.volume = baseVolume * SoundManager.instance.GetVolumeBGM();
         } else {
             float distVolume = 1;
-            Vector3 dist = this.transform.position - StageManager.instance.player.gameObject.transform.position;
-            dist.z = 0;
-            distVolume = volumeRange - dist.magnitude;
-            distVolume /= volumeRange;
-            if (distVolume < 0) distVolume = 0;
-            if (isUI == true) distVolume = 1;
+            if (isUI == false) {
+                Vector3 dist = this.transform.position - StageManager.instance.player.gameObject.transform.position;
+                dist.z = 0;
+                distVolume = volumeRange - dist.magnitude;
+                distVolume /= volumeRange;
+                if (distVolume < 0) distVolume = 0;
+            }
 
             audioSouce.volume = baseVolume * SoundManager.instance.GetVolumeSE()*distVolume;
 
