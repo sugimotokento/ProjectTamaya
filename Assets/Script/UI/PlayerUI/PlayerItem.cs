@@ -61,7 +61,7 @@ public class PlayerItem : MonoBehaviour {
     }
     public void AddItem(PlayerItemIndex item) {
         player.sound.PlayShot(PlayerSound.SoundIndex.GOHAN);
-        itemList.Add(item);
+        itemList.Insert(0, item);
     }
     public void UseKey(int num = 1) {
         player.sound.PlayShot(PlayerSound.SoundIndex.UNLOCK);
