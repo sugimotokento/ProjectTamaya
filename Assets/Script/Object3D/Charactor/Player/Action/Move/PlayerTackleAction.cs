@@ -41,7 +41,14 @@ public class PlayerTackleAction : PlayerMoveAction {
 
     }
     public override void TriggerEnter(Collider collider) {
-        if (collider.CompareTag("Enemy")) {
+        bool isBattle = false;
+        for (int i = 0; i < StageManager.instance.enemyScript.Count; ++i) {
+            if (StageManager.instance.enemyScript[i].SCENE_NUM == 3) {
+                isBattle = true;
+            }
+        }
+
+        if (isBattle==false && collider.CompareTag("Enemy")) {
             if (collider.gameObject.GetComponent<Enemy>().isSumaki == false) {
                 player.ChangeAction<PlayerTackleAction, PlayerGuruguruAction>();
                 PlayerGuruguruAction guruguruAction = player.GetAction<PlayerGuruguruAction>();

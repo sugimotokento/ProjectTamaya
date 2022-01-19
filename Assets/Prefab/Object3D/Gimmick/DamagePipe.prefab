@@ -18,7 +18,7 @@ GameObject:
   m_TagString: Stage
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 18
   m_IsActive: 1
 --- !u!4 &4568144261542363481
 Transform:
@@ -104,7 +104,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 18
   m_IsActive: 1
 --- !u!4 &4568144262269984283
 Transform:
@@ -137,7 +137,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 18
   m_IsActive: 1
 --- !u!4 &4568144262696427308
 Transform:
@@ -264,6 +264,10 @@ PrefabInstance:
     - target: {fileID: 651602615218703546, guid: fe41d193b92b0b749b1d28a4088ba867, type: 3}
       propertyPath: m_Name
       value: HeatNoiseEffect
+      objectReference: {fileID: 0}
+    - target: {fileID: 651602615218703546, guid: fe41d193b92b0b749b1d28a4088ba867, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 18
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fe41d193b92b0b749b1d28a4088ba867, type: 3}

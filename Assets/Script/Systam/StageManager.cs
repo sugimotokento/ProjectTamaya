@@ -29,7 +29,7 @@ public class StageManager : MonoBehaviour {
 
 
     private GameObject enemyManagerObj;
-    private List<Enemy> enemyScript = new List<Enemy>();
+    [HideInInspector]public List<Enemy> enemyScript = new List<Enemy>();
 
     public bool canMainBGM = false;
     private bool canBattleBGM = true;

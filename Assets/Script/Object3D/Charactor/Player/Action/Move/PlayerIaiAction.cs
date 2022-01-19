@@ -36,7 +36,14 @@ public class PlayerIaiAction : PlayerMoveAction {
 
     public override void TriggerEnter(Collider collider) {
         if (collider.gameObject.CompareTag("Enemy")) {
-            if (collider.gameObject.GetComponent<Enemy>().isSumaki == false) {
+            bool isBattle = false;
+            for (int i = 0; i < StageManager.instance.enemyScript.Count; ++i) {
+                if (StageManager.instance.enemyScript[i].SCENE_NUM == 3) {
+                    isBattle = true;
+                }
+            }
+
+            if (isBattle==false && collider.gameObject.GetComponent<Enemy>().isSumaki == false) {
                 hitEnemy = collider.gameObject;
                 isEnemyHit = true;
             }

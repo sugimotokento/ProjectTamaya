@@ -14,7 +14,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 18
   m_IsActive: 1
 --- !u!4 &6431627721283280626
 Transform:
@@ -51,7 +51,7 @@ GameObject:
   m_TagString: Stage
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 18
   m_IsActive: 1
 --- !u!4 &6431627722356994080
 Transform:
@@ -237,7 +237,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isBGM: 0
+  isUI: 0
   baseVolume: 1
+  volumeRange: 15
 --- !u!1001 &2868155837720255171
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -292,6 +294,10 @@ PrefabInstance:
     - target: {fileID: 9118672003115237014, guid: 9c8d59fd654475a43a7a59eb36afbb65, type: 3}
       propertyPath: m_Name
       value: SteamParticle
+      objectReference: {fileID: 0}
+    - target: {fileID: 9118672003115237014, guid: 9c8d59fd654475a43a7a59eb36afbb65, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 18
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9c8d59fd654475a43a7a59eb36afbb65, type: 3}
