@@ -374,10 +374,10 @@ public class Enemy : MonoBehaviour
 
         //Ž‹ü
         viewrad = VecRad(NoisePos ,transform.position);
-        viewrad = -1 * viewrad * Mathf.Rad2Deg;
+        viewrad = viewrad * Mathf.Rad2Deg;
 
         //Ž‹ü‚Ì•ûŒü‚ÉŒü‚«‚ð•Ï‚¦‚é
-        transform.GetChild(0).gameObject.transform.rotation = Quaternion.Euler(0.0f, 0.0f, -1 * viewrad);
+        transform.GetChild(0).gameObject.transform.rotation = Quaternion.Euler(0.0f, 0.0f, viewrad);
 
         if (NoiseTime > 2.0f)
         {
@@ -716,7 +716,7 @@ public class Enemy : MonoBehaviour
         if (other.gameObject.tag == "Noise")
         {
             isNoise = true;
-            NoisePos = transform.position;
+            NoisePos = player.gameObject.transform.position;
         }
     }
 }
